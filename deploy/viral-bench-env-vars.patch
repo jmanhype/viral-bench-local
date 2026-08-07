@@ -1,0 +1,22 @@
+--- a/marketing-agent.ts
++++ b/marketing-agent.ts
+@@ -238,7 +238,8 @@
+ async function scrapeCreatorsGet(pathname: string, params?: Record<string, string>): Promise<any> {
+-  const u = new URL(`https://api.scrapecreators.com${pathname}`);
++  const SC_BASE = process.env.SCRAPECREATORS_API_URL || 'https://api.scrapecreators.com';
++  const u = new URL(`${SC_BASE}${pathname}`);
+   if (params) Object.entries(params).forEach(([k, v]) => u.searchParams.set(k, v));
+   const res = await fetch(u.toString(), {
+     headers: { 'x-api-key': SCRAPE_CREATORS_API_KEY },
+@@ -310,9 +311,9 @@
+ // ─── Doublespeed MCP Integration ─────────────────────────────────────────────
+ 
+-const DS_MCP_URL = 'https://app.doublespeed.ai/api/mcp';
+-const DS_AUTHORIZATION_ENDPOINT = 'https://app.doublespeed.ai/oauth/authorize';
+-const DS_TOKEN_ENDPOINT = 'https://app.doublespeed.ai/api/oauth/token';
+-const DS_REGISTRATION_ENDPOINT = 'https://app.doublespeed.ai/api/oauth/register';
++const DS_BASE = process.env.DOUBLESPEED_API_URL || 'https://app.doublespeed.ai';
++const DS_MCP_URL = `${DS_BASE}/api/mcp`;
++const DS_AUTHORIZATION_ENDPOINT = `${DS_BASE}/oauth/authorize`;
++const DS_TOKEN_ENDPOINT = `${DS_BASE}/api/oauth/token`;
++const DS_REGISTRATION_ENDPOINT = `${DS_BASE}/api/oauth/register`;

@@ -1,0 +1,34 @@
+# Viral-Bench Local API Compatibility Edge
+# Routes hard-coded vendor hostnames to local services
+#
+# Usage (non-privileged ports — no sudo needed):
+#   export LIGHTREEL_API_URL="http://127.0.0.1:8001/v1/chat"
+#   For ScrapeCreators/Doublespeed, patch marketing-agent.ts base URLs
+#   or set env vars if you add them.
+#
+# Alternative: use /etc/hosts + privileged ports (requires sudo):
+#   1. Add to /etc/hosts: 127.0.0.1 api.scrapecreators.com app.doublespeed.ai
+#   2. Run: sudo caddy run --config deploy/Caddyfile.privileged
+#   3. Trust cert: sudo security add-trusted-cert -d -r trustRoot \
+#        -k /Library/Keychains/System.keychain \
+#        ~/.local/share/caddy/pki/authorities/local/root.crt
+
+:8443 {
+    tls internal
+    
+    handle @scrapecreators {
+        reverse_proxy 127.0.0.1:8010
+    }
+    
+    handle @doublespeed {
+        reverse_proxy 127.0.0.1:8020
+    }
+    
+    matcher scrapecreators {
+        header Host api.scrapecreators.com
+    }
+    
+    matcher doublespeed {
+        header Host app.doublespeed.ai
+    }
+}

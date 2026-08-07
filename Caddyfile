@@ -1,0 +1,21 @@
+# ═══════════════════════════════════════════════════════════════════
+# Viral-Bench Local — Caddy SNI Routing
+# ═══════════════════════════════════════════════════════════════════
+# Routes vendor hostnames to local services via SNI matching.
+# Add to /etc/hosts for Node.js (browsers use SNI automatically):
+#   127.0.0.1 api.scrapecreators.com app.doublespeed.ai
+#
+# Start: caddy run --config ~/viral-bench-local/Caddyfile
+# ═══════════════════════════════════════════════════════════════════
+
+# ScrapeCreators → Scraper API
+https://api.scrapecreators.com {
+    tls internal
+    reverse_proxy localhost:8010
+}
+
+# Doublespeed → MCP Server
+https://app.doublespeed.ai {
+    tls internal
+    reverse_proxy localhost:8020
+}

@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Environment / Secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.Trash/
+Thumbs.db
+
+# Logs / Runtime
+/tmp/
+*.log
+nohup.out
+
+# Data (keep schema, not content)
+*.db
+*.sqlite
+corpus/
+videos/
+
+# Node (if any frontend)
+node_modules/

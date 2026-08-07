@@ -1,0 +1,30 @@
+[project]
+name = "viral-bench-local"
+version = "0.1.0"
+description = "Self-hosted replacements for Viral-Bench paid APIs"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+    "pydantic>=2.10",
+    "httpx>=0.28",
+    "redis>=5.2",
+    "sqlalchemy[asyncio]>=2.0",
+    "aiosqlite>=0.20",
+    "qdrant-client>=1.13",
+    "minio>=7.2",
+    "yt-dlp>=2024.12",
+    "instaloader>=4.14",
+    "gallery-dl>=1.28",
+    "sharp>=0.33; sys_platform != 'win32'",
+    "Pillow>=11.0",
+    "mcp>=1.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-asyncio", "ruff"]
+gpu = ["comfyui-client"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
