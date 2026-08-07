@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="100%">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#3fb950" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" rx="16"/>
+
+  <!-- Grid pattern (subtle) -->
+  <g opacity="0.06" stroke="#c9d1d9" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="630"/><line x1="40" y1="0" x2="40" y2="630"/>
+    <line x1="80" y1="0" x2="80" y2="630"/><line x1="120" y1="0" x2="120" y2="630"/>
+    <line x1="160" y1="0" x2="160" y2="630"/><line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="240" y1="0" x2="240" y2="630"/><line x1="280" y1="0" x2="280" y2="630"/>
+    <line x1="320" y1="0" x2="320" y2="630"/><line x1="360" y1="0" x2="360" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/><line x1="440" y1="0" x2="440" y2="630"/>
+    <line x1="480" y1="0" x2="480" y2="630"/><line x1="520" y1="0" x2="520" y2="630"/>
+    <line x1="560" y1="0" x2="560" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/>
+  </g>
+
+  <!-- LEFT SIDE: Title + Description -->
+  <!-- Category label -->
+  <rect x="60" y="80" width="180" height="28" rx="14" fill="#58a6ff" opacity="0.15"/>
+  <text x="150" y="99" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#58a6ff" text-anchor="middle" letter-spacing="1.5">OPEN SOURCE</text>
+
+  <!-- Project name -->
+  <text x="60" y="170" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#c9d1d9" letter-spacing="-1">Viral-Bench</text>
+  <text x="60" y="228" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" fill="#58a6ff" letter-spacing="-1">Local</text>
+
+  <!-- One-liner -->
+  <text x="60" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#8b949e">Self-hosted TikTok &amp; Instagram viral content</text>
+  <text x="60" y="305" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#8b949e">analysis API stack. Zero recurring costs.</text>
+
+  <!-- Stats row -->
+  <g transform="translate(60, 350)">
+    <rect width="140" height="60" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+    <text x="70" y="28" font-family="'SF Mono', 'Fira Code', monospace" font-size="22" font-weight="700" fill="#3fb950" text-anchor="middle">4,165</text>
+    <text x="70" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">POSTS SCRAPED</text>
+
+    <rect x="155" width="140" height="60" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+    <text x="225" y="28" font-family="'SF Mono', 'Fira Code', monospace" font-size="22" font-weight="700" fill="#58a6ff" text-anchor="middle">Qwen 3.8</text>
+    <text x="225" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">VLM ANALYSIS</text>
+
+    <rect x="310" width="140" height="60" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+    <text x="380" y="28" font-family="'SF Mono', 'Fira Code', monospace" font-size="22" font-weight="700" fill="#f0883e" text-anchor="middle">$0/mo</text>
+    <text x="380" y="48" font-family="system-ui, sans-serif" font-size="11" fill="#8b949e" text-anchor="middle">API COSTS</text>
+  </g>
+
+  <!-- Install command -->
+  <rect x="60" y="440" width="450" height="40" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="80" y="465" font-family="'SF Mono', 'Fira Code', monospace" font-size="14" fill="#3fb950">$</text>
+  <text x="100" y="465" font-family="'SF Mono', 'Fira Code', monospace" font-size="14" fill="#c9d1d9">git clone github.com/jmanhype/viral-bench-local</text>
+
+  <!-- RIGHT SIDE: Architecture diagram -->
+  <g transform="translate(640, 60)">
+    <!-- Panel background -->
+    <rect width="520" height="510" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+
+    <!-- Panel header -->
+    <text x="24" y="36" font-family="'SF Mono', monospace" font-size="12" fill="#8b949e" letter-spacing="1">ARCHITECTURE</text>
+    <line x1="24" y1="48" x2="496" y2="48" stroke="#30363d" stroke-width="1"/>
+
+    <!-- Mac node -->
+    <rect x="30" y="70" width="200" height="180" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+    <text x="130" y="95" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#58a6ff" text-anchor="middle">Mac Orchestrator</text>
+    <line x1="50" y1="105" x2="210" y2="105" stroke="#30363d" stroke-width="0.5"/>
+
+    <text x="50" y="128" font-family="'SF Mono', monospace" font-size="11" fill="#3fb950">● research-api</text>
+    <text x="175" y="128" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">:8001</text>
+    <text x="50" y="148" font-family="'SF Mono', monospace" font-size="11" fill="#3fb950">● scraper-api</text>
+    <text x="175" y="148" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">:8010</text>
+    <text x="50" y="168" font-family="'SF Mono', monospace" font-size="11" fill="#f0883e">● browser-worker</text>
+    <text x="175" y="168" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">:8020</text>
+    <text x="50" y="188" font-family="'SF Mono', monospace" font-size="11" fill="#f0883e">● renderer</text>
+    <text x="175" y="188" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">:8030</text>
+    <text x="50" y="208" font-family="'SF Mono', monospace" font-size="11" fill="#f0883e">● publisher</text>
+    <text x="175" y="208" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">:8031</text>
+    <text x="50" y="232" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">postgres · redis · qdrant</text>
+
+    <!-- Flow arrow -->
+    <line x1="230" y1="160" x2="290" y2="160" stroke="url(#flow)" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="260" y="150" font-family="'SF Mono', monospace" font-size="9" fill="#8b949e" text-anchor="middle">CDP</text>
+
+    <!-- 3090 GPU node -->
+    <rect x="290" y="70" width="200" height="180" rx="8" fill="#0d1117" stroke="#3fb950" stroke-width="1.5"/>
+    <text x="390" y="95" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#3fb950" text-anchor="middle">3090 GPU Server</text>
+    <line x1="310" y1="105" x2="470" y2="105" stroke="#30363d" stroke-width="0.5"/>
+
+    <text x="310" y="128" font-family="'SF Mono', monospace" font-size="11" fill="#3fb950">● ComfyUI</text>
+    <text x="435" y="128" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">:8188</text>
+    <text x="310" y="148" font-family="'SF Mono', monospace" font-size="11" fill="#3fb950">● WanGP H3</text>
+    <text x="310" y="168" font-family="'SF Mono', monospace" font-size="11" fill="#58a6ff">● Qwen3.8-Max</text>
+    <text x="310" y="188" font-family="'SF Mono', monospace" font-size="11" fill="#58a6ff">● VLM Analysis</text>
+    <text x="310" y="218" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">24GB VRAM · SDPA</text>
+
+    <!-- Data flow below -->
+    <g transform="translate(30, 280)">
+      <text x="0" y="0" font-family="'SF Mono', monospace" font-size="11" fill="#8b949e" letter-spacing="1">DATA PIPELINE</text>
+
+      <!-- Pipeline nodes -->
+      <rect x="0" y="15" width="90" height="36" rx="6" fill="#0d1117" stroke="#58a6ff" stroke-width="1"/>
+      <text x="45" y="38" font-family="'SF Mono', monospace" font-size="10" fill="#58a6ff" text-anchor="middle">SCRAPE</text>
+
+      <line x1="90" y1="33" x2="115" y2="33" stroke="#30363d" stroke-width="1"/>
+      <polygon points="115,29 123,33 115,37" fill="#30363d"/>
+
+      <rect x="123" y="15" width="90" height="36" rx="6" fill="#0d1117" stroke="#3fb950" stroke-width="1"/>
+      <text x="168" y="38" font-family="'SF Mono', monospace" font-size="10" fill="#3fb950" text-anchor="middle">ANALYZE</text>
+
+      <line x1="213" y1="33" x2="238" y2="33" stroke="#30363d" stroke-width="1"/>
+      <polygon points="238,29 246,33 238,37" fill="#30363d"/>
+
+      <rect x="246" y="15" width="90" height="36" rx="6" fill="#0d1117" stroke="#f0883e" stroke-width="1"/>
+      <text x="291" y="38" font-family="'SF Mono', monospace" font-size="10" fill="#f0883e" text-anchor="middle">INSIGHTS</text>
+
+      <line x1="336" y1="33" x2="361" y2="33" stroke="#30363d" stroke-width="1"/>
+      <polygon points="361,29 369,33 361,37" fill="#30363d"/>
+
+      <rect x="369" y="15" width="90" height="36" rx="6" fill="#0d1117" stroke="#bc8cff" stroke-width="1"/>
+      <text x="414" y="38" font-family="'SF Mono', monospace" font-size="10" fill="#bc8cff" text-anchor="middle">PRODUCE</text>
+
+      <!-- Sample output annotation -->
+      <text x="0" y="80" font-family="'SF Mono', monospace" font-size="10" fill="#8b949e">Sample insight output:</text>
+      <rect x="0" y="90" width="460" height="70" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="0.5"/>
+      <text x="12" y="110" font-family="'SF Mono', monospace" font-size="10" fill="#3fb950">{ "hook": "shock visual + curiosity-gap"</text>
+      <text x="12" y="126" font-family="'SF Mono', monospace" font-size="10" fill="#58a6ff">  "energy": "high", "avg_er": 0.075</text>
+      <text x="12" y="142" font-family="'SF Mono', monospace" font-size="10" fill="#f0883e">  "median_views": 10600000 }</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="60" y="600" font-family="system-ui, sans-serif" font-size="12" fill="#8b949e">Replaces Lightreel · ScrapeCreators · Doublespeed — runs on macOS + Ubuntu 3090</text>
+  <text x="1140" y="600" font-family="'SF Mono', monospace" font-size="11" fill="#30363d" text-anchor="end">v1.0 · MIT</text>
+</svg>
