@@ -13,11 +13,11 @@ import json
 import logging
 import os
 from contextlib import asynccontextmanager
-from typing import Any, Literal
+from typing import Any, Literal, Optional
 from uuid import uuid4
 
 import httpx
-from fastapi import FastAPI, Header, HTTPException
+from fastapi import FastAPI, Header, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from services.research import corpus
@@ -42,11 +42,24 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Local Lightreel Compatibility API", lifespan=lifespan)
 
 # ─── Config ────────────────────────────────────────────────────────────────────
+# VLM/text provider: "gemini" (default) or "modelscope"
+VBL_PROVIDER = os.environ.get("VBL_PROVIDER", "gemini")
+
+# Gemini config
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_BASE_URL = os.environ.get(
+    "GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta"
+)
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+
+# ModelScope config (fallback)
 MODELSCOPE_API_KEY = os.environ.get("MODELSCOPE_API_KEY", "")
 MODELSCOPE_BASE_URL = os.environ.get(
     "MODELSCOPE_BASE_URL", "https://api-inference.modelscope.ai/v1"
 )
-MODELSCOPE_MODEL = os.environ.get("MODELSCOPE_MODEL", "Qwen-Ambassador/Qwen3.8-Max")
+MODELSCOPE_MODEL = os.environ.get("MODELSCOPE_MODEL", "Qwen-Ambassador/Qwen3.7-Max")
+
+ACTIVE_MODEL = GEMINI_MODEL if VBL_PROVIDER == "gemini" else MODELSCOPE_MODEL
 MAX_RESPONSE_FIELDS = 5
 
 
@@ -60,6 +73,7 @@ class ChatRequest(BaseModel):
     question: str = Field(min_length=1)
     conversation_id: str | None = None
     response_fields: dict[str, ResponseField] | None = None
+    niche: str | None = Field(default=None, description="Filter retrieval to a specific niche (e.g. dance, comedy, brand)")
 
 
 class ChatResponse(BaseModel):
@@ -91,36 +105,101 @@ class CritiqueResponse(BaseModel):
 
 # ─── LLM client ───────────────────────────────────────────────────────────────
 async def call_llm(messages: list[dict], max_tokens: int = 4096) -> str:
-    """Call ModelScope chat completions API."""
-    if not MODELSCOPE_API_KEY:
-        return "ERROR: MODELSCOPE_API_KEY not configured"
+    """Call LLM API (Gemini or ModelScope)."""
+    if VBL_PROVIDER == "gemini":
+        if not GEMINI_API_KEY:
+            return "ERROR: GEMINI_API_KEY not configured"
 
-    async with httpx.AsyncClient(timeout=300) as client:
-        resp = await client.post(
-            f"{MODELSCOPE_BASE_URL}/chat/completions",
-            headers={
-                "Authorization": f"Bearer {MODELSCOPE_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "model": MODELSCOPE_MODEL,
-                "messages": messages,
-                "max_tokens": max_tokens,
-                "temperature": 0.7,
-            },
-        )
-        if resp.status_code != 200:
-            logger.error("LLM call failed: %s %s", resp.status_code, resp.text[:200])
-            return f"ERROR: LLM returned {resp.status_code}"
+        # Convert OpenAI-style messages to Gemini format
+        contents = []
+        for msg in messages:
+            role = "user" if msg["role"] == "user" else "model"
+            contents.append({"role": role, "parts": [{"text": msg["content"]}]})
 
-        data = resp.json()
-        return data["choices"][0]["message"]["content"]
+        async with httpx.AsyncClient(timeout=300) as client:
+            resp = await client.post(
+                f"{GEMINI_BASE_URL}/models/{GEMINI_MODEL}:generateContent",
+                params={"key": GEMINI_API_KEY},
+                json={
+                    "contents": contents,
+                    "generationConfig": {
+                        "maxOutputTokens": max_tokens,
+                        "temperature": 0.7,
+                    }
+                },
+            )
+            if resp.status_code == 429:
+                logger.warning("Gemini rate limited")
+                return "ERROR: Rate limited"
+            if resp.status_code != 200:
+                logger.error("Gemini call failed: %s %s", resp.status_code, resp.text[:200])
+                return f"ERROR: LLM returned {resp.status_code}"
+
+            data = resp.json()
+            try:
+                parts = data["candidates"][0]["content"].get("parts", [])
+                # Gemini 3.5 includes thoughtSignature parts — find the text one
+                for part in parts:
+                    if "text" in part and part["text"]:
+                        return part["text"]
+                return "ERROR: No text in response"
+            except (KeyError, IndexError) as e:
+                logger.error("Gemini response parse error: %s — raw: %s", e, str(data)[:500])
+                return f"ERROR: Parse failed: {e}"
+    else:
+        if not MODELSCOPE_API_KEY:
+            return "ERROR: MODELSCOPE_API_KEY not configured"
+
+        async with httpx.AsyncClient(timeout=300) as client:
+            resp = await client.post(
+                f"{MODELSCOPE_BASE_URL}/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {MODELSCOPE_API_KEY}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": MODELSCOPE_MODEL,
+                    "messages": messages,
+                    "max_tokens": max_tokens,
+                    "temperature": 0.7,
+                },
+            )
+            if resp.status_code != 200:
+                logger.error("LLM call failed: %s %s", resp.status_code, resp.text[:200])
+                return f"ERROR: LLM returned {resp.status_code}"
+
+            data = resp.json()
+            return data["choices"][0]["message"]["content"]
+
+
+# ─── Niche-to-creator mapping ────────────────────────────────────────────────
+NICHE_CREATORS = {
+    'comedy': ['khaby.lame', 'wisdm8', 'brittany_broski'],
+    'magic/vfx': ['zachking'],
+    'dance': ['charlidamelio', 'jasonderulo', 'addisonre'],
+    'music': ['bellapoarch', 'toniannmusic'],
+    'pets': ['nala_cat', 'tuckerbudzyn', 'realgrumpycat'],
+    'food': ['gordonramsayofficial', 'babishculinaryuniverse'],
+    'fitness': ['chris.hemsworth', 'pamela_rf', 'blogilates'],
+    'education': ['hankgreen', 'neildegrassetyson'],
+    'lifestyle': ['emma', 'merrelltwins'],
+    'brand': ['duolingo', 'ryanair', 'chipotle'],
+    'vfx': ['julianbass'],
+}
+
+
+def get_creators_for_niche(niche: str | None) -> list[str] | None:
+    """Return creator handles for a niche, or None if not specified."""
+    if not niche:
+        return None
+    return NICHE_CREATORS.get(niche.lower())
 
 
 # ─── Evidence retrieval (SQLite FTS5 corpus) ──────────────────────────────────
-async def retrieve_evidence(question: str, limit: int = 20) -> list[dict[str, Any]]:
+async def retrieve_evidence(question: str, limit: int = 20, niche: str | None = None) -> list[dict[str, Any]]:
     """Retrieve relevant posts from the local UGC corpus via FTS5 search."""
-    return corpus.search_posts(question, limit=limit)
+    creator_handles = get_creators_for_niche(niche)
+    return corpus.search_posts(question, limit=limit, creator_handles=creator_handles)
 
 
 # ─── Synthesis ─────────────────────────────────────────────────────────────────
@@ -152,8 +231,8 @@ async def synthesize(
     ev_compact = []
     for e in evidence[:5]:
         ev_compact.append({
-            "hook": e.get("hook", ""),
-            "format": e.get("format", ""),
+            "hook": e.get("vlm_hook") or e.get("hook", ""),
+            "format": e.get("vlm_format") or e.get("format", ""),
             "views": e.get("views", 0),
             "engagement_rate": round(e.get("engagement_rate", 0), 4),
             "creator": e.get("creator_handle", ""),
@@ -234,7 +313,7 @@ async def chat(
             },
         )
 
-    evidence = await retrieve_evidence(request.question)
+    evidence = await retrieve_evidence(request.question, niche=request.niche)
     answer = await synthesize(request.question, evidence, request.response_fields)
 
     return ChatResponse(
@@ -245,7 +324,186 @@ async def chat(
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "service": "research-api", "model": MODELSCOPE_MODEL}
+    return {"status": "ok", "service": "research-api", "model": ACTIVE_MODEL, "provider": VBL_PROVIDER}
+
+
+# ─── Viral Score endpoint ────────────────────────────────────────────────────
+@app.get("/v1/score")
+async def viral_score(
+    hook: str,
+    niche: Optional[str] = None,
+    format: Optional[str] = None,
+):
+    """Score a hook against the corpus — predict virality."""
+    from services.research.viral_score import score_hook
+    result = score_hook(hook, niche=niche, format_type=format)
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result)
+    return result
+
+
+# ─── Agent endpoint ──────────────────────────────────────────────────────────
+class AgentRequest(BaseModel):
+    niche: str = Field(min_length=1, description="Content niche: dance, comedy, brand, etc.")
+    goal: str = Field(default="", description="Optional marketing goal")
+    max_rounds: int = Field(default=5, ge=1, le=10)
+    min_score: float = Field(default=5.0, ge=0, le=10)
+    custom_direction: str = Field(default="", description="Creative direction / constraints")
+
+
+class AgentResponse(BaseModel):
+    status: Literal["success", "failed"]
+    brief: Optional[dict] = None
+    error: Optional[str] = None
+
+
+async def _generate_brief_impl(
+    niche: str,
+    goal: str = "",
+    max_rounds: int = 5,
+    min_score: float = 5.0,
+    custom_direction: str = "",
+) -> AgentResponse:
+    """Shared implementation for brief generation."""
+    from services.agent.autonomous_agent import AgentConfig, generate_brief
+
+    config = AgentConfig(
+        niche=niche,
+        goal=goal,
+        max_rounds=max_rounds,
+        min_score=min_score,
+        custom_direction=custom_direction,
+    )
+
+    brief = await generate_brief(config)
+    if brief:
+        return AgentResponse(status="success", brief=brief.model_dump())
+    return AgentResponse(status="failed", error="No high-scoring content found")
+
+
+@app.post("/v1/agent/brief", response_model=AgentResponse)
+async def agent_brief_post(request: AgentRequest) -> AgentResponse:
+    """Generate a viral content brief for a niche (POST with JSON body)."""
+    return await _generate_brief_impl(
+        niche=request.niche,
+        goal=request.goal,
+        max_rounds=request.max_rounds,
+        min_score=request.min_score,
+        custom_direction=request.custom_direction,
+    )
+
+
+@app.get("/v1/agent/brief", response_model=AgentResponse)
+async def agent_brief_get(
+    niche: str = Query(..., description="Content niche: dance, comedy, brand, etc."),
+    goal: str = Query(default="", description="Optional marketing goal"),
+    max_rounds: int = Query(default=5, ge=1, le=10),
+    min_score: float = Query(default=5.0, ge=0, le=10),
+    custom_direction: str = Query(default="", description="Creative direction / constraints"),
+) -> AgentResponse:
+    """Generate a viral content brief for a niche (GET with query params)."""
+    return await _generate_brief_impl(
+        niche=niche,
+        goal=goal,
+        max_rounds=max_rounds,
+        min_score=min_score,
+        custom_direction=custom_direction,
+    )
+
+
+# ─── Batch brief endpoint ─────────────────────────────────────────────────────
+class BatchBriefRequest(BaseModel):
+    briefs: list[AgentRequest] = Field(min_length=1, max_length=20)
+
+
+class BatchBriefResponse(BaseModel):
+    status: Literal["success", "partial", "failed"]
+    briefs: list[dict]
+    stats: dict
+
+
+@app.post("/v1/agent/batch_brief", response_model=BatchBriefResponse)
+async def agent_batch_brief(request: BatchBriefRequest) -> BatchBriefResponse:
+    """Generate multiple briefs with deduplication to avoid hook/style repetition."""
+    from services.agent.autonomous_agent import AgentConfig, generate_brief
+    import asyncio
+    
+    # Parallel generation with semaphores to avoid overwhelming the API
+    semaphore = asyncio.Semaphore(8)  # Max 8 concurrent brief generations
+    
+    async def generate_one(req: AgentRequest) -> dict:
+        async with semaphore:
+            config = AgentConfig(
+                niche=req.niche,
+                goal=req.goal,
+                max_rounds=req.max_rounds,
+                min_score=req.min_score,
+                custom_direction=req.custom_direction,
+            )
+            
+            brief = await generate_brief(config)
+            if brief:
+                return {
+                    "niche": req.niche,
+                    "goal": req.goal,
+                    "brief": brief.model_dump(),
+                    "success": True
+                }
+            return {"niche": req.niche, "goal": req.goal, "success": False}
+    
+    # Generate all briefs in parallel
+    tasks = [generate_one(req) for req in request.briefs]
+    raw_results = await asyncio.gather(*tasks)
+    
+    # Deduplicate based on hook similarity (more relaxed)
+    results = []
+    used_hooks = []
+    used_styles = set()
+    failed = []
+    
+    for r in raw_results:
+        if not r["success"]:
+            failed.append({"niche": r["niche"], "goal": r["goal"], "reason": "generation failed"})
+            continue
+        
+        hook = r["brief"]["hook"]
+        style_name = r["brief"]["visual_direction"].get("style_name") if r["brief"].get("visual_direction") else None
+        
+        # Check for semantic similarity (relaxed: word overlap > 85%)
+        hook_words = set(hook.lower().split())
+        is_duplicate = False
+        for used in used_hooks:
+            used_words = set(used.lower().split())
+            if hook_words and used_words:
+                overlap = len(hook_words & used_words) / min(len(hook_words), len(used_words))
+                if overlap > 0.85:
+                    is_duplicate = True
+                    break
+        
+        if is_duplicate or (style_name and style_name in used_styles):
+            failed.append({"niche": r["niche"], "goal": r["goal"], "reason": "duplicate"})
+            continue
+        
+        used_hooks.append(hook)
+        if style_name:
+            used_styles.add(style_name)
+        del r["success"]
+        results.append(r)
+    
+    status = "success" if len(results) == len(request.briefs) else ("partial" if results else "failed")
+    
+    return BatchBriefResponse(
+        status=status,
+        briefs=results,
+        stats={
+            "requested": len(request.briefs),
+            "generated": len(results),
+            "failed": len(failed),
+            "unique_hooks": len(used_hooks),
+            "unique_styles": len(used_styles),
+            "failures": failed,
+        }
+    )
 
 
 # ─── Seed endpoint ─────────────────────────────────────────────────────────────
@@ -458,6 +716,63 @@ async def list_analyzed(limit: int = 20):
 
 # ─── Insights / Correlation Analysis ─────────────────────────────────────────
 
+@app.get("/v1/top_hooks")
+async def get_top_hooks(
+    niche: str | None = None,
+    limit: int = 10,
+    min_engagement: float = 0.1,
+):
+    """Return actual high-performing hook text from corpus.
+    
+    Returns raw caption text (not VLM pattern labels) sorted by engagement rate.
+    Used by autonomous_agent to seed hook generation.
+    """
+    conn = corpus._get_conn()
+    try:
+        # Filter by niche if provided
+        niche_filter = ""
+        params = {"limit": limit, "min_er": min_engagement}
+        
+        if niche:
+            creators = NICHE_CREATORS.get(niche.lower())
+            if creators:
+                placeholders = ",".join(f":c{i}" for i in range(len(creators)))
+                niche_filter = f"AND creator_handle IN ({placeholders})"
+                for i, c in enumerate(creators):
+                    params[f"c{i}"] = c
+        
+        # Get top hooks by engagement rate with actual caption text
+        sql = f"""
+            SELECT caption, format, views, engagement_rate, creator_handle
+            FROM posts
+            WHERE caption IS NOT NULL AND caption != ''
+              AND engagement_rate >= :min_er
+              {niche_filter}
+            ORDER BY engagement_rate DESC
+            LIMIT :limit
+        """
+        
+        rows = conn.execute(sql, params).fetchall()
+        
+        hooks = []
+        for r in rows:
+            # Extract first line or first 100 chars as the hook
+            caption = r["caption"]
+            hook_text = caption.split('\n')[0][:150] if caption else ""
+            
+            hooks.append({
+                "hook": hook_text,
+                "format": r["format"],
+                "views": r["views"],
+                "engagement_rate": round(r["engagement_rate"], 3),
+                "creator": r["creator_handle"],
+            })
+        
+        return {"niche": niche, "count": len(hooks), "hooks": hooks}
+    finally:
+        conn.close()
+
+
 @app.get("/v1/insights")
 async def get_insights(
     dimension: str = "all",
@@ -487,10 +802,112 @@ async def get_insights(
     if not rows:
         return {"error": "No analyzed posts with engagement data"}
 
-    def _norm(text: str | None, max_len: int = 40) -> str:
-        if not text:
+    def _norm_hook(text: str | None) -> str:
+        """Normalize free-text hook descriptions into categorical buckets."""
+        h = (text or "").lower()
+        if not h or h == "unknown":
             return "unknown"
-        return text.lower().strip()[:max_len]
+        if "curiosity-gap" in h or "curiosity gap" in h:
+            if "shock" in h:
+                return "curiosity-gap → shock"
+            if "text" in h:
+                return "curiosity-gap + text overlay"
+            if "direct address" in h or "direct-address" in h:
+                return "curiosity-gap + direct address"
+            return "curiosity-gap"
+        if "shock" in h:
+            return "shock visual"
+        if "direct address" in h or "direct-address" in h:
+            return "direct address"
+        if "text overlay" in h or "text-overlay" in h:
+            return "text overlay hook"
+        if "relatable" in h:
+            return "relatable scenario"
+        if "skill" in h or "misdirection" in h:
+            return "skill/misdirection"
+        if "warm" in h or "emotional" in h:
+            return "emotional/warm"
+        return "other"
+
+    def _norm_energy(analysis_json: str | None) -> str:
+        """Extract and normalize energy level from VLM analysis JSON."""
+        if not analysis_json:
+            return "unknown"
+        try:
+            e = _json.loads(analysis_json).get("energy_level", "unknown").lower().strip()
+        except Exception:
+            return "unknown"
+        if "extreme" in e:
+            return "extreme"
+        if "high" in e:
+            return "high"
+        if "medium-high" in e or "medium high" in e:
+            return "medium-high"
+        if "medium" in e:
+            return "medium"
+        if "low" in e:
+            return "low"
+        return "unknown"
+
+    def _norm_pacing(text: str | None) -> str:
+        """Normalize free-text pacing descriptions into categorical buckets."""
+        p = (text or "").lower()
+        if not p or p == "unknown":
+            return "unknown"
+        if "rapid cut" in p:
+            return "rapid cuts"
+        if "single take" in p or "continuous" in p or "uncut" in p:
+            return "single take"
+        if "slow" in p and "escalat" in p:
+            return "slow build → escalate"
+        if "moderate" in p:
+            return "moderate cuts"
+        if "fast" in p:
+            return "fast paced"
+        return "other"
+
+    def _norm_format(text: str | None) -> str:
+        """Normalize free-text format descriptions into categorical buckets."""
+        f = (text or "").lower()
+        if not f or f == "unknown":
+            return "unknown"
+        if "skit" in f or "comedy" in f:
+            return "skit/comedy"
+        if "vlog" in f or "selfie" in f or "talking head" in f:
+            return "vlog/talking head"
+        if "dance" in f or "lip-sync" in f or "lip sync" in f:
+            return "dance/lip-sync"
+        if "performance" in f or "concert" in f:
+            return "performance"
+        if "tutorial" in f or "how-to" in f or "diy" in f:
+            return "tutorial/DIY"
+        if "montage" in f:
+            return "montage"
+        if "split-screen" in f or "split screen" in f:
+            return "split screen"
+        return "other"
+
+    def _norm_audio(analysis_json: str | None) -> str:
+        """Extract and normalize audio style from VLM analysis JSON."""
+        if not analysis_json:
+            return "unknown"
+        try:
+            a = _json.loads(analysis_json).get("audio_style", "unknown").lower().strip()
+        except Exception:
+            return "unknown"
+        if "dialogue" in a or "talk" in a:
+            return "dialogue/talking"
+        if "music" in a or "song" in a:
+            return "music"
+        if "sound effect" in a or "sfx" in a:
+            return "sound effects"
+        if "voiceover" in a or "narration" in a:
+            return "voiceover"
+        if "lip-sync" in a or "lip sync" in a:
+            return "lip-sync"
+        if "silent" in a or "no audio" in a:
+            return "silent"
+        return "other"
 
     def _compute_stats(items: list[dict]) -> dict:
         ers = [i["er"] for i in items]
@@ -508,11 +925,11 @@ async def get_insights(
     # ── Per-dimension aggregation ──
     dims = {}
     dim_map = {
-        "hook": lambda r: _norm(r[0]),
-        "format": lambda r: _norm(r[1]),
-        "pacing": lambda r: _norm(r[2]),
-        "energy": lambda r: (_json.loads(r[9]).get("energy_level", "unknown").lower() if r[9] else "unknown"),
-        "audio": lambda r: (_json.loads(r[9]).get("audio_style", "unknown").lower()[:30] if r[9] else "unknown"),
+        "hook": lambda r: _norm_hook(r[0]),
+        "format": lambda r: _norm_format(r[1]),
+        "pacing": lambda r: _norm_pacing(r[2]),
+        "energy": lambda r: _norm_energy(r[9]),
+        "audio": lambda r: _norm_audio(r[9]),
     }
 
     target_dims = list(dim_map.keys()) if dimension == "all" else [dimension]
@@ -588,8 +1005,8 @@ async def get_insights(
         for r in rows:
             try:
                 analysis = _json.loads(r[9]) if r[9] else {}
-                hook = _norm(r[0], 30)
-                energy = analysis.get("energy_level", "unknown").lower()
+                hook = _norm_hook(r[0])
+                energy = _norm_energy(r[9])
                 key = f"{hook}|{energy}"
             except Exception:
                 continue

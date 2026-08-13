@@ -12,6 +12,7 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import sqlite3
 import sys
 import time
@@ -22,7 +23,7 @@ import httpx
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 logger = logging.getLogger("backfill-vlm")
 
-DB_PATH = Path("/tmp/vbl-corpus/corpus.db")
+DB_PATH = Path(os.environ.get("CORPUS_DB", "~/viral-bench-local/data/corpus.db"))
 API_URL = "http://127.0.0.1:8001"
 
 

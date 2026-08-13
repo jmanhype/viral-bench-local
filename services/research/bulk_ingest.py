@@ -12,6 +12,7 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import sqlite3
 import sys
 import time
@@ -24,7 +25,7 @@ log = logging.getLogger(__name__)
 
 SCRAPER_URL = "http://127.0.0.1:8010"
 RESEARCH_URL = "http://127.0.0.1:8001"
-DB_PATH = "/tmp/vbl-corpus/corpus.db"
+DB_PATH = os.path.expanduser("~/viral-bench-local/data/corpus.db")
 
 # Curated list of high-engagement TikTok creators across niches
 # Mix of viral formats: comedy, dance, POV, tutorials, pets, fitness, food

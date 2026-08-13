@@ -1,0 +1,14 @@
+{
+  "niche_briefs": {
+    "comedy": []
+  },
+  "cross_niche_briefs": [
+    {
+      "title": "Apply dance patterns to dance",
+      "source_niche": "dance",
+      "target_niche": "dance",
+      "hook_to_try": "pattern interrupt",
+      "brief": "\n\ud83d\udd04 CROSS-NICHE IDEA: DANCE \u2192 DANCE\n\nTake the proven \"pattern interrupt\" hook from dance content\nand apply it to dance videos.\n\nExample: dance uses pattern interrupt hooks effectively.\nHow would this look in dance?\n\n\ud83d\udccb BRIEF:\n- Open with pattern interrupt in first 3 seconds\n- Adapt it to dance context\n- Maintain dance aesthetic while borrowing dance psychology\n"
+    }
+  ]
+}

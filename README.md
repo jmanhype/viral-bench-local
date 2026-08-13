@@ -80,13 +80,61 @@ curl -X POST http://localhost:8001/v1/analyze \
 # Get aggregated insights across corpus
 curl "http://localhost:8001/v1/insights?dimension=all&min_n=3"
 
+# Generate content brief with production prompts
+curl -X POST http://localhost:8001/v1/agent/brief \
+  -H "Content-Type: application/json" \
+  -d '{
+    "niche": "comedy",
+    "goal": "maximize engagement",
+    "include_production_prompts": true
+  }'
+
 # Scrape all videos from a TikTok profile
-curl -H "x-api-key: local-dev" \
+curl -H "x-api-key: *** \
   "http://localhost:8010/v3/tiktok/profile/videos?handle=charlidamelio"
 
 # Bulk ingest + analyze
 python -m services.research.bulk_ingest --min-posts 500
 ```
+
+## Production Prompts
+
+The `/v1/agent/brief` endpoint returns tool-ready production prompts when `include_production_prompts: true`:
+
+```json
+{
+  "hook": "When your mama say 'come inside' but you already outside with the boys",
+  "format_type": "hood_native",
+  "production_prompts": {
+    "flux3": "/t2v prompt: 1990s South Central golden hour, three Black teenagers on porch steps laughing, palm shadows, stucco apartments, warm 35mm film grain, slow dolly shot duration:10 aspect_ratio:9:16",
+    "kling": {
+      "prompt": "1990s South Central golden hour, three Black teenagers on porch steps laughing, palm shadows, stucco apartments, warm 35mm film grain, slow dolly shot",
+      "aspect_ratio": "9:16",
+      "duration": 10,
+      "model": "kling-v2-master",
+      "mode": "pro",
+      "camera_control": {"type": "simple"}
+    },
+    "h3_job_json": {
+      "prompt": "1990s South Central golden hour, three Black teenagers on porch steps laughing, palm shadows, stucco apartments, warm 35mm film grain, slow dolly shot",
+      "image_start": "/path/to/your/first_frame.png",
+      "resolution": "480x832",
+      "video_length": 124,
+      "num_inference_steps": 20,
+      "sample_solver": "euler",
+      "guidance_scale": 1.0,
+      "embedded_guidance_scale": 6.0
+    },
+    "voiceover_text": "When your mama say 'come inside' but you already outside with the boys\n\nTell me you grew up in the hood without telling me",
+    "text_overlays": [
+      {"time": "0-3s", "text": "When your mama say 'come inside' but you already outside with the boys", "style": "bold center"},
+      {"time": "5-8s", "text": "Tell me you grew up in the hood without telling me", "style": "bold center"}
+    ]
+  }
+}
+```
+
+Copy these directly into your video generation tools (FLUX3, Kling, H3/WanGP) and CapCut/text overlay editors.
 
 ## Viral Pattern Insights (from corpus)
 

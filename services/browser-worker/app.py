@@ -40,7 +40,7 @@ logging.basicConfig(
 logger = logging.getLogger("browser-worker")
 
 # ── Config ────────────────────────────────────────────────────────────────────
-DB_PATH = Path(os.environ.get("CORPUS_DB", "/tmp/vbl-corpus/corpus.db"))
+DB_PATH = os.path.expanduser("~/viral-bench-local/data/corpus.db")
 SCRAPER_API = os.environ.get("SCRAPER_API_URL", "http://127.0.0.1:8010")
 RESEARCH_API = os.environ.get("RESEARCH_API_URL", "http://127.0.0.1:8001")
 EGO_BROWSER = os.environ.get("EGO_BROWSER", str(Path.home() / ".local/bin/ego-browser"))

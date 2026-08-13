@@ -17,7 +17,7 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-DB_DIR = Path("/tmp/vbl-corpus")
+DB_DIR = Path(os.path.expanduser("~/viral-bench-local/data"))
 DB_PATH = DB_DIR / "corpus.db"
 
 # ── Schema ────────────────────────────────────────────────────────────────────
@@ -224,7 +224,7 @@ def upsert_posts(posts: list[dict[str, Any]]) -> int:
 _SEARCH_SQL = """
 SELECT
     p.id, p.platform, p.post_url, p.creator_handle, p.caption,
-    p.transcript, p.hook, p.format, p.topic,
+    p.transcript, p.hook, p.format, p.topic, p.vlm_hook, p.vlm_format,
     p.views, p.likes, p.comments, p.shares, p.saves,
     p.engagement_rate, p.published_at, p.created_at,
     bm25(posts_fts) AS bm25_score
@@ -236,11 +236,16 @@ LIMIT :limit
 """
 
 
-def search_posts(query: str, limit: int = 20) -> list[dict[str, Any]]:
+def search_posts(query: str, limit: int = 20, creator_handles: list[str] = None) -> list[dict[str, Any]]:
     """Full-text search with BM25 + engagement_rate weighting.
 
     Returns posts sorted by combined relevance score (lower BM25 = better,
     higher engagement_rate = better).
+    
+    Args:
+        query: Search query text
+        limit: Max results to return
+        creator_handles: Optional list of creators to filter by
     """
     if not query or not query.strip():
         return []
@@ -251,11 +256,23 @@ def search_posts(query: str, limit: int = 20) -> list[dict[str, Any]]:
     if not fts_query:
         return []
 
+    # Build creator filter if provided
+    creator_filter = ""
+    params = {"query": fts_query, "limit": limit}
+    if creator_handles:
+        placeholders = ",".join(f"@h{i}" for i in range(len(creator_handles)))
+        creator_filter = f"AND p.creator_handle IN ({placeholders})"
+        for i, handle in enumerate(creator_handles):
+            params[f"h{i}"] = handle
+
+    sql = _SEARCH_SQL.replace(
+        "ORDER BY",
+        f"{creator_filter}\nORDER BY"
+    )
+
     conn = _get_conn()
     try:
-        rows = conn.execute(
-            _SEARCH_SQL, {"query": fts_query, "limit": limit}
-        ).fetchall()
+        rows = conn.execute(sql, params).fetchall()
         results = []
         for r in rows:
             d = dict(r)
