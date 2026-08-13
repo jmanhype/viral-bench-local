@@ -1375,7 +1375,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     
     # ─── FLUX3 prompt: one dense line with all aesthetics baked in ───
     flux3_prompt = ", ".join(contextual_prompt_parts)
-    flux3_command = f"/t2v prompt:{flux3_prompt} duration:{VIDEO_DURATION_S} aspect_ratio:9:16"
+    flux3_command = f"/t2v prompt:{flux3_prompt} duration:{VIDEO_DURATION_S} aspect_ratio:9:16 resolution:fhd"
     
     # ─── Kling / H3: contextual prompt (not just prompt_seed) ───
     kling_prompt = ", ".join(contextual_prompt_parts) if contextual_prompt_parts else hook
