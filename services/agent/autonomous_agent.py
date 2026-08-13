@@ -82,6 +82,84 @@ class HookCandidate(BaseModel):
     pattern_dna: list[dict] = []
 
 
+def _detect_hood_scenario(hook_lower: str) -> str:
+    """Detect which hood skit scenario a hook belongs to."""
+    if "mama" in hook_lower or "caught" in hook_lower:
+        return "mama"
+    if "block" in hook_lower or "friday" in hook_lower or "neighbor" in hook_lower:
+        return "block"
+    if "cookout" in hook_lower or "function" in hook_lower:
+        return "function"
+    if "graduated" in hook_lower or "only one" in hook_lower:
+        return "family"
+    if "grew up" in hook_lower or "tell me" in hook_lower:
+        return "nostalgia"
+    if "food" in hook_lower or "slaps" in hook_lower:
+        return "food"
+    return "general"
+
+
+def generate_dialogue(scenario: str, hook: str) -> list[dict]:
+    """Generate shootable dialogue lines timed to script beats.
+
+    Each line: {time, character, line} — character includes delivery hints
+    like (VO) or (off-camera). Returns [] for formats that don't use dialogue.
+    """
+    DIALOGUES = {
+        "block": [
+            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "3-12s", "character": "KID", "line": "DJ! DJ! Play that one song!"},
+            {"time": "12-35s", "character": "UNCLE ON THE GRILL", "line": "Ain't nobody touching this grill but me. I don't care who you are."},
+            {"time": "12-35s", "character": "AUNTIE", "line": "I made four types of potato salad — y'all gon' try ALL of 'em."},
+            {"time": "12-35s", "character": "COUSIN (showing up late)", "line": "Man, y'all ALWAYS eat without me!"},
+            {"time": "35-50s", "character": "NARRATOR (VO)", "line": "And yeah — the cops shut it down at 9:47. Every single time."},
+        ],
+        "mama": [
+            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "3-12s", "character": "MAMA (off-camera)", "line": "Boy, WHERE you at?! It is ELEVEN o'clock!"},
+            {"time": "12-35s", "character": "YOU (whispering)", "line": "I'm outside..."},
+            {"time": "12-35s", "character": "MAMA (off-camera)", "line": "Outside?! You better be inside in five seconds."},
+            {"time": "35-50s", "character": "YOU (to camera)", "line": "Y'all already know how this ended."},
+        ],
+        "function": [
+            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "3-12s", "character": "COUSIN", "line": "Man, the food table got a VIP section now?"},
+            {"time": "12-35s", "character": "UNCLE ON THE GRILL", "line": "You ain't touching this grill, lil man."},
+            {"time": "12-35s", "character": "AUNTIE", "line": "He brought STORE-BOUGHT potato salad... to my cookout."},
+            {"time": "35-50s", "character": "CROWD", "line": "Ooooooh!"},
+        ],
+        "family": [
+            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "3-12s", "character": "AUNTIE", "line": "Baby, you the first one. Make us proud."},
+            {"time": "12-35s", "character": "YOU (VO)", "line": "They said I couldn't. So I did it twice."},
+            {"time": "35-50s", "character": "MAMA", "line": "I always knew."},
+        ],
+        "nostalgia": [
+            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "12-35s", "character": "YOU", "line": "Corner store had a policy: no shoes, no shirt — still got service."},
+            {"time": "12-35s", "character": "FRIEND", "line": "Man, the block party DJ had ONE job."},
+            {"time": "35-50s", "character": "YOU (to camera)", "line": "If you know this one... we family."},
+        ],
+        "food": [
+            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "3-12s", "character": "SKEPTIC", "line": "It's just a plate of food, bro."},
+            {"time": "12-35s", "character": "YOU", "line": "You ain't even tasted it yet."},
+            {"time": "35-50s", "character": "SKEPTIC (after one bite)", "line": "...okay. I'm wrong. I'm wrong."},
+        ],
+        "pov": [
+            {"time": "0-3s", "character": "YOU (to camera)", "line": hook},
+            {"time": "12-35s", "character": "FRIEND", "line": "Nah, because that really just happened?"},
+            {"time": "35-50s", "character": "YOU", "line": "Every. Single. Time."},
+        ],
+        "general": [
+            {"time": "0-3s", "character": "YOU (to camera)", "line": hook},
+            {"time": "12-35s", "character": "FRIEND", "line": "Wait, for real?"},
+            {"time": "35-50s", "character": "YOU", "line": "Every single time."},
+        ],
+    }
+    return DIALOGUES.get(scenario, [])
+
+
 def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_style: Optional[dict] = None) -> str:
     """Generate a structured video script from hook and format.
     
@@ -137,19 +215,7 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
     if structure == "hood_skit":
         # Hood skit structure — specific, shootable direction
         # Detect the scenario from the hook
-        scenario = "general"
-        if "mama" in hook_lower or "caught" in hook_lower:
-            scenario = "mama"
-        elif "block" in hook_lower or "friday" in hook_lower or "neighbor" in hook_lower:
-            scenario = "block"
-        elif "cookout" in hook_lower or "function" in hook_lower:
-            scenario = "function"
-        elif "graduated" in hook_lower or "only one" in hook_lower:
-            scenario = "family"
-        elif "grew up" in hook_lower or "tell me" in hook_lower:
-            scenario = "nostalgia"
-        elif "food" in hook_lower or "slaps" in hook_lower:
-            scenario = "food"
+        scenario = _detect_hood_scenario(hook_lower)
 
         if scenario == "mama":
             script_parts.append("[3-12s] SCENE SETUP")
@@ -1368,6 +1434,20 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             "style": "bold center"
         })
     
+    # ─── Dialogue: shootable character lines timed to script beats ───
+    # Hood/skit content gets scenario-specific dialogue; POV hooks get a
+    # generic two-person exchange. Narrative-only content (no characters)
+    # gets an empty list — the voiceover carries it.
+    hook_lower_full = hook.lower()
+    hood_signals = {"hood", "block", "mama", "cookout", "function", "neighbor", "friday night", "graduated", "only one"}
+    is_dialogue_content = any(sig in hook_lower_full for sig in hood_signals) or hook_lower_full.startswith("pov")
+    dialogue = []
+    if is_dialogue_content:
+        scenario = _detect_hood_scenario(hook_lower_full)
+        if scenario == "general" and hook_lower_full.startswith("pov"):
+            scenario = "pov"
+        dialogue = generate_dialogue(scenario, hook)
+    
     return {
         "flux3": flux3_command,
         "kling": {
@@ -1389,6 +1469,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             "embedded_guidance_scale": 6.0
         },
         "voiceover_text": voiceover_text,
+        "dialogue": dialogue,
         "text_overlays": text_overlays
     }
 
