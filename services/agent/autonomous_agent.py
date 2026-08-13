@@ -27,6 +27,13 @@ logger = logging.getLogger(__name__)
 RESEARCH_URL = "http://127.0.0.1:8001"
 SGOS_URL = "http://127.0.0.1:8420"
 
+# Video length: every video is capped at 20 seconds.
+# H3 runs at 24fps → 20s = 480 frames. All script beats and dialogue
+# timestamps are planned on this grid.
+VIDEO_DURATION_S = 20
+H3_FPS = 24
+H3_FRAME_COUNT = VIDEO_DURATION_S * H3_FPS  # 480
+
 # Defaults
 MAX_ROUNDS = 3
 MIN_SCORE = 5.0
@@ -107,54 +114,54 @@ def generate_dialogue(scenario: str, hook: str) -> list[dict]:
     """
     DIALOGUES = {
         "block": [
-            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
-            {"time": "3-12s", "character": "KID", "line": "DJ! DJ! Play that one song!"},
-            {"time": "12-35s", "character": "UNCLE ON THE GRILL", "line": "Ain't nobody touching this grill but me. I don't care who you are."},
-            {"time": "12-35s", "character": "AUNTIE", "line": "I made four types of potato salad — y'all gon' try ALL of 'em."},
-            {"time": "12-35s", "character": "COUSIN (showing up late)", "line": "Man, y'all ALWAYS eat without me!"},
-            {"time": "35-50s", "character": "NARRATOR (VO)", "line": "And yeah — the cops shut it down at 9:47. Every single time."},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "KID", "line": "DJ! DJ! Play that one song!"},
+            {"time": "7-15s", "character": "UNCLE ON THE GRILL", "line": "Ain't nobody touching this grill but me. I don't care who you are."},
+            {"time": "7-15s", "character": "AUNTIE", "line": "I made four types of potato salad — y'all gon' try ALL of 'em."},
+            {"time": "7-15s", "character": "COUSIN (showing up late)", "line": "Man, y'all ALWAYS eat without me!"},
+            {"time": "15-20s", "character": "NARRATOR (VO)", "line": "And yeah — the cops shut it down at 9:47. Every single time."},
         ],
         "mama": [
-            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
-            {"time": "3-12s", "character": "MAMA (off-camera)", "line": "Boy, WHERE you at?! It is ELEVEN o'clock!"},
-            {"time": "12-35s", "character": "YOU (whispering)", "line": "I'm outside..."},
-            {"time": "12-35s", "character": "MAMA (off-camera)", "line": "Outside?! You better be inside in five seconds."},
-            {"time": "35-50s", "character": "YOU (to camera)", "line": "Y'all already know how this ended."},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "MAMA (off-camera)", "line": "Boy, WHERE you at?! It is ELEVEN o'clock!"},
+            {"time": "7-15s", "character": "YOU (whispering)", "line": "I'm outside..."},
+            {"time": "7-15s", "character": "MAMA (off-camera)", "line": "Outside?! You better be inside in five seconds."},
+            {"time": "15-20s", "character": "YOU (to camera)", "line": "Y'all already know how this ended."},
         ],
         "function": [
-            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
-            {"time": "3-12s", "character": "COUSIN", "line": "Man, the food table got a VIP section now?"},
-            {"time": "12-35s", "character": "UNCLE ON THE GRILL", "line": "You ain't touching this grill, lil man."},
-            {"time": "12-35s", "character": "AUNTIE", "line": "He brought STORE-BOUGHT potato salad... to my cookout."},
-            {"time": "35-50s", "character": "CROWD", "line": "Ooooooh!"},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "COUSIN", "line": "Man, the food table got a VIP section now?"},
+            {"time": "7-15s", "character": "UNCLE ON THE GRILL", "line": "You ain't touching this grill, lil man."},
+            {"time": "7-15s", "character": "AUNTIE", "line": "He brought STORE-BOUGHT potato salad... to my cookout."},
+            {"time": "15-20s", "character": "CROWD", "line": "Ooooooh!"},
         ],
         "family": [
-            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
-            {"time": "3-12s", "character": "AUNTIE", "line": "Baby, you the first one. Make us proud."},
-            {"time": "12-35s", "character": "YOU (VO)", "line": "They said I couldn't. So I did it twice."},
-            {"time": "35-50s", "character": "MAMA", "line": "I always knew."},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "AUNTIE", "line": "Baby, you the first one. Make us proud."},
+            {"time": "7-15s", "character": "YOU (VO)", "line": "They said I couldn't. So I did it twice."},
+            {"time": "15-20s", "character": "MAMA", "line": "I always knew."},
         ],
         "nostalgia": [
-            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
-            {"time": "12-35s", "character": "YOU", "line": "Corner store had a policy: no shoes, no shirt — still got service."},
-            {"time": "12-35s", "character": "FRIEND", "line": "Man, the block party DJ had ONE job."},
-            {"time": "35-50s", "character": "YOU (to camera)", "line": "If you know this one... we family."},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "7-15s", "character": "YOU", "line": "Corner store had a policy: no shoes, no shirt — still got service."},
+            {"time": "7-15s", "character": "FRIEND", "line": "Man, the block party DJ had ONE job."},
+            {"time": "15-20s", "character": "YOU (to camera)", "line": "If you know this one... we family."},
         ],
         "food": [
-            {"time": "0-3s", "character": "NARRATOR (VO)", "line": hook},
-            {"time": "3-12s", "character": "SKEPTIC", "line": "It's just a plate of food, bro."},
-            {"time": "12-35s", "character": "YOU", "line": "You ain't even tasted it yet."},
-            {"time": "35-50s", "character": "SKEPTIC (after one bite)", "line": "...okay. I'm wrong. I'm wrong."},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "SKEPTIC", "line": "It's just a plate of food, bro."},
+            {"time": "7-15s", "character": "YOU", "line": "You ain't even tasted it yet."},
+            {"time": "15-20s", "character": "SKEPTIC (after one bite)", "line": "...okay. I'm wrong. I'm wrong."},
         ],
         "pov": [
-            {"time": "0-3s", "character": "YOU (to camera)", "line": hook},
-            {"time": "12-35s", "character": "FRIEND", "line": "Nah, because that really just happened?"},
-            {"time": "35-50s", "character": "YOU", "line": "Every. Single. Time."},
+            {"time": "0-2s", "character": "YOU (to camera)", "line": hook},
+            {"time": "7-15s", "character": "FRIEND", "line": "Nah, because that really just happened?"},
+            {"time": "15-20s", "character": "YOU", "line": "Every. Single. Time."},
         ],
         "general": [
-            {"time": "0-3s", "character": "YOU (to camera)", "line": hook},
-            {"time": "12-35s", "character": "FRIEND", "line": "Wait, for real?"},
-            {"time": "35-50s", "character": "YOU", "line": "Every single time."},
+            {"time": "0-2s", "character": "YOU (to camera)", "line": hook},
+            {"time": "7-15s", "character": "FRIEND", "line": "Wait, for real?"},
+            {"time": "15-20s", "character": "YOU", "line": "Every single time."},
         ],
     }
     return DIALOGUES.get(scenario, [])
@@ -243,7 +250,7 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
     script_parts = []
 
     # Hook (0-3 seconds)
-    script_parts.append(f"[0-3s] HOOK: {hook}")
+    script_parts.append(f"[0-2s] HOOK: {hook}")
     script_parts.append("  → Text overlay: Large, bold, center screen")
     if is_hood:
         script_parts.append("  → Visual: Face cam, front porch, kitchen, or block — real environment, not a studio")
@@ -258,37 +265,37 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
         scenario = _detect_hood_scenario(hook_lower)
 
         if scenario == "mama":
-            script_parts.append("[3-12s] SCENE SETUP")
+            script_parts.append("[2-7s] SCENE SETUP")
             script_parts.append("  → Two-shot or split-screen: you now vs. flashback")
             script_parts.append("  → Location: Kitchen or living room at night, lights low")
             script_parts.append("  → Props: Phone (screen glow on face), maybe a hoodie")
             script_parts.append("")
-            script_parts.append("[12-35s] THE SCENE")
+            script_parts.append("[7-15s] THE SCENE")
             script_parts.append("  → Play both characters (or use a friend for mama)")
             script_parts.append("  → Mama voice: 'Boy where you at?!' (off-camera or filtered)")
             script_parts.append("  → You: frozen, caught in the act")
             script_parts.append("  → Build the tension — what were you doing?")
-            script_parts.append("  → The punchline/reveal at 30s mark")
+            script_parts.append("  → The punchline/reveal at the 12s mark")
             script_parts.append("")
-            script_parts.append("[35-50s] PAYOFF")
+            script_parts.append("[15-20s] PAYOFF")
             script_parts.append("  → The consequence or the funny resolution")
             script_parts.append("  → Cut to present day: 'and that's why I...'")
             script_parts.append("  → Reaction shot — deadpan or laughing")
             script_parts.append("")
 
         elif scenario == "block":
-            script_parts.append("[3-12s] ESTABLISHING SHOT")
+            script_parts.append("[2-7s] ESTABLISHING SHOT")
             script_parts.append("  → Pan of the block / street / porch — golden hour or night lights")
             script_parts.append("  → Text: 'POV: it's 2019 and the block is LIT'")
             script_parts.append("  → Sound: Bass from a nearby car, kids yelling, summer energy")
             script_parts.append("")
-            script_parts.append("[12-35s] THE VIBE")
+            script_parts.append("[7-15s] THE VIBE")
             script_parts.append("  → Quick cuts: dominoes, music, food on the grill, people laughing")
             script_parts.append("  → Each cut = a different character/moment (play them all or use friends)")
             script_parts.append("  → One recurring character who always does the same thing")
             script_parts.append("  → The energy builds — more people, louder music, better food")
             script_parts.append("")
-            script_parts.append("[35-50s] THE MOMENT")
+            script_parts.append("[15-20s] THE MOMENT")
             script_parts.append("  → The peak moment everyone remembers")
             script_parts.append("  → Slow-mo or freeze frame on the best part")
             script_parts.append("  → Text overlay: 'Y'all remember this?'")
@@ -296,74 +303,74 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
             script_parts.append("")
 
         elif scenario == "function":
-            script_parts.append("[3-12s] ARRIVAL")
+            script_parts.append("[2-7s] ARRIVAL")
             script_parts.append("  → Pull up to the function — car shot or walking in")
             script_parts.append("  → Quick fit check or food table scan")
             script_parts.append("  → Text: 'The cookout had a WHOLE different energy'")
             script_parts.append("")
-            script_parts.append("[12-35s] THE CHARACTERS")
+            script_parts.append("[7-15s] THE CHARACTERS")
             script_parts.append("  → Quick cuts of each 'type' at the function:")
             script_parts.append("  → The uncle on the grill who won't let nobody touch it")
             script_parts.append("  → The auntie who brought 4 types of potato salad")
             script_parts.append("  → The cousin who showed up late with no food")
             script_parts.append("  → Play them all yourself or tag friends")
             script_parts.append("")
-            script_parts.append("[35-50s] THE CHAOS")
+            script_parts.append("[15-20s] THE CHAOS")
             script_parts.append("  → The moment everything goes left — music too loud, argument starts, food runs out")
             script_parts.append("  → 'And then somebody said...' — the line that started it")
             script_parts.append("  → Freeze frame on the reaction")
             script_parts.append("")
 
         elif scenario == "family":
-            script_parts.append("[3-12s] THE SETUP")
+            script_parts.append("[2-7s] THE SETUP")
             script_parts.append("  → Family photo or graduation cap — visual anchor")
             script_parts.append("  → Text: 'POV: you the only one who made it out'")
             script_parts.append("  → Tone: pride mixed with bittersweet")
             script_parts.append("")
-            script_parts.append("[12-35s] THE JOURNEY")
+            script_parts.append("[7-15s] THE JOURNEY")
             script_parts.append("  → Quick montage: studying, working, grinding")
             script_parts.append("  → Flashbacks to people who doubted you")
             script_parts.append("  → The moment you realized you were different")
             script_parts.append("  → 'They said I couldn't...' → show the proof")
             script_parts.append("")
-            script_parts.append("[35-50s] THE PROOF")
+            script_parts.append("[15-20s] THE PROOF")
             script_parts.append("  → Present day: where you are now")
             script_parts.append("  → Bring it back to the block/family — 'but I never forgot'")
             script_parts.append("  → Emotional hit — this is the share moment")
             script_parts.append("")
 
         elif scenario == "nostalgia":
-            script_parts.append("[3-12s] THE TRIGGER")
+            script_parts.append("[2-7s] THE TRIGGER")
             script_parts.append("  → One object/sound that takes you back")
             script_parts.append("  → Close-up: a specific snack, a song, a photo, a street corner")
             script_parts.append("  → Text: 'Tell me you grew up in the hood without telling me'")
             script_parts.append("")
-            script_parts.append("[12-35s] THE LIST")
-            script_parts.append("  → Quick-fire montage of 5-7 things only hood kids know:")
-            script_parts.append("  → Each item = 2-3 seconds, text overlay + visual")
+            script_parts.append("[7-15s] THE LIST")
+            script_parts.append("  → Quick-fire montage of 4-5 things only hood kids know:")
+            script_parts.append("  → Each item = 1-2 seconds, text overlay + visual")
             script_parts.append("  → Examples: the corner store candy, the block party playlist,")
             script_parts.append("    mama's Sunday cooking, the neighbor's loud music at 2am")
             script_parts.append("  → Build recognition — viewer should be nodding the whole time")
             script_parts.append("")
-            script_parts.append("[35-50s] THE HIT")
+            script_parts.append("[15-20s] THE HIT")
             script_parts.append("  → The one item that hits hardest — slow it down")
             script_parts.append("  → 'If you know this one, we're family'")
             script_parts.append("  → End on emotion — nostalgia is the share trigger")
             script_parts.append("")
 
         elif scenario == "food":
-            script_parts.append("[3-12s] THE CLAIM")
+            script_parts.append("[2-7s] THE CLAIM")
             script_parts.append("  → Hot take energy — confident, slightly confrontational")
             script_parts.append("  → Show the hood dish on camera — make it look amazing")
             script_parts.append("  → Text: the hot take (big, bold)")
             script_parts.append("")
-            script_parts.append("[12-35s] THE PROOF")
+            script_parts.append("[7-15s] THE PROOF")
             script_parts.append("  → Cook it or show it being made — close-ups, steam, sizzle")
             script_parts.append("  → Compare to the 'fancy' version side by side")
             script_parts.append("  → Taste test — real reaction, not fake")
             script_parts.append("  → 'Now tell me this ain't better than...'")
             script_parts.append("")
-            script_parts.append("[35-50s] THE VERDICT")
+            script_parts.append("[15-20s] THE VERDICT")
             script_parts.append("  → Final shot: the dish, plated or in a styrofoam container")
             script_parts.append("  → 'Hood food don't miss. Ever.'")
             script_parts.append("  → Comment bait: 'What's YOUR hood dish?'")
@@ -371,22 +378,22 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
 
         else:
             # General hood skit fallback
-            script_parts.append("[3-12s] SCENE SETUP")
+            script_parts.append("[2-7s] SCENE SETUP")
             script_parts.append("  → Real environment: porch, kitchen, block, car")
             script_parts.append("  → Establish the vibe — music, lighting, energy")
             script_parts.append("")
-            script_parts.append("[12-35s] THE SCENE")
+            script_parts.append("[7-15s] THE SCENE")
             script_parts.append("  → Play the characters (one-person skit or with friends)")
             script_parts.append("  → Build the scenario — relatable, specific, funny")
             script_parts.append("  → One moment that everyone recognizes")
             script_parts.append("")
-            script_parts.append("[35-50s] PAYOFF")
+            script_parts.append("[15-20s] PAYOFF")
             script_parts.append("  → Punchline, reaction, or emotional hit")
             script_parts.append("  → The moment that makes people share it")
             script_parts.append("")
 
         # Hood skit CTA
-        script_parts.append("[50-60s] OUTRO")
+        script_parts.append("[18-20s] OUTRO")
         script_parts.append("  → No hard CTA — keep it natural")
         script_parts.append("  → 'Y'all tell me if this happened to you' or")
         script_parts.append("  → 'Tag someone who does this' — comment bait")
@@ -395,110 +402,110 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
 
     elif structure == "tutorial":
         # Tutorial structure
-        script_parts.append("[3-15s] SETUP")
+        script_parts.append("[2-5s] SETUP")
         script_parts.append("  → Quick context: Why this matters")
         script_parts.append("  → Preview the end result")
         script_parts.append("")
-
+        
         # Extract step count from hook or default to 3
         step_count = 3
         if has_numbers:
             num_match = re.search(r'(\d+)', hook)
             if num_match:
                 step_count = min(int(num_match.group(1)), 5)  # Cap at 5 steps
-
-        script_parts.append(f"[15-45s] STEPS ({step_count} steps)")
+        
+        script_parts.append(f"[5-14s] STEPS ({step_count} steps)")
         for i in range(1, step_count + 1):
-            duration = 8 if step_count <= 3 else 6
-            start = 15 + (i-1) * duration
+            duration = 3 if step_count <= 3 else 2
+            start = 5 + (i-1) * duration
             end = start + duration
             script_parts.append(f"  [{start}-{end}s] Step {i}:")
             script_parts.append(f"    → Show action")
             script_parts.append(f"    → Text overlay with key tip")
             script_parts.append(f"    → Voiceover or captions")
         script_parts.append("")
-
-        script_parts.append("[45-55s] RESULT")
+        
+        script_parts.append("[14-18s] RESULT")
         script_parts.append("  → Show finished product/outcome")
         script_parts.append("  → Before/after comparison")
         script_parts.append("")
-
+    
     elif structure == "story":
         # Story structure
-        script_parts.append("[3-10s] CONTEXT")
+        script_parts.append("[2-5s] CONTEXT")
         script_parts.append("  → Set the scene")
         script_parts.append("  → 'Here's what happened...'")
         script_parts.append("")
-
-        script_parts.append("[10-40s] JOURNEY")
+        
+        script_parts.append("[5-14s] JOURNEY")
         script_parts.append("  → Rising action")
         script_parts.append("  → Challenges faced")
         script_parts.append("  → Key turning point")
         script_parts.append("")
-
-        script_parts.append("[40-55s] RESOLUTION")
+        
+        script_parts.append("[14-20s] RESOLUTION")
         script_parts.append("  → The outcome")
         script_parts.append("  → What I learned")
         script_parts.append("")
-
+    
     elif structure == "contrarian":
         # Contrarian structure
-        script_parts.append("[3-10s] COMMON BELIEF")
+        script_parts.append("[2-6s] COMMON BELIEF")
         script_parts.append("  → 'Most people think...'")
         script_parts.append("  → Show the mainstream approach")
         script_parts.append("")
-
-        script_parts.append("[10-35s] COUNTERARGUMENT")
+        
+        script_parts.append("[6-13s] COUNTERARGUMENT")
         script_parts.append("  → Why that's wrong")
         script_parts.append("  → Evidence/examples")
         script_parts.append("  → 'Here's what actually works...'")
         script_parts.append("")
-
-        script_parts.append("[35-55s] PROOF")
+        
+        script_parts.append("[13-20s] PROOF")
         script_parts.append("  → Results/data")
         script_parts.append("  → Before/after")
         script_parts.append("  → Why this works better")
         script_parts.append("")
-
+    
     elif structure == "challenge":
         # Challenge structure
-        script_parts.append("[3-8s] CHALLENGE INTRO")
+        script_parts.append("[2-5s] CHALLENGE INTRO")
         script_parts.append("  → What's the challenge?")
         script_parts.append("  → Why it's hard")
         script_parts.append("")
-
-        script_parts.append("[8-45s] ATTEMPT")
+        
+        script_parts.append("[5-15s] ATTEMPT")
         script_parts.append("  → The process")
         script_parts.append("  → Failures/struggles")
         script_parts.append("  → Persistence")
         script_parts.append("")
-
-        script_parts.append("[45-55s] OUTCOME")
+        
+        script_parts.append("[15-20s] OUTCOME")
         script_parts.append("  → Success or funny fail")
         script_parts.append("  → Encourage others to try")
         script_parts.append("")
-
+    
     else:
         # Generic structure
-        script_parts.append("[3-15s] MAIN POINT")
+        script_parts.append("[2-7s] MAIN POINT")
         script_parts.append("  → Expand on the hook")
         script_parts.append("  → Provide context/value")
         script_parts.append("")
-
-        script_parts.append("[15-40s] DETAILS")
+        
+        script_parts.append("[7-15s] DETAILS")
         script_parts.append("  → Supporting information")
         script_parts.append("  → Examples")
         script_parts.append("  → Tips/insights")
         script_parts.append("")
-
-        script_parts.append("[40-55s] CONCLUSION")
+        
+        script_parts.append("[15-20s] CONCLUSION")
         script_parts.append("  → Key takeaway")
         script_parts.append("  → Call to action")
         script_parts.append("")
-
+    
     # CTA (skip for hood skits — they have their own outro)
     if not is_hood:
-        script_parts.append("[55-60s] CTA")
+        script_parts.append("[18-20s] CTA")
         if is_question:
             script_parts.append("  → 'What do you think? Comment below'")
         else:
@@ -538,7 +545,8 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
     script_parts.append("")
     script_parts.append("[PRODUCTION NOTES]")
     script_parts.append("  → Vertical 9:16 (1080x1920)")
-    script_parts.append("  → First 3 seconds: Hook must land immediately")
+    script_parts.append("  → Total length: 20 seconds (hard cap)")
+    script_parts.append("  → First 2 seconds: Hook must land immediately")
     script_parts.append("  → Text size: Large (readable on mobile)")
     script_parts.append("  → Audio: Trending sound or voiceover")
     
@@ -1367,7 +1375,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     
     # ─── FLUX3 prompt: one dense line with all aesthetics baked in ───
     flux3_prompt = ", ".join(contextual_prompt_parts)
-    flux3_command = f"/t2v prompt:{flux3_prompt} duration:10 aspect_ratio:9:16"
+    flux3_command = f"/t2v prompt:{flux3_prompt} duration:{VIDEO_DURATION_S} aspect_ratio:9:16"
     
     # ─── Kling / H3: contextual prompt (not just prompt_seed) ───
     kling_prompt = ", ".join(contextual_prompt_parts) if contextual_prompt_parts else hook
@@ -1400,7 +1408,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         if current_time is None:
             continue  # Still in skip zone
         
-        # Detect new timestamp section: [3-12s] LABEL
+        # Detect new timestamp section: [2-7s] LABEL
         ts_match = re.match(r'\[(\d+-?\d*s?)\]\s*(?:\w[\w\s]*?)(?::|$)', stripped)
         if ts_match:
             current_time = ts_match.group(1)
@@ -1489,7 +1497,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     # If no overlays found, at least include the hook
     if not text_overlays:
         text_overlays.append({
-            "time": "0-3s",
+            "time": "0-2s",
             "text": hook,
             "style": "bold center"
         })
@@ -1499,7 +1507,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         "kling": {
             "prompt": kling_prompt,
             "aspect_ratio": "9:16",
-            "duration": 10,
+            "duration": VIDEO_DURATION_S,
             "model": "kling-v2-master",
             "mode": "pro",
             "camera_control": {"type": "simple"}
@@ -1508,11 +1516,13 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             "prompt": h3_prompt,
             "image_start": "/path/to/your/first_frame.png",
             "resolution": "480x832",
-            "video_length": 124,
+            "video_length": H3_FRAME_COUNT,
             "num_inference_steps": 20,
             "sample_solver": "euler",
             "guidance_scale": 1.0,
-            "embedded_guidance_scale": 6.0
+            "embedded_guidance_scale": 6.0,
+            "sliding_window_size": 124,
+            "sliding_window_overlap": 1
         },
         "voiceover_text": voiceover_text,
         "dialogue": dialogue,
