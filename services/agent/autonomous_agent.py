@@ -160,6 +160,46 @@ def generate_dialogue(scenario: str, hook: str) -> list[dict]:
     return DIALOGUES.get(scenario, [])
 
 
+# Voice texture per character archetype — baked into video prompts in the style of
+# "dropping a 'line'. his voice is deep and old like he smoked 2 packs a day"
+VOICE_PROFILES = {
+    "UNCLE ON THE GRILL": "deep gravelly voice like he smoked 2 packs of cigarettes per day",
+    "AUNTIE": "loud warm voice that carries across the whole block",
+    "MAMA": "sharp commanding mama voice that ends every argument",
+    "KID": "high-pitched excited kid voice, slightly out of breath",
+    "COUSIN": "winded complaining voice like he just ran from three blocks away",
+    "FRIEND": "casual conversational voice, half laughing",
+    "SKEPTIC": "doubting flat tone that flips into full belief",
+    "CROWD": "collective crowd reaction, hyped",
+    "YOU": "natural conversational voice, direct to camera",
+    "NARRATOR": "deep reflective voiceover, nostalgic tone",
+}
+
+
+def build_dialogue_prompt(scenario: str, hook: str) -> str:
+    """Render dialogue lines into one dense video-prompt clause.
+
+    Style: character dropping "line" + voice texture — so video/lip-sync tools
+    get who is talking, what they say, and how they sound. Narrator lines are
+    skipped (voiceover carries them, not on-screen speech).
+    """
+    lines = generate_dialogue(scenario, hook)
+    if not lines:
+        return ""
+    clauses = []
+    for d in lines:
+        char = d["character"]
+        base_char = char.split("(")[0].strip()
+        if base_char == "NARRATOR":
+            continue  # voiceover, not on-screen speech
+        voice = VOICE_PROFILES.get(char) or VOICE_PROFILES.get(base_char, "")
+        clause = f"{base_char.lower()} dropping \"{d['line']}\""
+        if voice:
+            clause += f", {voice}"
+        clauses.append(clause)
+    return ", ".join(clauses)
+
+
 def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_style: Optional[dict] = None) -> str:
     """Generate a structured video script from hook and format.
     
@@ -1305,6 +1345,26 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             if color_terms:
                 contextual_prompt_parts.append(color_terms)
     
+    # ─── Dialogue: bake character speech + voice texture into the video prompt ───
+    # Hood/skit content gets scenario-specific dialogue; POV hooks get a
+    # generic two-person exchange. Narrative-only content (no characters)
+    # stays silent on-screen — the voiceover carries it.
+    hook_lower_full = hook.lower()
+    hood_signals = {"hood", "block", "mama", "cookout", "function", "neighbor", "friday night", "graduated", "only one"}
+    is_dialogue_content = any(sig in hook_lower_full for sig in hood_signals) or hook_lower_full.startswith("pov")
+    dialogue = []
+    dialogue_prompt_clause = ""
+    if is_dialogue_content:
+        scenario = _detect_hood_scenario(hook_lower_full)
+        if scenario == "general" and hook_lower_full.startswith("pov"):
+            scenario = "pov"
+        dialogue = generate_dialogue(scenario, hook)
+        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook)
+    
+    # Append dialogue clause so video tools get who is talking + how they sound
+    if dialogue_prompt_clause:
+        contextual_prompt_parts.append(dialogue_prompt_clause)
+    
     # ─── FLUX3 prompt: one dense line with all aesthetics baked in ───
     flux3_prompt = ", ".join(contextual_prompt_parts)
     flux3_command = f"/t2v prompt:{flux3_prompt} duration:10 aspect_ratio:9:16"
@@ -1433,20 +1493,6 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             "text": hook,
             "style": "bold center"
         })
-    
-    # ─── Dialogue: shootable character lines timed to script beats ───
-    # Hood/skit content gets scenario-specific dialogue; POV hooks get a
-    # generic two-person exchange. Narrative-only content (no characters)
-    # gets an empty list — the voiceover carries it.
-    hook_lower_full = hook.lower()
-    hood_signals = {"hood", "block", "mama", "cookout", "function", "neighbor", "friday night", "graduated", "only one"}
-    is_dialogue_content = any(sig in hook_lower_full for sig in hood_signals) or hook_lower_full.startswith("pov")
-    dialogue = []
-    if is_dialogue_content:
-        scenario = _detect_hood_scenario(hook_lower_full)
-        if scenario == "general" and hook_lower_full.startswith("pov"):
-            scenario = "pov"
-        dialogue = generate_dialogue(scenario, hook)
     
     return {
         "flux3": flux3_command,
