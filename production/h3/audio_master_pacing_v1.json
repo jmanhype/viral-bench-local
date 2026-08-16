@@ -1,0 +1,19 @@
+{
+  "model_type": "minimax_h3_ref2va_pruned",
+  "prompt": "found footage of a 2006 Atlanta trap house block party at dusk, same residential street with string lights crisscrossing overhead, purple and magenta lighting, smoke haze, fish-eye lens distortion, saturated colors, VHS tracking artifacts. The man from <Picture 1> stands at a large grill flipping meat with blackened tongs, close-cropped grey hair, full grey beard, white tank top under unbuttoned red-and-black plaid flannel, gold rope chain, sweat towel over shoulder. He moves in sync with the reference audio track: each time the 808 hits he flips the meat with a sharp accent, his head nods on the beat, crowd behind him bounces on the downbeats, camera accents and any environment changes land precisely on the strong beats of the music. He looks at the camera and says in a deep gravelly voice like he smoked two packs a day: Welcome to the block party, yall. Consumer camcorder with saturated color grading, VHS tracking lines, no text, no subtitles, no hud, no watermark, no slow motion.",
+  "video_prompt_type": "I",
+  "audio_prompt_type": "A",
+  "audio_guide": "/home/straughter/h3_runs/block_party_bed_6s.wav",
+  "image_refs": [
+    "/home/straughter/h3_runs/unc_ray_v3_frame1.png"
+  ],
+  "width": 480,
+  "height": 832,
+  "video_length": 121,
+  "num_inference_steps": 20,
+  "guidance_scale": 1.0,
+  "embedded_guidance_scale": 6.0,
+  "seed": 424248,
+  "force_fps": "24",
+  "output": "outputs/audio_master_pacing_v1.mp4"
+}

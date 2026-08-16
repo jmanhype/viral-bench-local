@@ -29,9 +29,21 @@ nohup.out
 
 # Data (keep schema, not content)
 *.db
+*.db-shm
+*.db-wal
 *.sqlite
 corpus/
 videos/
+
+# Generated media — masters live on 3090 bulk storage, not in git
+outputs/
+*.mp4
+*.wav
+*.mp3
+
+# Private community research exports — never commit or push
+research/dreamingtulpa_discord_mentions.json
+research/dreamingtulpa_unique_prompts.json
 
 # Node (if any frontend)
 node_modules/

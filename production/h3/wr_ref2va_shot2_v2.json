@@ -1,0 +1,18 @@
+{
+  "model_type": "minimax_h3_ref2va_pruned",
+  "prompt": "glossy 2003 pop music video, the beautiful young woman from <Picture 1> with long dark hair blowing in the wind, black leather jacket, silver hoop earrings, close-up of her singing passionately from the driver seat of a car at night, silhouette rim-lit by passing neon signs, pink and purple light trails sweeping across her face, her mouth moving in exact sync with the song from <Audio 1>, eyes closed feeling the song. Slow dolly orbit around her face ending on a held beat. Glossy 2003 pop music video aesthetic, saturated neon color grade, anamorphic lens flares, early-2000s digital camera clarity, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity",
+  "video_prompt_type": "I",
+  "image_refs": [
+    "/home/straughter/h3_runs/wr_still_230.png"
+  ],
+  "audio_guide": "/home/straughter/h3_runs/wr_shot2_guide.wav",
+  "width": 480,
+  "height": 832,
+  "video_length": 176,
+  "num_inference_steps": 20,
+  "guidance_scale": 1.0,
+  "embedded_guidance_scale": 6.0,
+  "seed": 717,
+  "force_fps": "24",
+  "output": "outputs/wr_ref2va_shot2_v2.mp4"
+}

@@ -1,0 +1,17 @@
+{
+  "prompt": "found footage of 2006 Atlanta trap house music video, rapper in white tee and diamond chain leaning against candy-paint Escalade, purple and magenta lighting, gold grill reflecting studio lights, lean cup in hand, smoke haze, fish-eye lens distortion, Hype Williams influence, saturated colors, VHS tracking artifacts, heavyset Black man in his late 50s, close-cropped grey hair, full grey beard, white tank top under an unbuttoned red-and-black plaid flannel, gold rope chain, sweat towel over one shoulder, holding blackened grill tongs, points the tongs while making a point; flips meat mid-sentence without looking; wipes his forehead with the shoulder towel, kid dropping \"DJ! DJ! Play that one song!\", high-pitched excited kid voice, slightly out of breath, uncle on the grill dropping \"Ain't nobody touching this grill but me. I don't care who you are.\", deep gravelly voice like he smoked 2 packs of cigarettes per day, auntie dropping \"I made four types of potato salad \u2014 y'all gon' try ALL of 'em.\", loud warm voice that carries across the whole block, cousin dropping \"Man, y'all ALWAYS eat without me!\", winded complaining voice like he just ran from three blocks away, Consumer camcorder with saturated color grading, VHS tracking lines and head switching noise, slight image softness from consumer camcorder lens, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity, no cinematic color grading, no natural lighting, no modern digital artifacts",
+  "image_start": "/home/straughter/h3_runs/unc_ray_v3_frame1.png",
+  "resolution": "480x832",
+  "video_length": 480,
+  "num_inference_steps": 20,
+  "sample_solver": "euler",
+  "guidance_scale": 1.0,
+  "embedded_guidance_scale": 6.0,
+  "sliding_window_size": 124,
+  "sliding_window_overlap": 1,
+  "model_type": "minimax_h3_fl2va_pruned",
+  "seed": 424247,
+  "flow_shift": 12,
+  "output_filename": "unc_ray_block_party_v3",
+  "image_end": "/home/straughter/h3_runs/unc_ray_v3_frame4.png"
+}

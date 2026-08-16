@@ -1,0 +1,14 @@
+{
+  "model_type": "minimax_h3_fl2va_pruned",
+  "script": "glossy 2003 pop music video, a beautiful young woman with long dark hair blowing in the wind, black leather jacket, silver hoop earrings, driving a black convertible down a neon-lit highway at night, glowing dashboard, city lights streaking past, she sings along joyfully to the radio, one continuous performance. Slow push-in through the windshield ending on a held beat. Glossy 2003 pop music video aesthetic, saturated neon color grade, anamorphic lens flares, early-2000s digital camera clarity, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity\n---\nglossy 2003 pop music video, same beautiful young woman with long dark hair, black leather jacket, silver hoop earrings, close-up of her singing passionately from the driver seat, silhouette rim-lit by passing neon signs, pink and purple light trails sweeping across her face, eyes closed feeling the song. Slow dolly orbit around her face ending on a held beat. Glossy 2003 pop music video aesthetic, saturated neon color grade, anamorphic lens flares, early-2000s digital camera clarity, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity\n---\nglossy 2003 pop music video, same beautiful young woman with long dark hair in the black convertible, wide shot of the convertible speeding down the elevated highway, tail-light streaks, city skyline glowing in the distance, magenta and cyan neon reflections on wet asphalt. Steady fast tracking alongside the car ending on a held beat. Glossy 2003 pop music video aesthetic, saturated neon color grade, anamorphic lens flares, early-2000s digital camera clarity, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity\n---\nglossy 2003 pop music video, same beautiful young woman with long dark hair, rain begins falling on the windshield, streetlight light trails through the rain drops, she throws her head back laughing and singing at the sky, surrendering to the moment. Handheld close-up pulling back slowly ending on a held beat. Glossy 2003 pop music video aesthetic, saturated neon color grade, anamorphic lens flares, early-2000s digital camera clarity, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity",
+  "shot_count": 0,
+  "width": 480,
+  "height": 832,
+  "frames_per_shot": 120,
+  "num_inference_steps": 20,
+  "guidance_scale": 1.0,
+  "embedded_guidance_scale": 6.0,
+  "seed": 143143,
+  "output": "outputs/wet_reckless_mv_v1.mp4",
+  "prompt": "Wet Reckless music video: 4 performance shots cut to a 143.6 BPM hook, neon night drive, Y2K pop aesthetic"
+}

@@ -1,0 +1,21 @@
+{
+  "prompt": "found footage of 2006 Atlanta trap house music video, rapper in white tee and diamond chain leaning against candy-paint Escalade, purple and magenta lighting, gold grill reflecting studio lights, lean cup in hand, smoke haze, fish-eye lens distortion, Hype Williams influence, saturated colors, VHS tracking artifacts, heavyset Black man in his late 50s, close-cropped grey hair, full grey beard, white tank top under an unbuttoned red-and-black plaid flannel, gold rope chain, sweat towel over one shoulder, holding blackened grill tongs, points the tongs while making a point; flips meat mid-sentence without looking; wipes his forehead with the shoulder towel, you dropping \"POV: this is what comedy really looks like\", natural conversational voice, direct to camera, friend dropping \"Nah, because that really just happened?\", casual conversational voice, half laughing, you dropping \"Every. Single. Time.\", natural conversational voice, direct to camera, Consumer camcorder with saturated color grading, VHS tracking lines and head switching noise, slight image softness from consumer camcorder lens, no text, no subtitles, no hud, no watermark, no slow motion, no 4k clarity, no cinematic color grading, no natural lighting, no modern digital artifacts",
+  "model_type": "minimax_h3_fl2va_pruned",
+  "image_start": "/home/straughter/h3_runs/unc_ray_frame1.png",
+  "image_mode": 0,
+  "image_prompt_type": "S",
+  "resolution": "480x832",
+  "video_length": 480,
+  "num_inference_steps": 20,
+  "sample_solver": "euler",
+  "seed": 424247,
+  "guidance_scale": 1.0,
+  "embedded_guidance_scale": 6.0,
+  "flow_shift": 12,
+  "temperature": 0.8,
+  "top_p": 0.9,
+  "top_k": 50,
+  "sliding_window_size": 124,
+  "sliding_window_overlap": 1,
+  "output_filename": "unc_ray_block_party"
+}
