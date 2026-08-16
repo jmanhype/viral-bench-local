@@ -349,6 +349,8 @@ class AgentRequest(BaseModel):
     max_rounds: int = Field(default=5, ge=1, le=10)
     min_score: float = Field(default=5.0, ge=0, le=10)
     custom_direction: str = Field(default="", description="Creative direction / constraints")
+    style_id: str = Field(default="", description="Pin a visual style by id (franchise lock), e.g. '2000s-atlanta-trap-house'. Empty = auto-match.")
+    character_id: str = Field(default="", description="Pin a franchise character by id (character lock), e.g. 'unc-ray'. Empty = archetypes only.")
 
 
 class AgentResponse(BaseModel):
@@ -363,6 +365,8 @@ async def _generate_brief_impl(
     max_rounds: int = 5,
     min_score: float = 5.0,
     custom_direction: str = "",
+    style_id: str = "",
+    character_id: str = "",
 ) -> AgentResponse:
     """Shared implementation for brief generation."""
     from services.agent.autonomous_agent import AgentConfig, generate_brief
@@ -373,6 +377,8 @@ async def _generate_brief_impl(
         max_rounds=max_rounds,
         min_score=min_score,
         custom_direction=custom_direction,
+        style_id=style_id,
+        character_id=character_id,
     )
 
     brief = await generate_brief(config)
@@ -390,6 +396,8 @@ async def agent_brief_post(request: AgentRequest) -> AgentResponse:
         max_rounds=request.max_rounds,
         min_score=request.min_score,
         custom_direction=request.custom_direction,
+        style_id=request.style_id,
+        character_id=request.character_id,
     )
 
 
@@ -400,6 +408,8 @@ async def agent_brief_get(
     max_rounds: int = Query(default=5, ge=1, le=10),
     min_score: float = Query(default=5.0, ge=0, le=10),
     custom_direction: str = Query(default="", description="Creative direction / constraints"),
+    style_id: str = Query(default="", description="Pin a visual style by id (franchise lock). Empty = auto-match."),
+    character_id: str = Query(default="", description="Pin a franchise character by id (character lock), e.g. 'unc-ray'. Empty = archetypes only."),
 ) -> AgentResponse:
     """Generate a viral content brief for a niche (GET with query params)."""
     return await _generate_brief_impl(
@@ -408,6 +418,8 @@ async def agent_brief_get(
         max_rounds=max_rounds,
         min_score=min_score,
         custom_direction=custom_direction,
+        style_id=style_id,
+        character_id=character_id,
     )
 
 

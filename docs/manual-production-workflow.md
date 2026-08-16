@@ -22,10 +22,31 @@ curl -X POST http://localhost:8001/v1/agent/brief \
   -H "Content-Type: application/json" \
   -d '{
     "niche": "comedy",
-    "goal": "maximize engagement",
-    "include_production_prompts": true
+    "goal": "maximize engagement"
   }'
 ```
+
+### Franchise lock (recommended for series)
+
+Pin a visual style by id so every brief in a run shares one identical look —
+same fixed style suffix on every prompt (modeled on dreamingtulpa's FLUX3
+franchise formula: one constant tail, many swapped gags). Without `style_id`
+the system auto-matches a style per brief.
+
+```bash
+curl -X POST http://localhost:8001/v1/agent/brief \
+  -H "Content-Type: application/json" \
+  -d '{
+    "niche": "comedy",
+    "goal": "hood comedy",
+    "style_id": "2000s-atlanta-trap-house"
+  }'
+```
+
+Prompt anatomy (5 slots): `[found footage of] [scene/gag] [dialogue + voice texture] [FIXED style suffix] [duration:20 aspect_ratio:9:16 resolution:fhd]`.
+The suffix carries color treatment, film artifacts, and negatives
+(`no text, no subtitles, no hud, no watermark, no slow motion` + the style's
+forbidden artifacts). FLUX3 accepts `resolution:fhd` or `resolution:hd` only.
 
 Response includes:
 - **hook**: The opening line (e.g., "When your mama say 'come inside' but you already outside with the boys")
@@ -227,11 +248,11 @@ Tell me you grew up in the hood without telling me
 Generate multiple briefs and queue them:
 
 ```bash
-# Generate 5 briefs
+# Generate 5 briefs in ONE franchise (same style_id = identical look across all)
 for i in {1..5}; do
   curl -X POST http://localhost:8001/v1/agent/brief \
     -H "Content-Type: application/json" \
-    -d '{"niche": "comedy", "include_production_prompts": true}' \
+    -d '{"niche": "comedy", "style_id": "2000s-atlanta-trap-house"}' \
     > brief_$i.json
 done
 ```
@@ -242,7 +263,7 @@ Process each brief through your video generation pipeline, then batch-upload to 
 
 ## Summary
 
-1. **Generate brief** with `include_production_prompts: true`
+1. **Generate brief** (optionally with `style_id` for franchise lock)
 2. **Copy prompts** into FLUX3/Kling/H3 for video
 3. **Add text overlays** in CapCut using VBL's timed captions
 4. **Record voiceover** from VBL's script

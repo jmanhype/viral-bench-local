@@ -75,6 +75,8 @@ class AgentConfig(BaseModel):
     max_rounds: int = MAX_ROUNDS
     min_score: float = MIN_SCORE
     custom_direction: str = Field(default="", description="Creative direction / constraints")
+    style_id: str = Field(default="", description="Pin a visual style by id (franchise lock) — e.g. '2000s-atlanta-trap-house'. Empty = auto-match.")
+    character_id: str = Field(default="", description="Pin a franchise character by id (character lock) — e.g. 'unc-ray'. Empty = archetypes only.")
 
 
 class HookCandidate(BaseModel):
@@ -103,7 +105,36 @@ def _detect_hood_scenario(hook_lower: str) -> str:
         return "nostalgia"
     if "food" in hook_lower or "slaps" in hook_lower:
         return "food"
+    if "dj" in hook_lower or "aux" in hook_lower or "playlist" in hook_lower:
+        return "dj"
+    if "barbershop" in hook_lower or "barber" in hook_lower or "haircut" in hook_lower:
+        return "barbershop"
+    if "corner store" in hook_lower or "bodega" in hook_lower or "credit" in hook_lower:
+        return "cornerstore"
     return "general"
+
+
+def _hook_subject(hook: str) -> str:
+    """Pull a short concrete subject out of the hook so dialogue can share a topic.
+
+    dreamingtulpa's dialogue works because every line is about the SAME specific
+    thing. Our hooks carry that subject — we just have to strip the meta framing
+    ("POV:", "this is what ... really looks like") down to the noun/event people
+    are actually reacting to. Returns a cleaned phrase; falls back to the hook.
+    """
+    import re
+    h = hook.strip()
+    # Strip format prefixes
+    h = re.sub(r"^(POV:|POV\s|When|Y'all tell me|Real talk:|Hot take:|Storytime:?)\s*",
+               "", h, flags=re.IGNORECASE)
+    # Strip meta framing that wraps the real subject
+    h = re.sub(r"^(this is what|this is how|what)\s+", "", h, flags=re.IGNORECASE)
+    h = re.sub(r"\s+(really )?(looks like|is like|actually happened|happened|went down)$",
+               "", h, flags=re.IGNORECASE)
+    h = re.sub(r"[.!?]+$", "", h).strip()
+    # Drop a leading article for a tighter noun phrase
+    h = re.sub(r"^(the|a|an)\s+", "", h, flags=re.IGNORECASE)
+    return h or hook.strip()
 
 
 def generate_dialogue(scenario: str, hook: str) -> list[dict]:
@@ -111,7 +142,12 @@ def generate_dialogue(scenario: str, hook: str) -> list[dict]:
 
     Each line: {time, character, line} — character includes delivery hints
     like (VO) or (off-camera). Returns [] for formats that don't use dialogue.
+
+    Common-sense rule: spoken lines must share ONE subject — the concrete thing
+    the hook is about. `subject` is the hook's topic with meta framing stripped,
+    so the exchange reads like a real conversation, not canned one-liners.
     """
+    subject = _hook_subject(hook)
     DIALOGUES = {
         "block": [
             {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
@@ -153,15 +189,42 @@ def generate_dialogue(scenario: str, hook: str) -> list[dict]:
             {"time": "7-15s", "character": "YOU", "line": "You ain't even tasted it yet."},
             {"time": "15-20s", "character": "SKEPTIC (after one bite)", "line": "...okay. I'm wrong. I'm wrong."},
         ],
+        # POV: the hook rides in the narrator VO — on screen the characters must
+        # say things people actually SAY. Every line shares one subject: the
+        # hook's concrete topic (meta framing stripped). Never echo "POV:"
+        # verbatim — nobody walks around saying that out loud.
         "pov": [
-            {"time": "0-2s", "character": "YOU (to camera)", "line": hook},
-            {"time": "7-15s", "character": "FRIEND", "line": "Nah, because that really just happened?"},
-            {"time": "15-20s", "character": "YOU", "line": "Every. Single. Time."},
+            {"time": "0-2s", "character": "YOU (to camera)", "line": "Y'all see what just happened?"},
+            {"time": "7-15s", "character": "FRIEND", "line": f"Wait — {subject}?"},
+            {"time": "15-20s", "character": "YOU", "line": "Yep. Every. Single. Time."},
         ],
+        "dj": [
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "KID", "line": "DJ! Play the one everybody waiting on!"},
+            {"time": "7-15s", "character": "DJ", "line": "Nah, I control the AUX tonight. Y'all gone wait."},
+            {"time": "7-15s", "character": "UNCLE ON THE GRILL", "line": "Boy, play some Isley Brothers before I unplug you."},
+            {"time": "15-20s", "character": "CROWD", "line": "PLAY. THE. SONG."},
+        ],
+        "barbershop": [
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "BARBER", "line": "You see this chair? Four generations sat in this chair."},
+            {"time": "7-15s", "character": "BARBER", "line": "I don't fix haircuts. I fix decisions."},
+            {"time": "7-15s", "character": "FRIEND", "line": "Bro, he just described my whole life in one cut."},
+            {"time": "15-20s", "character": "YOU", "line": "Barbershop debates undefeated. Undefeated."},
+        ],
+        "cornerstore": [
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "2-7s", "character": "KID", "line": "Mr. Hassan, can I get two Arizona and a Honey Bun?"},
+            {"time": "7-15s", "character": "STORE OWNER", "line": "You owe me from Tuesday. Pay your mama first."},
+            {"time": "7-15s", "character": "STORE OWNER", "line": "And don't touch the glass. You know the glass rule."},
+            {"time": "15-20s", "character": "YOU (VO)", "line": "Man held the whole block together. One register at a time."},
+        ],
+        # NARRATOR (VO) lines use the hook — that's legitimate voiceover copy,
+        # it's read, not acted on screen. Spoken lines share the hook's subject.
         "general": [
-            {"time": "0-2s", "character": "YOU (to camera)", "line": hook},
-            {"time": "7-15s", "character": "FRIEND", "line": "Wait, for real?"},
-            {"time": "15-20s", "character": "YOU", "line": "Every single time."},
+            {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
+            {"time": "7-15s", "character": "FRIEND", "line": f"Hold on — {subject}?"},
+            {"time": "15-20s", "character": "YOU", "line": "Yep. Every single time."},
         ],
     }
     return DIALOGUES.get(scenario, [])
@@ -180,15 +243,22 @@ VOICE_PROFILES = {
     "CROWD": "collective crowd reaction, hyped",
     "YOU": "natural conversational voice, direct to camera",
     "NARRATOR": "deep reflective voiceover, nostalgic tone",
+    "DJ": "smooth confident voice over the beat, mic-voice energy",
+    "BARBER": "calm measured barbershop sage voice, never rushes a sentence",
+    "STORE OWNER": "gruff but warm elder voice with an accent, speaks in short rules",
 }
 
 
-def build_dialogue_prompt(scenario: str, hook: str) -> str:
+def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = None) -> str:
     """Render dialogue lines into one dense video-prompt clause.
 
     Style: character dropping "line" + voice texture — so video/lip-sync tools
     get who is talking, what they say, and how they sound. Narrator lines are
     skipped (voiceover carries them, not on-screen speech).
+
+    If a franchise character is pinned (character lock dict), its lock voice
+    overrides the generic archetype voice whenever that archetype speaks —
+    same voice texture on every brief of the franchise.
     """
     lines = generate_dialogue(scenario, hook)
     if not lines:
@@ -200,11 +270,73 @@ def build_dialogue_prompt(scenario: str, hook: str) -> str:
         if base_char == "NARRATOR":
             continue  # voiceover, not on-screen speech
         voice = VOICE_PROFILES.get(char) or VOICE_PROFILES.get(base_char, "")
+        # Franchise lock voice wins for the pinned character's archetype
+        if character and character.get("archetype") == base_char and character.get("voice"):
+            voice = character["voice"]
         clause = f"{base_char.lower()} dropping \"{d['line']}\""
         if voice:
             clause += f", {voice}"
         clauses.append(clause)
     return ", ".join(clauses)
+
+
+# ─── Style suffix (modeled on dreamingtulpa's FLUX3 formula) ───
+# His winning prompts share a FIXED verbatim tail on every generation:
+#   "... Chaotic low-quality handheld footage with extreme camera shake and
+#    jittery movements, no slow motion, grainy high-ISO sensor noise creating
+#    a raw documentary feel with motion blur and unstable framing,
+#    no text, no hud, no camera"
+# The tail is what makes his franchise instantly recognizable. We build the same
+# thing from the Lost Futures register: deterministic treatment terms per style
+# (color_science + film artifacts) + universal negatives. Same style → exact
+# same suffix every time, so a franchise of briefs shares one recognizable look.
+UNIVERSAL_NEGATIVES = "no text, no subtitles, no hud, no watermark, no slow motion"
+
+
+def build_style_suffix(visual_direction: dict) -> str:
+    """Build the fixed style suffix appended verbatim to every video prompt.
+
+    Composition: color treatment (first clause of color_science) + up to 2
+    camera/film artifacts + the style's own forbidden artifacts turned into
+    negatives (register data we already own but never used) + universal
+    negatives. Deterministic — no randomness — so the suffix is identical
+    across every brief of a franchise.
+    """
+    parts = []
+
+    color_science = visual_direction.get("color_science", "")
+    if isinstance(color_science, dict):
+        color_terms = color_science.get("palette", color_science.get("description", ""))
+    elif isinstance(color_science, str):
+        color_terms = color_science.split("—")[0].strip()
+    else:
+        color_terms = ""
+    if color_terms:
+        parts.append(color_terms)
+
+    accurate_artifacts = visual_direction.get("accurate_artifacts", []) or []
+    film_artifacts = [a for a in accurate_artifacts if any(term in a.lower() for term in
+                      ["vhs", "film", "grain", "noise", "tracking", "camcorder", "hand-held", "handheld", "blur", "zoom", "shake"])]
+    if film_artifacts:
+        parts.extend(film_artifacts[:2])
+
+    negatives = [UNIVERSAL_NEGATIVES]
+    for fa in visual_direction.get("forbidden_artifacts", []) or []:
+        # "digital macroblocking (shot on film)" -> "no digital macroblocking"
+        term = fa.split("(")[0].strip()
+        if term:
+            neg = f"no {term.lower()}"
+            if neg not in UNIVERSAL_NEGATIVES and neg not in ", ".join(negatives):
+                negatives.append(neg)
+    parts.append(", ".join(negatives))
+
+    return ", ".join(p for p in parts if p)
+
+
+# Found-footage framing prefix — dreamingtulpa opens 63% of his prompts with
+# "found footage of ...". Applied to hood/skit dialogue content so the video
+# reads as a real recording, not a produced scene.
+FOUND_FOOTAGE_PREFIX = "found footage of"
 
 
 def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_style: Optional[dict] = None) -> str:
@@ -590,10 +722,35 @@ def load_visual_register() -> dict:
     return {"styles": [], "matching_rules": {}}
 
 
-def match_visual_style(niche: str, format_type: str, energy_level: str = "medium", goal: str = "", hook: str = "") -> Optional[dict]:
+def load_character_locks() -> dict:
+    """Load the franchise character lock registry (SGFLIX identity-lock schema)."""
+    import json
+    locks_path = Path(__file__).parent.parent.parent / "data" / "character_locks.json"
+    if locks_path.exists():
+        with open(locks_path) as f:
+            return json.load(f)
+    return {"characters": []}
+
+
+def get_character_lock(character_id: str) -> Optional[dict]:
+    """Look up a franchise character by id. Returns the lock dict or None."""
+    if not character_id:
+        return None
+    for c in load_character_locks().get("characters", []):
+        if c.get("id") == character_id:
+            return c
+    logger.warning(f"character_id '{character_id}' not in character registry — proceeding without a lock")
+    return None
+
+
+def match_visual_style(niche: str, format_type: str, energy_level: str = "medium", goal: str = "", hook: str = "", style_id: str = "") -> Optional[dict]:
     """Match a Lost Future visual style to the niche, format, and goal keywords.
     
-    Scoring:
+    Franchise lock: pass style_id to pin a specific style (e.g. run a whole
+    series in one look — dreamingtulpa's franchise model: one fixed suffix,
+    many gags). Skips scoring entirely.
+    
+    Scoring (when style_id is empty):
     1. Hook subject matter extraction (graduation, funeral, wedding, etc.)
     2. Subject-to-style matching (find styles that can represent that subject)
     3. Goal keyword matching against style names/descriptions/best_uses
@@ -609,6 +766,25 @@ def match_visual_style(niche: str, format_type: str, energy_level: str = "medium
     
     if not styles:
         return None
+    
+    # ─── Franchise lock: pinned style wins, no roulette ───
+    if style_id:
+        pinned = next((s for s in styles if s["id"] == style_id), None)
+        if pinned:
+            return {
+                "style_name": pinned["name"],
+                "style_id": pinned["id"],
+                "visual_description": pinned["visual_description"],
+                "the_wrongness": pinned["wrongness"],
+                "best_uses": pinned["best_uses"],
+                "prompt_seed": pinned["prompt_seed"],
+                "energy_level": pinned["energy_level"],
+                "accurate_artifacts": pinned.get("accurate_artifacts", []),
+                "forbidden_artifacts": pinned.get("forbidden_artifacts", []),
+                "color_science": pinned.get("color_science", ""),
+            }
+        # Unknown style_id: log and fall through to auto-match
+        logger.warning(f"style_id '{style_id}' not in visual register — falling back to auto-match")
     
     # ─── Extract hook subject matter for content-aware matching ───
     # Parse the hook to identify the ACTUAL narrative content
@@ -1244,7 +1420,7 @@ async def score_hook(hook: str, niche: str) -> dict:
         return {"score": 0, "error": resp.text}
 
 
-def generate_production_prompts(hook: str, script: str, visual_direction: dict, niche: str = "") -> dict:
+def generate_production_prompts(hook: str, script: str, visual_direction: dict, niche: str = "", character: Optional[dict] = None) -> dict:
     """Generate tool-ready copy-paste prompts for video production tools.
     
     Returns prompts formatted for:
@@ -1253,13 +1429,16 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     - H3/WanGP: Job JSON with prompt, image_start, resolution, sample_solver
     - Voiceover: Clean text without timestamps
     - Text overlays: Timed text for CapCut/manual
+
+    If a franchise `character` lock is provided (from data/character_locks.json),
+    its physical lock is baked into the scene slot verbatim, its signature hooks
+    ride along, and its voice texture overrides the generic archetype voice —
+    same person, voice, and look on every brief of the franchise.
     """
     import re
     
     prompt_seed = visual_direction.get("prompt_seed", "")
     style_name = visual_direction.get("style_name", "")
-    accurate_artifacts = visual_direction.get("accurate_artifacts", [])
-    color_science = visual_direction.get("color_science", "")
     
     # ─── Extract hook subject for narrative-driven video generation ───
     # Remove format prefixes like "POV:", "When", etc. to get the core subject
@@ -1297,69 +1476,51 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         elif any(kw in hook_lower for kw in ["barbershop", "barber", "haircut"]):
             narrative_subject = "barbershop interior, barber cutting hair, community conversation, mirrors and chairs"
     
-    # Build the video prompt
+    # Build the video prompt — dreamingtulpa's 5-slot formula:
+    #   [framing] [scene/gag] [dialogue+voice] [FIXED style suffix] [params]
+    # The aesthetic treatment is NOT assembled inline anymore: it rides in
+    # build_style_suffix() so every brief of a franchise shares an identical tail.
     contextual_prompt_parts = []
     
-    # Start with narrative subject if we identified one
+    # ─── Dialogue detection first: it decides found-footage framing ───
+    hook_lower_full = hook.lower()
+    hood_signals = {"hood", "block", "mama", "cookout", "function", "neighbor", "friday night", "graduated", "only one"}
+    is_dialogue_content = any(sig in hook_lower_full for sig in hood_signals) or hook_lower_full.startswith("pov")
+    
+    # Scene slot: narrative subject if we identified one, else the style's own seed
     if narrative_subject:
         contextual_prompt_parts.append(narrative_subject)
-        
-        # Add aesthetic treatment from visual style (color, era, camera style only)
-        if color_science:
-            # color_science might be a string or dict
-            if isinstance(color_science, str):
-                color_terms = color_science.split("—")[0].strip()
-            elif isinstance(color_science, dict):
-                color_terms = color_science.get("palette", color_science.get("description", ""))
-            else:
-                color_terms = ""
-            if color_terms:
-                contextual_prompt_parts.append(color_terms)
-        
-        # Add era if mentioned in style name
+        # Era tag from style name (cheap, keeps period legibility)
         if "80s" in style_name or "1980s" in style_name:
             contextual_prompt_parts.append("1980s aesthetic")
         elif "90s" in style_name or "1990s" in style_name:
             contextual_prompt_parts.append("1990s aesthetic")
         elif "70s" in style_name or "1970s" in style_name:
             contextual_prompt_parts.append("1970s aesthetic")
-        
-        # Add film/camera style artifacts (not content artifacts)
-        film_artifacts = [a for a in accurate_artifacts if any(term in a.lower() for term in 
-                          ["vhs", "film", "grain", "noise", "tracking", "camcorder", "hand-held"])]
-        if film_artifacts:
-            contextual_prompt_parts.append(", ".join(film_artifacts[:2]))
-    
     else:
-        # Fallback: no clear narrative, use the style's prompt_seed
-        if prompt_seed:
-            contextual_prompt_parts.append(prompt_seed)
-        else:
-            # Last resort: use the hook itself
-            contextual_prompt_parts.append(hook_core)
-        
-        if accurate_artifacts:
-            artifacts_str = ", ".join(accurate_artifacts[:3])
-            contextual_prompt_parts.append(artifacts_str)
-        
-        if color_science:
-            # color_science might be a string or dict
-            if isinstance(color_science, str):
-                color_terms = color_science.split("—")[0].strip()
-            elif isinstance(color_science, dict):
-                color_terms = color_science.get("palette", color_science.get("description", ""))
-            else:
-                color_terms = ""
-            if color_terms:
-                contextual_prompt_parts.append(color_terms)
+        # Fallback: the style's prompt_seed IS the scene + treatment for that look
+        contextual_prompt_parts.append(prompt_seed if prompt_seed else hook_core)
+    
+    # Framing slot: "found footage of" on dialogue/hood content (his #1 opener,
+    # 98/156 prompts). Reads as a real recording, not a produced scene.
+    if is_dialogue_content and contextual_prompt_parts:
+        contextual_prompt_parts[0] = f"{FOUND_FOOTAGE_PREFIX} {contextual_prompt_parts[0]}"
+    
+    # Character lock slot: pinned franchise character goes verbatim right after
+    # the framing — same person on every brief of the franchise, exactly like
+    # dreamingtulpa's recurring cast. Signature hooks are character-defining
+    # mannerisms, so they ride along verbatim too.
+    if character and character.get("lock"):
+        char_parts = [character["lock"]]
+        hooks = character.get("signature_hooks", []) or []
+        if hooks:
+            char_parts.append("; ".join(hooks))
+        contextual_prompt_parts.insert(1, ", ".join(char_parts))
     
     # ─── Dialogue: bake character speech + voice texture into the video prompt ───
     # Hood/skit content gets scenario-specific dialogue; POV hooks get a
     # generic two-person exchange. Narrative-only content (no characters)
     # stays silent on-screen — the voiceover carries it.
-    hook_lower_full = hook.lower()
-    hood_signals = {"hood", "block", "mama", "cookout", "function", "neighbor", "friday night", "graduated", "only one"}
-    is_dialogue_content = any(sig in hook_lower_full for sig in hood_signals) or hook_lower_full.startswith("pov")
     dialogue = []
     dialogue_prompt_clause = ""
     if is_dialogue_content:
@@ -1367,11 +1528,16 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         if scenario == "general" and hook_lower_full.startswith("pov"):
             scenario = "pov"
         dialogue = generate_dialogue(scenario, hook)
-        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook)
+        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook, character)
     
     # Append dialogue clause so video tools get who is talking + how they sound
     if dialogue_prompt_clause:
         contextual_prompt_parts.append(dialogue_prompt_clause)
+    
+    # ─── Fixed style suffix: same verbatim tail on every gen of the franchise ───
+    style_suffix = build_style_suffix(visual_direction)
+    if style_suffix:
+        contextual_prompt_parts.append(style_suffix)
     
     # ─── FLUX3 prompt: one dense line with all aesthetics baked in ───
     flux3_prompt = ", ".join(contextual_prompt_parts)
@@ -1526,7 +1692,13 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         },
         "voiceover_text": voiceover_text,
         "dialogue": dialogue,
-        "text_overlays": text_overlays
+        "text_overlays": text_overlays,
+        "character_lock": {
+            "id": character.get("id", ""),
+            "name": character.get("name", ""),
+            "lock": character.get("lock", ""),
+            "do_not_change": character.get("do_not_change", []),
+        } if character else None,
     }
 
 
@@ -1550,10 +1722,17 @@ async def generate_brief(config: AgentConfig) -> Optional[ContentBrief]:
         niche=config.niche,
         format_type="medium",
         energy_level=energy,
-        goal=config.goal or ""
+        goal=config.goal or "",
+        style_id=config.style_id or ""
     )
     if visual_direction:
-        logger.info(f"Matched visual style: {visual_direction['style_name']}")
+        locked = " (franchise lock)" if config.style_id else ""
+        logger.info(f"Matched visual style: {visual_direction['style_name']}{locked}")
+
+    # Step 2b: Resolve pinned franchise character (character lock), if any
+    character = get_character_lock(config.character_id or "")
+    if character:
+        logger.info(f"Character lock engaged: {character.get('name', character.get('id'))}")
 
     # Step 3: Generate hooks with visual context
     logger.info("Generating hook candidates from proven patterns...")
@@ -1734,7 +1913,8 @@ async def generate_brief(config: AgentConfig) -> Optional[ContentBrief]:
             hook=best.hook,
             script=best.script,
             visual_direction=visual_direction,
-            niche=config.niche
+            niche=config.niche,
+            character=character
         )
 
     return ContentBrief(

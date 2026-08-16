@@ -1,0 +1,105 @@
+{
+  "_doc": "Character locks for franchise consistency (SGFLIX CHARACTER_IDENTITY_LOCK schema, flattened to text). Same lock paragraph on every brief of a franchise — only scene/dialogue change. Pin via character_id on the brief API. Archetypes map to dialogue scenarios in autonomous_agent.py.",
+  "characters": [
+    {
+      "id": "unc-ray",
+      "name": "Uncle Ray",
+      "archetype": "UNCLE ON THE GRILL",
+      "lock": "heavyset Black man in his late 50s, close-cropped grey hair, full grey beard, white tank top under an unbuttoned red-and-black plaid flannel, gold rope chain, sweat towel over one shoulder, holding blackened grill tongs",
+      "voice": "deep gravelly voice like he smoked 2 packs of cigarettes per day",
+      "dialogue_archetype": "grill authority — everything comes back to the grill, ends every argument",
+      "signature_hooks": ["points the tongs while making a point", "flips meat mid-sentence without looking", "wipes his forehead with the shoulder towel"],
+      "do_not_change": ["grey beard", "white tank top", "gold rope chain", "the grill is always in frame or his hand is on it"]
+    },
+    {
+      "id": "auntie-pearl",
+      "name": "Auntie Pearl",
+      "archetype": "AUNTIE",
+      "lock": "Black woman in her mid 50s, shoulder-length press-and-curl hair, oversized turquoise earrings, floral church dress with a white apron tied over it, holding a covered aluminum foil tray",
+      "voice": "loud warm voice that carries across the whole block",
+      "dialogue_archetype": "food gatekeeper — her potato salad is sacred, judges every store-bought dish",
+      "signature_hooks": ["lifts the foil lid one inch to peek", "tastes from the wooden spoon and nods once", "waves a disapproving finger still holding the spoon"],
+      "do_not_change": ["turquoise earrings", "floral dress + white apron", "the foil tray never leaves her hands"]
+    },
+    {
+      "id": "cousin-deshawn",
+      "name": "Cousin DeShawn",
+      "archetype": "COUSIN",
+      "lock": "skinny Black man in his mid 20s, fresh high-top fade, white tee under an unzipped red varsity jacket, jeans creased sharp, always arriving late and slightly out of breath",
+      "voice": "winded complaining voice like he just ran from three blocks away",
+      "dialogue_archetype": "chronically late — missed every important moment, blames everything but himself",
+      "signature_hooks": ["jogs into frame mid-conversation", "checks his phone then pockets it fast", "gestures wide with both hands while explaining"],
+      "do_not_change": ["red varsity jacket", "high-top fade", "always arriving, never already there"]
+    },
+    {
+      "id": "mama-jean",
+      "name": "Mama Jean",
+      "archetype": "MAMA",
+      "lock": "Black woman in her early 50s, neat bun pulled tight, reading glasses on a beaded chain around her neck, floral housecoat over jeans, one hand always on her hip",
+      "voice": "sharp commanding mama voice that ends every argument",
+      "dialogue_archetype": "the law — one sentence and the whole block goes quiet, counts to three",
+      "signature_hooks": ["points at the door without turning around", "pulls the glasses up onto her head to look you dead in the eye", "cuts the music off mid-song"],
+      "do_not_change": ["glasses on the beaded chain", "hand on hip", "never raises her voice — doesn't have to"]
+    },
+    {
+      "id": "lil-man",
+      "name": "Lil Man",
+      "archetype": "KID",
+      "lock": "Black boy around 8 or 9, fresh cornrows with beads on the ends, oversized white t-shirt down to his knees, slides on his feet untied, holding a red solo cup of juice",
+      "voice": "high-pitched excited kid voice, slightly out of breath",
+      "dialogue_archetype": "the messenger — always running up with urgent news nobody asked for",
+      "signature_hooks": ["runs up to the camera and stops dead", "bounces on his heels while waiting to talk", "spills a little juice when he's excited"],
+      "do_not_change": ["cornrows with beads", "oversized white tee", "the red solo cup"]
+    },
+    {
+      "id": "big-marque",
+      "name": "Big Marque",
+      "archetype": "FRIEND",
+      "lock": "Black man in his late 20s, bald fade with a crisp lineup, grey hoodie unzipped over a black tee, silver Cuban link chain, phone always half-out of his pocket",
+      "voice": "casual conversational voice, half laughing",
+      "dialogue_archetype": "the witness — saw the whole thing and can barely keep it together telling it",
+      "signature_hooks": ["half-laughs mid-sentence", "pulls his phone out like he's got proof then puts it back", "leans in when he drops the punchline"],
+      "do_not_change": ["grey hoodie", "silver Cuban link", "always mid-laugh"]
+    },
+    {
+      "id": "skeptic",
+      "name": "Tyrell",
+      "archetype": "SKEPTIC",
+      "lock": "Black man in his early 30s, short twists, black windbreaker zipped to the chin, arms crossed, eyebrow already raised",
+      "voice": "doubting flat tone that flips into full belief",
+      "dialogue_archetype": "the doubter — arms crossed until the moment he isn't, then he's the loudest believer",
+      "signature_hooks": ["crosses his arms tighter when he disagrees", "leans back with a smirk", "uncrosses his arms the exact second he believes"],
+      "do_not_change": ["black windbreaker zipped up", "arms crossed until the flip", "one eyebrow raised"]
+    },
+    {
+      "id": "dj-fresh",
+      "name": "DJ Fresh",
+      "archetype": "DJ",
+      "lock": "Black man in his late 20s, cornrows pulled back, oversized headphones around his neck, black-and-gold windbreaker, one hand on the mixer and the other pointing at the crowd",
+      "voice": "smooth confident voice over the beat, mic-voice energy",
+      "dialogue_archetype": "AUX gatekeeper — he decides when the block hears the song, and he knows it",
+      "signature_hooks": ["cupping the headphone against one ear", "pointing at whoever asked for a song", "scratching the jog wheel mid-sentence"],
+      "do_not_change": ["headphones around the neck, never on the ears", "black-and-gold windbreaker", "hand never leaves the mixer"]
+    },
+    {
+      "id": "mr-leon",
+      "name": "Mr. Leon",
+      "archetype": "BARBER",
+      "lock": "Black man in his mid 60s, clean grey fade with a crisp lineup of his own, white barber smock over a black polo, straight razor folded in one hand, reading glasses pushed up on his forehead",
+      "voice": "calm measured barbershop sage voice, never rushes a sentence",
+      "dialogue_archetype": "the sage — every haircut is life advice, four generations of the block have sat in his chair",
+      "signature_hooks": ["turns the chair to face the mirror before dropping wisdom", "snips once while talking without looking", "folds and unfolds the straight razor while thinking"],
+      "do_not_change": ["white barber smock", "razor in hand", "the chair is always center frame"]
+    },
+    {
+      "id": "mr-hassan",
+      "name": "Mr. Hassan",
+      "archetype": "STORE OWNER",
+      "lock": "Middle Eastern man in his early 60s, neat grey mustache, beige sweater vest over a collared shirt, standing behind a counter stacked with lottery tickets, a small ledger notebook beside the register",
+      "voice": "gruff but warm elder voice with an accent, speaks in short rules",
+      "dialogue_archetype": "the block's accountant — knows who owes what, collects from your mama first, feeds every kid anyway",
+      "signature_hooks": ["taps the ledger when someone owes him", "slides a Honey Bun across the counter anyway", "points at the glass rule sign"],
+      "do_not_change": ["beige sweater vest", "the ledger by the register", "always behind the counter"]
+    }
+  ]
+}
