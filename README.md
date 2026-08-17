@@ -25,8 +25,8 @@ Mac Orchestrator                    3090 GPU Server
 ├── research-api    :8001           ├── ComfyUI       :8188
 ├── scraper-api     :8010           ├── WanGP H3      (multishot)
 ├── browser-worker  :8020           ├── Qwen3.8-Max   (VLM)
-├── renderer        :8030           └── SDXL/FLUX     workflows
-├── publisher       :8031
+├── publisher       :8030           └── SDXL/FLUX     workflows
+├── renderer        :8031
 ├── postgres        :5432
 ├── redis           :6379
 └── qdrant          :6333
@@ -43,9 +43,9 @@ Each stage is an independent HTTP service. Swap any node for your own implementa
 | research-api | 8001 | Lightreel `/v1/chat` | ✅ Live |
 | scraper-api | 8010 | ScrapeCreators | ✅ Live |
 | browser-worker | 8020 | ego-browser automation | ✅ Live |
-| renderer | 8030 | Doublespeed rendering | 🔨 Building |
-| publisher | 8031 | Multi-platform posting | 🔨 Building |
-| mcp-server | 8020 | Model Context Protocol | 📋 Planned |
+| publisher | 8030 | Multi-platform posting | ✅ Live |
+| renderer | 8031 | Doublespeed rendering | ✅ Live |
+| mcp-server | 8020 | Model Context Protocol | 🔄 Native alternative — shares 8020 with browser-worker; run either as a native process, not as a simultaneous Compose service |
 
 ## Quick Start
 
@@ -57,11 +57,18 @@ cd viral-bench-local
 uv venv && source .venv/bin/activate
 uv pip install -e ".[dev]"
 
-# Copy env template and add your ModelScope key
+# Copy the env template and fill in EVERY required value:
 cp .env.example .env
-# Edit .env → set MODELSCOPE_API_KEY
+# Edit .env → required values (all have no default):
+#   MODELSCOPE_API_KEY  — ModelScope API key (subagent LLM)
+#   POSTGRES_PASSWORD   — database password
+#   MINIO_PASSWORD      — object-storage password
+#   MCP_AUTH_TOKEN      — MCP server auth token
+#   SCRAPER_API_KEY     — scraper API auth key
+# Compose refuses to start until these are set (no insecure defaults).
 
-# Start all services
+# Load them into the environment, then start every service:
+set -a; source .env; set +a
 ./start-all.sh
 
 # Verify

@@ -1,0 +1,87 @@
+name: CI
+
+# Trigger on push to any branch and on pull requests.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+# Least-privilege: read-only repo contents. No secrets/tokens are used anywhere.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # ─── Verify (single job) ─────────────────────────────────────────────────────
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Install uv (0.11.6)
+        uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081 # v5
+        with:
+          version: "0.11.6"
+          python-version: "3.11"
+
+      - name: Install project + dev extras
+        run: uv pip install --system ".[dev]"
+
+      - name: Run security/fixture regression suite
+        run: PYTHONPATH='' python -m pytest tests/test_security.py -q
+
+      - name: py_compile runtime modules
+        run: find services -name '*.py' -print0 | xargs -0 python -m py_compile
+
+      - name: bash -n start scripts
+        run: bash -n start-all.sh deploy/start-all.sh
+
+      - name: Validate compose config (test-only env)
+        run: |
+          env POSTGRES_PASSWORD=ci MINIO_PASSWORD=ci MCP_AUTH_TOKEN=ci \
+            SCRAPER_API_KEY=ci MODELSCOPE_API_KEY=ci docker compose config -q
+
+      - name: Build wheel
+        run: uv build --wheel
+
+  # ─── Docker (parallel matrix, only after verify) ─────────────────────────────
+  docker:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # The five application images actually start from the Compose stack.
+        target:
+          - research-api
+          - scraper-api
+          - browser-worker
+          - publisher
+          - renderer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          target: ${{ matrix.target }}
+          push: false
+          tags: vbl-ci:${{ matrix.target }}
+          cache-from: type=gha,scope=vbl-${{ matrix.target }}
+          cache-to: type=gha,mode=max,scope=vbl-${{ matrix.target }}

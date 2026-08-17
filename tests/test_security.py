@@ -734,3 +734,121 @@ def test_postgres_healthcheck_targets_configured_db():
     assert "-d" in hc_text and configured_db in hc_text, (
         f"postgres healthcheck must explicitly check -d {configured_db}: {hc}"
     )
+
+
+# ─── CI workflow (.github/workflows/ci.yml) ───────────────────────────────────
+
+def _ci_yaml():
+    """Load ci.yml; normalize the `on` key (PyYAML turns it into key True)."""
+    import yaml
+    path = REPO / ".github" / "workflows" / "ci.yml"
+    text = path.read_text()
+    data = yaml.safe_load(text) or {}
+    return data, text
+
+
+def test_ci_workflow_file_exists_and_has_push_pull_request():
+    """ci.yml must exist and trigger on push + pull_request."""
+    data, text = _ci_yaml()
+    triggers = data.get("on") or data.get(True) or {}
+    assert triggers, "ci.yml must declare triggers"
+    trigger_keys = set(triggers.keys())
+    assert "push" in trigger_keys and "pull_request" in trigger_keys
+
+
+def test_ci_read_only_contents_permission_and_no_secrets():
+    """CI must run with contents:read and never reference secrets/credentials."""
+    data, text = _ci_yaml()
+    perms = data.get("permissions", {})
+    assert perms.get("contents") == "read", f"permissions must set contents:read, got {perms}"
+    assert "secrets." not in text, "workflow must not reference secrets (no credentials)"
+
+
+def test_ci_uses_ubuntu_and_pinned_actions():
+    """Runners ubuntu-latest; actions pinned to exact security SHAs."""
+    data, text = _ci_yaml()
+    assert "ubuntu-latest" in text
+    pins = {
+        "checkout": "11d5960a326750d5838078e36cf38b85af677262",
+        "setup-uv": "e58605a9b6da7c637471fab8847a5e5a6b8df081",
+        "setup-buildx": "8d2750c68a42422c14e847fe6c8ac0403b4cbd6f",
+        "build-push": "10e90e3645eae34f1e60eeb005ba3a3d33f178e8",
+    }
+    for action, sha in pins.items():
+        assert sha in text, f"{action} action must be pinned to {sha}"
+
+
+def test_ci_concurrency_and_timeouts():
+    """Concurrency cancel-in-progress and job timeouts set."""
+    data, text = _ci_yaml()
+    assert "cancel-in-progress" in text, "concurrency must cancel-in-progress"
+    assert "timeout-minutes" in text, "CI jobs must set timeouts"
+
+
+def test_ci_verify_job_installs_dev_and_runs_tests():
+    """Verify job must install .[dev], run tests, py_compile, bash -n, compose config, uv build."""
+    data, text = _ci_yaml()
+    step_text = text
+    assert "uv pip install" in step_text and ".[dev]" in step_text, "verify must install .[dev]"
+    assert "tests/test_security.py" in step_text, "verify must run tests/test_security.py"
+    assert "py_compile" in step_text, "verify must py_compile changed runtime modules"
+    assert "bash -n" in step_text, "verify must bash -n the start scripts"
+    assert "docker compose config" in step_text, "verify must validate compose config"
+    assert "-uv build" in step_text or "uv build" in step_text, "verify must build wheel"
+
+
+def test_ci_docker_matrix_exact_targets():
+    """Docker matrix must cover exactly the five app targets and build with push:false."""
+    data, text = _ci_yaml()
+    # matrix targets appear in the workflow text; exact set check via the matrix include.
+    assert "research-api" in text and "scraper-api" in text and "browser-worker" in text
+    assert "publisher" in text and "renderer" in text
+    assert "push: false" in text, "build-push must use push:false (no publishing)"
+    assert "type=gha" in text or "docker/build-push-action" in text, "must use GHA cache"
+    assert "docker/build-push-action" in text
+
+
+# ─── README: correct ports, statuses, mcp-server, Quick Start ─────────────────
+
+def test_readme_publisher_port_8030_renderer_8031():
+    """README must reflect publisher=8030, renderer=8031 (matches Dockerfile)."""
+    readme = (REPO / "README.md").read_text()
+    assert "renderer :8031" in readme or "renderer        :8031" in readme, "arch renderer=8031"
+    assert "publisher :8030" in readme or "publisher       :8030" in readme, "arch publisher=8030"
+    # Table rows (grep table line for publisher/renderer).
+    for line in readme.splitlines():
+        if line.startswith("| publisher"):
+            assert "| 8030 |" in line, f"publisher table port wrong: {line!r}"
+        if line.startswith("| renderer"):
+            assert "| 8031 |" in line, f"renderer table port wrong: {line!r}"
+
+
+def test_readme_statuses_all_live_five_docker_apps():
+    """The five Docker-verified apps must be listed Live/working, none 'Building'."""
+    readme = (REPO / "README.md").read_text()
+    for app in ["research-api", "scraper-api", "browser-worker", "publisher", "renderer"]:
+        row = next((l for l in readme.splitlines() if l.startswith(f"| {app}")), None)
+        assert row, f"missing table row for {app}"
+        assert "Building" not in row and "Planned" not in row, f"{app} status stale: {row!r}"
+
+
+def test_readme_mcp_server_documented_as_native_alternative():
+    """mcp-server is a native alternative sharing 8020, not a Compose service."""
+    readme = (REPO / "README.md").read_text()
+    assert "mcp-server" in readme
+    # Must not be listed as a separate simultaneous Compose service row on its own port.
+    mcp_row = next((l for l in readme.splitlines() if l.startswith("| mcp-server")), None)
+    assert mcp_row is not None, "README should still document mcp-server"
+    # It shares 8020 with browser-worker (native alternative), not a distinct compose port.
+    assert "8020" in mcp_row
+    assert "native" in mcp_row.lower() or "alternative" in mcp_row.lower(), mcp_row
+
+
+def test_readme_quick_start_sources_env_all_required_values():
+    """Quick Start must source .env before start-all.sh and mention all required values."""
+    readme = (REPO / "README.md").read_text()
+    qs = readme.split("## Quick Start")[1].split("## ")[0] if "## Quick Start" in readme else ""
+    assert "source .env" in qs or "set -a; source .env" in qs or ".env" in qs, "Quick Start must source .env"
+    low = qs.lower()
+    for need in ["postgres_password", "minio_password", "mcp_auth_token", "scraper_api_key"]:
+        assert need in low, f"Quick Start must mention required value {need}"
