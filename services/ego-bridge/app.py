@@ -146,8 +146,30 @@ async def click(req: ClickRequest):
 
 @app.post("/v1/type")
 async def type_text(req: TypeRequest):
-    """Type text into an input element."""
-    js = f"await fillInput('{req.selector}', '{req.text}'); cliLog('typed')"
+    """Type text into an input element.
+
+    Resolves the target robustly (exact selector first, else the Discord
+    message box via aria-label^=), then focuses and types — so automated
+    callers don't depend on a brittle exact aria-label value.
+    """
+    escaped_sel = req.selector.replace("\\", "\\\\").replace("'", "\\'")
+    escaped_text = req.text.replace("\\", "\\\\").replace("'", "\\'")
+    script_body = (
+        "(() => {"
+        "const s1 = '" + escaped_sel + "';"
+        "let s = 'div[contenteditable=true][aria-label^=\"Message\"]';"
+        "try { if (document.querySelector(s1)) s = s1; } catch (e) {}"
+        "const el = document.querySelector(s);"
+        "if (el) el.focus();"
+        "return s;"
+        "})()"
+    )
+    # Resolve + focus inside the page context (js()), then type via ego helper.
+    js = (
+        "const sel = await js(String.raw`" + script_body + "`);"
+        f"await fillInput(sel, '{escaped_text}');"
+        "cliLog('typed');"
+    )
     try:
         output = _run_ego(js)
         return {"status": "typed", "output": output.strip()}
