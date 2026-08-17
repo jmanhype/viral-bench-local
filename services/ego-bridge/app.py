@@ -196,40 +196,22 @@ class DownloadRequest(BaseModel):
 
 @app.post("/v1/download")
 async def download_file(req: DownloadRequest):
-    """Download a file using the browser's authenticated session.
+    """Download a file from the host. Works for Discord CDN signed URLs
+    since the host has direct internet access (unlike Docker containers)."""
+    import subprocess, os
 
-    Navigates to the URL (which triggers download with fresh cookies),
-    then uses CDP to save the response. Works for Discord CDN signed URLs
-    that expire when accessed outside the browser session.
-    """
-    import subprocess, time
+    dest = req.output_path
+    os.makedirs(os.path.dirname(dest) or ".", exist_ok=True)
 
-    # Navigate browser to the URL — this loads it with fresh auth
-    nav_js = f"await gotoAndWait('{req.url}', {{ wait: true, timeout: 30 }}); cliLog('navigated')"
-    try:
-        _run_ego(nav_js)
-    except Exception:
-        pass  # Navigation may fail for binary content, that's OK
-
-    # Use curl from host (which can reach CDN) with a short timeout
-    # The key insight: we extract the FRESH redirect URL from the browser first
-    url_js = "cliLog(window.location.href)"
-    try:
-        fresh_url = _run_ego(url_js).strip()
-    except Exception:
-        fresh_url = req.url
-
-    # Download via curl from host (host has network access to CDN)
     r = subprocess.run(
-        ["curl", "-sL", "-m", "120", "-o", req.output_path, fresh_url],
+        ["curl", "-sL", "-m", "120", "-o", dest, req.url],
         capture_output=True, text=True, timeout=130,
     )
     if r.returncode != 0:
         raise HTTPException(500, f"Download failed: {r.stderr[:200]}")
 
-    import os
-    size = os.path.getsize(req.output_path) if os.path.exists(req.output_path) else 0
-    return {"path": req.output_path, "size": size}
+    size = os.path.getsize(dest) if os.path.exists(dest) else 0
+    return {"path": dest, "size": size}
 
 
 if __name__ == "__main__":
