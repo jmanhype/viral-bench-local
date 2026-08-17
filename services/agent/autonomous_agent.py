@@ -1429,6 +1429,127 @@ async def score_hook(hook: str, niche: str) -> dict:
         return {"score": 0, "error": resp.text}
 
 
+def populate_ref2va_fields(h3_config: dict, keeper_metadata: Optional[dict]) -> dict:
+    """Populate Ref2VA lip-sync fields from keeper song metadata.
+
+    Args:
+        h3_config: An H3 job config dict (modified in place and returned).
+        keeper_metadata: Dict from sgos-backend GET /v1/keepers/{id} with keys
+            bpm, phrase_boundaries, transcript_path, identity_still_path,
+            keeper_slice_path. If None, returns config unchanged.
+
+    Returns:
+        Modified h3_config with Ref2VA fields populated and model_type switched
+        to minimax_h3_ref2va_pruned.
+    """
+    if keeper_metadata is None:
+        return h3_config
+
+    h3_config["model_type"] = "minimax_h3_ref2va_pruned"
+    h3_config["audio_prompt_type"] = "A"
+    h3_config["video_prompt_type"] = "I"
+    h3_config["audio_guide"] = keeper_metadata.get("keeper_slice_path")
+    still = keeper_metadata.get("identity_still_path")
+    h3_config["image_refs"] = [still] if still else []
+    return h3_config
+
+
+def _build_multishot_config(
+    script: str,
+    visual_direction: dict,
+    hook: str,
+    character: Optional[dict] = None,
+) -> dict:
+    """Build an H3 FL2VA multishot config from a timed script.
+
+    Splits the script into 3 shots using timestamp beats, injects explicit
+    motion language per shot, and returns a complete job JSON ready for
+    WanGP/H3 processing.
+    """
+    import re
+
+    prompt_seed = visual_direction.get("prompt_seed", "")
+    style_suffix = build_style_suffix(visual_direction)
+
+    # Parse script timestamp sections: [0-2s], [2-7s], [7-15s], [15-20s]
+    sections = []
+    current_ts = None
+    current_lines = []
+    for line in script.split("\n"):
+        stripped = line.strip()
+        ts_match = re.match(r'\[(\d+)-?(\d*)s?\]', stripped)
+        if ts_match:
+            if current_ts is not None:
+                sections.append((current_ts, " ".join(current_lines)))
+            start = int(ts_match.group(1))
+            end = int(ts_match.group(2)) if ts_match.group(2) else start + 5
+            current_ts = (start, end)
+            current_lines = []
+            # Extract content after the bracket
+            content = re.sub(r'^\[\d+-?\d*s?\]\s*\w*:\s*', '', stripped).strip()
+            if content and content not in ("HOOK", "MAIN POINT", "DETAILS",
+                                           "CONCLUSION", "CTA", "VISUAL STYLE",
+                                           "PRODUCTION NOTES"):
+                current_lines.append(content)
+        elif current_ts and stripped.startswith("→"):
+            text = re.sub(r'^→\s*', '', stripped).strip()
+            if text and len(text) > 3:
+                current_lines.append(text)
+    if current_ts:
+        sections.append((current_ts, " ".join(current_lines)))
+
+    # Map sections into 3 shots by time ranges
+    shot_ranges = [(0, 7), (7, 14), (14, 21)]  # ~7s each
+    motion_verbs = [
+        "slowly rising from the depths, water cascading off massive scales",
+        "turning deliberately toward camera, unleashing a guttural roar",
+        "stepping forward through destruction, crushing debris underfoot",
+    ]
+    shots = []
+    for i, (s_start, s_end) in enumerate(shot_ranges):
+        # Gather section content that falls within this shot's time range
+        shot_parts = []
+        for (ts_start, ts_end), content in sections:
+            if ts_start < s_end and ts_end > s_start and content:
+                shot_parts.append(content)
+        scene_desc = " ".join(shot_parts) if shot_parts else prompt_seed
+        # Inject explicit motion
+        motion = motion_verbs[i % len(motion_verbs)]
+        full_prompt = f"{scene_desc}, {motion}"
+        if style_suffix:
+            full_prompt += f", {style_suffix}"
+        # Character lock
+        if character and character.get("lock"):
+            full_prompt = f"{character['lock']}, {full_prompt}"
+
+        shots.append({
+            "shot_index": i + 1,
+            "time_range": f"{s_start}-{s_end}s",
+            "prompt": full_prompt,
+            "model_type": "minimax_h3_fl2va_pruned",
+            "video_prompt_type": "I",
+            "audio_prompt_type": None,
+            "audio_guide": None,
+            "image_refs": [],
+            "width": 480,
+            "height": 832,
+            "video_length": 176,
+            "force_fps": "24",
+            "num_inference_steps": 20,
+            "guidance_scale": 1.0,
+            "embedded_guidance_scale": 6.0,
+            "seed": 42 + i,
+        })
+
+    return {
+        "shots": shots,
+        "total_shots": len(shots),
+        "frames_per_shot": 176,
+        "fps": 24,
+        "total_duration_s": round(len(shots) * 176 / 24, 2),
+    }
+
+
 def generate_production_prompts(hook: str, script: str, visual_direction: dict, niche: str = "", character: Optional[dict] = None) -> dict:
     """Generate tool-ready copy-paste prompts for video production tools.
     
@@ -1706,6 +1827,7 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             "image_refs": None,              # list of identity still paths for Ref2VA <Picture N>
             "video_prompt_type": None,       # "I" when using image_refs + audio_guide together
         },
+        "h3_multishot_json": _build_multishot_config(script, visual_direction, hook, character),
         "voiceover_text": voiceover_text,
         "dialogue": dialogue,
         "text_overlays": text_overlays,
