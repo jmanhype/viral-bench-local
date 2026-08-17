@@ -15,9 +15,11 @@ from typing import Any
 
 import httpx
 
+from services.secure_env import require_secret
+
 logger = logging.getLogger(__name__)
 
-DB_DIR = Path(os.path.expanduser("~/viral-bench-local/data"))
+DB_DIR = Path(os.environ.get("VBL_DATA_DIR", os.path.expanduser("~/viral-bench-local/data")))
 DB_PATH = DB_DIR / "corpus.db"
 
 # ── Schema ────────────────────────────────────────────────────────────────────
@@ -289,7 +291,16 @@ def search_posts(query: str, limit: int = 20, creator_handles: list[str] = None)
 # ── Seeding from Scraper API ─────────────────────────────────────────────────
 
 SCRAPER_BASE = os.environ.get("SCRAPER_API_URL", "http://127.0.0.1:8010")
-SCRAPER_API_KEY = os.environ.get("SCRAPER_API_KEY", "local-dev-key")
+
+
+def get_scraper_api_key() -> str:
+    """Return the configured Scraper API key, failing CLOSED if unset.
+
+    Lazy (not module-level) so importing the corpus module never crashes the
+    research service when the key is absent — the failure surfaces only when a
+    scraper call actually needs the credential.
+    """
+    return require_secret("SCRAPER_API_KEY", hint="Set SCRAPER_API_KEY in .env to enable corpus seeding.")
 
 
 async def seed_from_scraper_api(
@@ -304,7 +315,7 @@ async def seed_from_scraper_api(
     errors: list[str] = []
     per_handle: dict[str, int] = {}
 
-    async with httpx.AsyncClient(timeout=60, headers={"x-api-key": SCRAPER_API_KEY}) as client:
+    async with httpx.AsyncClient(timeout=60, headers={"x-api-key": get_scraper_api_key()}) as client:
         for handle in handles:
             try:
                 url = f"{SCRAPER_BASE}/v3/tiktok/profile/videos"

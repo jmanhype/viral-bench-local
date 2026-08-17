@@ -22,12 +22,23 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+import os
+import sys
+
+if not __package__:
+    # Direct-script launch (`python services/renderer/app.py`): put the parent
+    # `services/` dir on the path so the shared helper resolves.
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from secure_env import effective_host
+else:
+    from services.secure_env import effective_host
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [vbl-renderer] %(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-HOST = os.environ.get("RENDERER_HOST", "0.0.0.0")
+HOST = effective_host("RENDERER_HOST")
 PORT = int(os.environ.get("RENDERER_PORT", "8031"))
-COMFYUI_URL = os.environ.get("COMFYUI_URL", "http://192.168.1.143:8188")
+COMFYUI_URL = os.environ.get("COMFYUI_URL", "http://gpu-server:8188")
 RENDERS_DIR = Path("/tmp/vbl-renders")
 FONTS_DIR = Path("/tmp/vbl-fonts")
 RENDERS_DIR.mkdir(parents=True, exist_ok=True)

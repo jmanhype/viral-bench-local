@@ -12,13 +12,14 @@ services:
     environment:
       POSTGRES_DB: viralbench
       POSTGRES_USER: vbl
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vbl_secret}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U vbl"]
+      # pg_isready defaults DB to the username; target the configured POSTGRES_DB.
+      test: ["CMD-SHELL", "pg_isready -U vbl -d viralbench"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -27,7 +28,7 @@ services:
     image: redis:7-alpine
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -38,12 +39,15 @@ services:
     image: qdrant/qdrant:v1.13.0
     restart: unless-stopped
     ports:
-      - "6333:6333"
-      - "6334:6334"
+      - "127.0.0.1:6333:6333"
+      - "127.0.0.1:6334:6334"
     volumes:
       - qdrant_data:/qdrant/storage
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:6333/health || exit 1"]
+      # qdrant image has no curl; use bash + /dev/tcp to hit /healthz and assert HTTP 200 OK.
+      test:
+        - "CMD-SHELL"
+        - "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333; printf \"GET /healthz HTTP/1.1\\r\\nHost: 127.0.0.1\\r\\nConnection: close\\r\\n\\r\\n\" >&3; IFS= read -r line <&3; exec 3>&-; case \"$$line\" in *\"200 OK\"*) exit 0;; *) exit 1;; esac'"
       interval: 10s
       timeout: 5s
       retries: 5
@@ -54,10 +58,10 @@ services:
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_USER:-vbladmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:-vbl_secret_123}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:?Set MINIO_PASSWORD in .env}
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
     volumes:
       - minio_data:/data
     healthcheck:
@@ -73,15 +77,19 @@ services:
       target: research-api
     restart: unless-stopped
     ports:
-      - "8001:8001"
+      - "127.0.0.1:8001:8001"
     environment:
-      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD:-vbl_secret}@postgres:5432/viralbench
+      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD}@postgres:5432/viralbench
       REDIS_URL: redis://redis:6379
       QDRANT_URL: http://qdrant:6333
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: ${MINIO_USER:-vbladmin}
-      MINIO_SECRET_KEY: ${MINIO_PASSWORD:-vbl_secret_123}
+      MINIO_SECRET_KEY: ${MINIO_PASSWORD:?Set MINIO_PASSWORD in .env}
       MODELSCOPE_API_KEY: ${MODELSCOPE_API_KEY:?Set MODELSCOPE_API_KEY in .env}
+      SCRAPER_API_KEY: ${SCRAPER_API_KEY:?Set SCRAPER_API_KEY in .env}
+      VBL_DATA_DIR: /data
+    volumes:
+      - ./data:/data
     depends_on:
       postgres:
         condition: service_healthy
@@ -96,12 +104,13 @@ services:
       target: scraper-api
     restart: unless-stopped
     ports:
-      - "8010:8010"
+      - "127.0.0.1:8010:8010"
     environment:
-      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD:-vbl_secret}@postgres:5432/viralbench
+      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD}@postgres:5432/viralbench
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: ${MINIO_USER:-vbladmin}
-      MINIO_SECRET_KEY: ${MINIO_PASSWORD:-vbl_secret_123}
+      MINIO_SECRET_KEY: ${MINIO_PASSWORD:?Set MINIO_PASSWORD in .env}
+      SCRAPER_API_KEY: ${SCRAPER_API_KEY:?Set SCRAPER_API_KEY in .env}
     depends_on:
       postgres:
         condition: service_healthy
@@ -114,11 +123,14 @@ services:
       target: browser-worker
     restart: unless-stopped
     ports:
-      - "8020:8020"
+      - "127.0.0.1:8020:8020"
     environment:
-      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD:-vbl_secret}@postgres:5432/viralbench
+      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD}@postgres:5432/viralbench
       REDIS_URL: redis://redis:6379
-      MCP_AUTH_TOKEN: ${MCP_AUTH_TOKEN:-local-dev-token}
+      MCP_AUTH_TOKEN: ${MCP_AUTH_TOKEN:?Set MCP_AUTH_TOKEN in .env}
+      VBL_DATA_DIR: /data
+    volumes:
+      - ./data:/data
     depends_on:
       postgres:
         condition: service_healthy
@@ -131,9 +143,9 @@ services:
       target: renderer
     restart: unless-stopped
     ports:
-      - "8031:8031"
+      - "127.0.0.1:8031:8031"
     environment:
-      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD:-vbl_secret}@postgres:5432/viralbench
+      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD}@postgres:5432/viralbench
       COMFYUI_URL: ${COMFYUI_URL:-http://gpu-server:8188}
     depends_on:
       postgres:
@@ -145,13 +157,13 @@ services:
       target: publisher
     restart: unless-stopped
     ports:
-      - "8030:8030"
+      - "127.0.0.1:8030:8030"
     environment:
-      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD:-vbl_secret}@postgres:5432/viralbench
+      DATABASE_URL: postgresql+asyncpg://vbl:${POSTGRES_PASSWORD}@postgres:5432/viralbench
       REDIS_URL: redis://redis:6379
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: ${MINIO_USER:-vbladmin}
-      MINIO_SECRET_KEY: ${MINIO_PASSWORD:-vbl_secret_123}
+      MINIO_SECRET_KEY: ${MINIO_PASSWORD:?Set MINIO_PASSWORD in .env}
     depends_on:
       postgres:
         condition: service_healthy

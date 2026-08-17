@@ -12,18 +12,19 @@ echo "=== Starting Viral-Bench Local APIs ==="
 # Research API (Lightreel replacement)
 echo "[1/3] Starting research-api on :8001..."
 MODELSCOPE_API_KEY="${MODELSCOPE_API_KEY:?Set MODELSCOPE_API_KEY env var}" \
-  $VENV -m uvicorn services.research.app:app --host 0.0.0.0 --port 8001 &
+  $VENV -m uvicorn services.research.app:app --host "${RESEARCH_HOST:-127.0.0.1}" --port 8001 &
 PID_RESEARCH=$!
 
 # Scraper API (ScrapeCreators replacement)
 echo "[2/3] Starting scraper-api on :8010..."
-$VENV -m uvicorn services.scraper.app:app --host 0.0.0.0 --port 8010 &
+SCRAPER_API_KEY="${SCRAPER_API_KEY:?Set SCRAPER_API_KEY env var}" \
+  $VENV -m uvicorn services.scraper.app:app --host "${SCRAPER_HOST:-127.0.0.1}" --port 8010 &
 PID_SCRAPER=$!
 
-# MCP Server (Doublespeed replacement)
+# MCP Server (Doublespeed replacement) — run as a script (dir is mcp-server).
 echo "[3/3] Starting mcp-server on :8020..."
-MCP_AUTH_TOKEN="${MCP_AUTH_TOKEN:-local-dev-token}" \
-  $VENV -m uvicorn services.mcp_server.app:app --host 0.0.0.0 --port 8020 &
+MCP_AUTH_TOKEN="${MCP_AUTH_TOKEN:?Set MCP_AUTH_TOKEN env var}" \
+  $VENV services/mcp-server/app.py &
 PID_MCP=$!
 
 echo ""

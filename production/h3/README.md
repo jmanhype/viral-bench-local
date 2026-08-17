@@ -1,7 +1,7 @@
 # H3 Production Pipeline (MiniMax H3 on WanGP, 3090)
 
 Canonical copy of the music-video / audio-conditioned generation pipeline.
-Mirrored from the 3090 (`straughter@192.168.1.143:/home/straughter/h3_runs/`) on 2026-08-15.
+Mirrored from the 3090 (`straughter@3090:/home/straughter/h3_runs/`) on 2026-08-15.
 The 3090 copy remains the live working set — this directory is the durable backup + reviewable source of truth.
 
 ## Layout

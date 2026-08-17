@@ -24,6 +24,17 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
+import os
+import sys
+
+if not __package__:
+    # Direct-script launch (`python services/publisher/app.py`): put the parent
+    # `services/` dir on the path so the shared helper resolves.
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from secure_env import effective_host
+else:
+    from services.secure_env import effective_host
+
 logger = logging.getLogger("vbl-publisher")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelname)s: %(message)s")
 
@@ -32,7 +43,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s] %(levelna
 # ---------------------------------------------------------------------------
 
 DRAFTS_DB = Path("/tmp/vbl-drafts/drafts.db")
-HOST = os.environ.get("PUBLISHER_HOST", "0.0.0.0")
+HOST = effective_host("PUBLISHER_HOST")
 PORT = int(os.environ.get("PUBLISHER_PORT", "8030"))
 
 # TikTok API config

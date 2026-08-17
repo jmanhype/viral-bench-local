@@ -22,7 +22,12 @@ from pydantic import BaseModel, Field
 
 from services.research import corpus
 
+from services.secure_env import effective_host
+
 logger = logging.getLogger(__name__)
+
+# Exposed app bind defaults to loopback unless explicitly overridden.
+HOST = effective_host("RESEARCH_HOST")
 
 
 @asynccontextmanager
@@ -1045,4 +1050,4 @@ async def get_insights(
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("RESEARCH_PORT", "8001"))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host=HOST, port=port)

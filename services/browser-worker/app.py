@@ -32,6 +32,17 @@ from typing import Any
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
+import sys
+import os
+
+if not __package__:
+    # Direct-script launch (`python services/browser-worker/app.py`): put the
+    # parent `services/` dir on the path so the shared helper resolves.
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from secure_env import effective_host
+else:
+    from services.secure_env import effective_host
+
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
@@ -40,7 +51,7 @@ logging.basicConfig(
 logger = logging.getLogger("browser-worker")
 
 # ── Config ────────────────────────────────────────────────────────────────────
-DB_PATH = os.path.expanduser("~/viral-bench-local/data/corpus.db")
+DB_PATH = os.path.join(os.environ.get("VBL_DATA_DIR", os.path.expanduser("~/viral-bench-local/data")), "corpus.db")
 SCRAPER_API = os.environ.get("SCRAPER_API_URL", "http://127.0.0.1:8010")
 RESEARCH_API = os.environ.get("RESEARCH_API_URL", "http://127.0.0.1:8001")
 EGO_BROWSER = os.environ.get("EGO_BROWSER", str(Path.home() / ".local/bin/ego-browser"))
@@ -756,7 +767,7 @@ def main():
     if args.serve:
         import uvicorn
         logger.info("Starting browser-worker API on port %d", args.port)
-        uvicorn.run(app, host="0.0.0.0", port=args.port)
+        uvicorn.run(app, host=effective_host("BROWSER_WORKER_HOST"), port=args.port)
         return
 
     # CLI mode

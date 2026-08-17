@@ -1,0 +1,59 @@
+# VBL .dockerignore — prevents 849MB build context
+# Justification per entry below.
+
+# ── Private research data (git-ignored but COPY . . would include) ──
+research/dreamingtulpa_discord_mentions.json
+research/dreamingtulpa_unique_prompts.json
+
+# ── Version control ──
+.git
+.gitignore
+
+# ── Python caches / build artifacts ──
+__pycache__
+*.py[cod]
+**/__pycache__/
+**/*.py[cod]
+*.egg-info
+dist
+build
+.venv
+.pytest_cache
+.hypothesis
+.mypy_cache
+.ruff_cache
+
+# ── Generated data / media / databases (576MB+ data/, 27MB outputs/) ──
+data/
+outputs/
+*.db
+*.db-shm
+*.db-wal
+**/*.db
+**/*.db-shm
+**/*.db-wal
+backups/
+
+# ── Environment / secrets ──
+.env
+.env.*
+!.env.example
+
+# ── IDE / OS ──
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Docs not needed at runtime ──
+docs/
+*.md
+!production/h3/README.md
+
+# ── Tests (not needed in production image) ──
+tests/
+
+# ── Deploy scripts (host-side only) ──
+deploy/

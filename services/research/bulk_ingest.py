@@ -20,6 +20,8 @@ from pathlib import Path
 
 import httpx
 
+from services.secure_env import require_secret
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 log = logging.getLogger(__name__)
 
@@ -146,7 +148,7 @@ async def main():
     inserted = 0
     analyzed = 0
 
-    async with httpx.AsyncClient(headers={"x-api-key": "local-dev"}) as client:
+    async with httpx.AsyncClient(headers={"x-api-key": require_secret("SCRAPER_API_KEY", hint="Set SCRAPER_API_KEY in .env before running bulk ingest.")}) as client:
         for i, handle in enumerate(profiles):
             if inserted >= args.min_posts:
                 log.info(f"Reached target of {args.min_posts} new posts")

@@ -36,7 +36,7 @@ echo "Starting Viral-Bench Local services..."
 # Research API (:8001)
 if ! lsof -i :8001 -t >/dev/null 2>&1; then
     MODELSCOPE_API_KEY="${MODELSCOPE_API_KEY:?Set MODELSCOPE_API_KEY env var or in .env}" \
-    nohup $VENV -m uvicorn services.research.app:app --host 0.0.0.0 --port 8001 > "$LOGDIR/research.log" 2>&1 &
+    nohup $VENV -m uvicorn services.research.app:app --host "${RESEARCH_HOST:-127.0.0.1}" --port 8001 > "$LOGDIR/research.log" 2>&1 &
     echo "  ✅ Research API  :8001 (PID $!)"
 else
     echo "  ⏭️  Research API  :8001 (already running)"
@@ -45,7 +45,8 @@ fi
 # Scraper API (:8010)
 if ! lsof -i :8010 -t >/dev/null 2>&1; then
     PATH="$(pwd)/.venv/bin:$PATH" \
-    nohup $VENV -m uvicorn services.scraper.app:app --host 0.0.0.0 --port 8010 > "$LOGDIR/scraper.log" 2>&1 &
+    SCRAPER_API_KEY="${SCRAPER_API_KEY:?Set SCRAPER_API_KEY in .env before starting the scraper}" \
+    nohup $VENV -m uvicorn services.scraper.app:app --host "${SCRAPER_HOST:-127.0.0.1}" --port 8010 > "$LOGDIR/scraper.log" 2>&1 &
     echo "  ✅ Scraper API   :8010 (PID $!)"
 else
     echo "  ⏭️  Scraper API   :8010 (already running)"
@@ -53,7 +54,7 @@ fi
 
 # MCP Server (:8020)
 if ! lsof -i :8020 -t >/dev/null 2>&1; then
-    MCP_AUTH_TOKEN="${MCP_AUTH_TOKEN:-local-dev-token}" \
+    MCP_AUTH_TOKEN="${MCP_AUTH_TOKEN:?Set MCP_AUTH_TOKEN in .env before starting the MCP server}" \
     nohup $VENV services/mcp-server/app.py > "$LOGDIR/mcp.log" 2>&1 &
     echo "  ✅ MCP Server    :8020 (PID $!)"
 else
@@ -70,7 +71,7 @@ fi
 
 # Renderer (:8031)
 if ! lsof -i :8031 -t >/dev/null 2>&1; then
-    COMFYUI_URL="${COMFYUI_URL:-http://192.168.1.143:8188}" \
+    COMFYUI_URL="${COMFYUI_URL:-http://gpu-server:8188}" \
     nohup $VENV services/renderer/app.py > "$LOGDIR/renderer.log" 2>&1 &
     echo "  ✅ Renderer      :8031 (PID $!)"
 else

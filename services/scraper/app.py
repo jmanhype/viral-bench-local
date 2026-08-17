@@ -5,7 +5,7 @@ Implements the 3 endpoints Viral-Bench actually calls:
   GET /v1/instagram/post?url=...&trim=true
   GET /v3/tiktok/profile/videos?handle=...&sort_by=latest
 
-Auth: x-api-key header (any non-empty value accepted locally).
+Auth: x-api-key header validated against the configured SCRAPER_API_KEY secret (fail closed).
 Response shapes match ScrapeCreators' aweme_detail / xdt_shortcode_media / aweme_list.
 """
 from __future__ import annotations
@@ -21,11 +21,14 @@ from typing import Any
 from fastapi import FastAPI, Header, HTTPException, Query
 from fastapi.responses import JSONResponse
 
+from services.secure_env import effective_host, secrets_equal
+
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Local ScrapeCreators Compatibility API")
 
 # ─── Config ────────────────────────────────────────────────────────────────────
+HOST = effective_host("SCRAPER_HOST")
 CACHE_DIR = os.environ.get("SCRAPER_CACHE_DIR", "/tmp/scraper-cache")
 YTDLP_TIMEOUT = int(os.environ.get("YTDLP_TIMEOUT", "120"))
 INSTALOADER_TIMEOUT = int(os.environ.get("INSTALOADER_TIMEOUT", "60"))
@@ -841,10 +844,27 @@ def _map_instagram_to_sc(raw: dict[str, Any], shortcode: str, url: str) -> dict[
 
 
 # ─── Auth middleware ───────────────────────────────────────────────────────────
-async def check_api_key(x_api_key: str | None = Header(default=None, alias="x-api-key")) -> None:
-    """Accept any non-empty API key for local development."""
+def _expected_api_key() -> str:
+    """Server-side configured Scraper API key (fail CLOSED when unset).
+
+    Lazy so importing the module never crashes when the key is absent; the
+    server refuses to authorize requests until SCRAPER_API_KEY is configured.
+    """
+    from services.secure_env import require_secret
+    return require_secret("SCRAPER_API_KEY", hint="Set SCRAPER_API_KEY in .env before starting the scraper.")
+
+
+def check_api_key(x_api_key: str | None = Header(default=None, alias="x-api-key")) -> None:
+    """Authorize against the configured secret; reject missing or wrong keys.
+
+    Uses a constant-time comparison (secrets_equal) so API-key timing does not
+    leak the expected secret. Fail-closed: if SCRAPER_API_KEY is unset, the
+    lazy _expected_api_key() resolves via require_secret and raises.
+    """
     if not x_api_key:
         raise HTTPException(status_code=401, detail="Missing x-api-key header")
+    if not secrets_equal(x_api_key, _expected_api_key()):
+        raise HTTPException(status_code=403, detail="Invalid x-api-key")
 
 
 # ─── Routes ────────────────────────────────────────────────────────────────────
@@ -854,8 +874,7 @@ async def tiktok_video_transcript(
     x_api_key: str | None = Header(default=None, alias="x-api-key"),
 ) -> JSONResponse:
     """Fetch transcript/captions for a TikTok video."""
-    if not x_api_key:
-        raise HTTPException(status_code=401, detail="Missing x-api-key header")
+    check_api_key(x_api_key)
 
     cache_k = _cache_key("tt_transcript", url)
     cached = _load_cache(cache_k)
@@ -890,8 +909,7 @@ async def tiktok_video(
     x_api_key: str | None = Header(default=None, alias="x-api-key"),
 ) -> JSONResponse:
     """Fetch TikTok post metadata + images + stats + music."""
-    if not x_api_key:
-        raise HTTPException(status_code=401, detail="Missing x-api-key header")
+    check_api_key(x_api_key)
 
     cache_k = _cache_key("tt_video", url)
     # When include_transcript is requested, use a separate cache key to avoid polluting base cache
@@ -942,8 +960,7 @@ async def instagram_post(
     x_api_key: str | None = Header(default=None, alias="x-api-key"),
 ) -> JSONResponse:
     """Fetch Instagram post/carousel metadata + images."""
-    if not x_api_key:
-        raise HTTPException(status_code=401, detail="Missing x-api-key header")
+    check_api_key(x_api_key)
 
     try:
         result = await fetch_instagram_post(url)
@@ -963,8 +980,7 @@ async def tiktok_profile_videos(
     x_api_key: str | None = Header(default=None, alias="x-api-key"),
 ) -> JSONResponse:
     """Fetch recent videos from a TikTok profile."""
-    if not x_api_key:
-        raise HTTPException(status_code=401, detail="Missing x-api-key header")
+    check_api_key(x_api_key)
 
     clean_handle = handle.lstrip("@")
     profile_url = f"https://www.tiktok.com/@{clean_handle}"
@@ -996,4 +1012,4 @@ async def health():
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("SCRAPER_PORT", "8010"))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host=HOST, port=port)

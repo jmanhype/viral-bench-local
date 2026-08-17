@@ -156,10 +156,11 @@ export MODELSCOPE_API_KEY="your-key-here"
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `MODELSCOPE_API_KEY` | Yes | — | Qwen3.7-Max API key (subagent LLM) |
-| `POSTGRES_PASSWORD` | No | `vbl_secret` | Database password |
+| `POSTGRES_PASSWORD` | Yes | — | Database password (no default) |
+| `SCRAPER_API_KEY` | Yes | — | Scraper API auth — must match the scraper service secret (no default) |
+| `MCP_AUTH_TOKEN` | Yes | — | MCP server auth (no default) |
 | `MINIO_USER` | No | `vbladmin` | Object storage user |
-| `MINIO_PASSWORD` | No | `vbl_secret_123` | Object storage password |
-| `MCP_AUTH_TOKEN` | No | `local-dev-token` | MCP server auth |
+| `MINIO_PASSWORD` | Yes | — | Object storage password (no default) |
 | `COMFYUI_URL` | No | `http://gpu-server:8188` | ComfyUI GPU endpoint |
 
 ### Health checks

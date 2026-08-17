@@ -18,12 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps
-COPY pyproject.toml .
-RUN pip install . 2>&1 | tail -5
-
-# Copy app
+# Install Python deps (copy full source so package metadata resolves)
 COPY . .
+RUN pip install .
 
 # ─── research-api (port 8001) ───────────────────────────────────
 FROM base AS research-api
@@ -45,21 +42,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     && rm -rf /var/lib/apt/lists/*
 ENV PLAYWRIGHT_BROWSERS_PATH=/usr/lib/playwright
+ENV BROWSER_WORKER_HOST=0.0.0.0
 EXPOSE 8020
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD curl -sf http://localhost:8020/health || exit 1
-CMD ["uvicorn", "services.browser.app:app", "--host", "0.0.0.0", "--port", "8020"]
+# services/browser-worker is a hyphenated dir — not importable as a dotted module;
+# run the app's direct-script --serve mode against the exposed port.
+CMD ["python", "services/browser-worker/app.py", "--serve", "--port", "8020"]
 
-# ─── publisher (port 8031) ─────────────────────────────────────
+# ─── publisher (port 8030) ─────────────────────────────────────
 FROM base AS publisher
-EXPOSE 8031
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD curl -sf http://localhost:8031/health || exit 1
-CMD ["uvicorn", "services.publisher.app:app", "--host", "0.0.0.0", "--port", "8031"]
-
-# ─── renderer (port 8030) ─────────────────────────────────────
-FROM base AS renderer
 EXPOSE 8030
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD curl -sf http://localhost:8030/health || exit 1
-CMD ["uvicorn", "services.renderer.app:app", "--host", "0.0.0.0", "--port", "8030"]
+CMD ["uvicorn", "services.publisher.app:app", "--host", "0.0.0.0", "--port", "8030"]
+
+# ─── renderer (port 8031) ─────────────────────────────────────
+FROM base AS renderer
+EXPOSE 8031
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD curl -sf http://localhost:8031/health || exit 1
+CMD ["uvicorn", "services.renderer.app:app", "--host", "0.0.0.0", "--port", "8031"]

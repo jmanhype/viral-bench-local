@@ -29,6 +29,17 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
+import os
+import sys
+
+if not __package__:
+    # Direct-script launch (`python services/mcp-server/app.py`): put the parent
+    # `services/` dir on the path so the shared helper resolves.
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from secure_env import effective_host, require_secret, secrets_equal
+else:
+    from services.secure_env import effective_host, require_secret, secrets_equal
+
 logger = logging.getLogger("viral-bench-mcp")
 
 # ---------------------------------------------------------------------------
@@ -37,10 +48,10 @@ logger = logging.getLogger("viral-bench-mcp")
 
 RENDERS_DIR = Path("/tmp/vbl-renders")
 DRAFTS_DB = Path("/tmp/vbl-drafts/drafts.db")
-AUTH_TOKEN = os.environ.get("MCP_AUTH_TOKEN", "local-dev-token")
-HOST = os.environ.get("MCP_HOST", "0.0.0.0")
+AUTH_TOKEN = require_secret("MCP_AUTH_TOKEN", hint="Set MCP_AUTH_TOKEN in .env before starting the MCP server.")
+HOST = effective_host("MCP_HOST")
 PORT = int(os.environ.get("MCP_PORT", "8020"))
-COMFYUI_URL = os.environ.get("COMFYUI_URL", "http://192.168.1.143:8188")
+COMFYUI_URL = os.environ.get("COMFYUI_URL", "http://gpu-server:8188")
 
 RENDERS_DIR.mkdir(parents=True, exist_ok=True)
 DRAFTS_DB.parent.mkdir(parents=True, exist_ok=True)
@@ -337,7 +348,8 @@ class BearerAuthMiddleware(BaseHTTPMiddleware):
             return JSONResponse({"error": "Missing or invalid Authorization header"}, status_code=401)
 
         token = auth_header[len("Bearer "):]
-        if token != AUTH_TOKEN:
+        # Constant-time comparison so bearer-token timing does not leak AUTH_TOKEN.
+        if not secrets_equal(token, AUTH_TOKEN):
             return JSONResponse({"error": "Invalid token"}, status_code=403)
 
         return await call_next(request)
@@ -605,7 +617,7 @@ if __name__ == "__main__":
     app.add_middleware(BearerAuthMiddleware)
 
     print(f"[viral-bench-mcp] Starting on {HOST}:{PORT}")
-    print(f"[viral-bench-mcp] Auth token: {'set via env' if os.environ.get('MCP_AUTH_TOKEN') else 'using default'}")
+    print(f"[viral-bench-mcp] Auth token: configured (required via MCP_AUTH_TOKEN)")
     print(f"[viral-bench-mcp] Renders dir: {RENDERS_DIR}")
     print(f"[viral-bench-mcp] Drafts DB: {DRAFTS_DB}")
     print(f"[viral-bench-mcp] ComfyUI URL: {COMFYUI_URL}")

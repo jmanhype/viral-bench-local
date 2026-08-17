@@ -712,10 +712,19 @@ class ContentBrief(BaseModel):
     generated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
+def _data_dir() -> Path:
+    """Resolve runtime data directory from VBL_DATA_DIR or repo-relative default."""
+    import os
+    env_dir = os.environ.get("VBL_DATA_DIR")
+    if env_dir:
+        return Path(env_dir)
+    return Path(__file__).parent.parent.parent / "data"
+
+
 def load_visual_register() -> dict:
     """Load Lost Future visual style catalog."""
     import json
-    register_path = Path(__file__).parent.parent.parent / "data" / "visual_register.json"
+    register_path = _data_dir() / "visual_register.json"
     if register_path.exists():
         with open(register_path) as f:
             return json.load(f)
@@ -725,7 +734,7 @@ def load_visual_register() -> dict:
 def load_character_locks() -> dict:
     """Load the franchise character lock registry (SGFLIX identity-lock schema)."""
     import json
-    locks_path = Path(__file__).parent.parent.parent / "data" / "character_locks.json"
+    locks_path = _data_dir() / "character_locks.json"
     if locks_path.exists():
         with open(locks_path) as f:
             return json.load(f)
