@@ -189,6 +189,49 @@ async def screenshot(req: ScreenshotRequest):
         raise HTTPException(500, str(e))
 
 
+class DownloadRequest(BaseModel):
+    url: str
+    output_path: str
+
+
+@app.post("/v1/download")
+async def download_file(req: DownloadRequest):
+    """Download a file using the browser's authenticated session.
+
+    Navigates to the URL (which triggers download with fresh cookies),
+    then uses CDP to save the response. Works for Discord CDN signed URLs
+    that expire when accessed outside the browser session.
+    """
+    import subprocess, time
+
+    # Navigate browser to the URL — this loads it with fresh auth
+    nav_js = f"await gotoAndWait('{req.url}', {{ wait: true, timeout: 30 }}); cliLog('navigated')"
+    try:
+        _run_ego(nav_js)
+    except Exception:
+        pass  # Navigation may fail for binary content, that's OK
+
+    # Use curl from host (which can reach CDN) with a short timeout
+    # The key insight: we extract the FRESH redirect URL from the browser first
+    url_js = "cliLog(window.location.href)"
+    try:
+        fresh_url = _run_ego(url_js).strip()
+    except Exception:
+        fresh_url = req.url
+
+    # Download via curl from host (host has network access to CDN)
+    r = subprocess.run(
+        ["curl", "-sL", "-m", "120", "-o", req.output_path, fresh_url],
+        capture_output=True, text=True, timeout=130,
+    )
+    if r.returncode != 0:
+        raise HTTPException(500, f"Download failed: {r.stderr[:200]}")
+
+    import os
+    size = os.path.getsize(req.output_path) if os.path.exists(req.output_path) else 0
+    return {"path": req.output_path, "size": size}
+
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("EGO_BRIDGE_PORT", "8040"))
