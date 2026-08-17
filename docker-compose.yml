@@ -181,6 +181,16 @@ services:
   #   build: N/A — runs on host
   #   ports: ["127.0.0.1:8040:8040"]
 
+  # ─── H3 Bridge (HOST-ONLY, SSH proxy to 3090 GPU server) ───
+  # Docker Desktop Mac containers cannot SSH to LAN IPs.
+  # This service runs on the Mac host where SSH works and proxies
+  # submit/status/retrieve calls to the 3090. Containers call it
+  # via host.docker.internal:8041.
+  # Start: .venv/bin/python services/h3-bridge/app.py
+  # h3-bridge:
+  #   build: N/A — runs on host
+  #   ports: ["127.0.0.1:8041:8041"]
+
   # ─── Style Refresh (HOST-ONLY, depends on ego-bridge) ──────
   # Drives Lost Future GPT via ego-bridge to generate new visual styles.
   # Start: .venv/bin/python services/style-refresh/app.py
