@@ -181,6 +181,20 @@ services:
   #   build: N/A — runs on host
   #   ports: ["127.0.0.1:8040:8040"]
 
+  # ─── Style Refresh (HOST-ONLY, depends on ego-bridge) ──────
+  # Drives Lost Future GPT via ego-bridge to generate new visual styles.
+  # Start: .venv/bin/python services/style-refresh/app.py
+  # style-refresh:
+  #   build: N/A — runs on host
+  #   ports: ["127.0.0.1:8050:8050"]
+
+  # ─── Character Refresh (HOST-ONLY, depends on ego-bridge) ──
+  # Drives Lost Future GPT via ego-bridge to generate character bibles.
+  # Start: .venv/bin/python services/character-refresh/app.py
+  # character-refresh:
+  #   build: N/A — runs on host
+  #   ports: ["127.0.0.1:8051:8051"]
+
   # ─── SGOS Backend (H3 pipeline + keeper metadata API) ────────
   # Containerized sgos-backend with SSH access to 3090 GPU server.
   # Build context is ../sgos-backend (sibling repo).

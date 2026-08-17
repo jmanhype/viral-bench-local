@@ -38,7 +38,7 @@
         "H.264 compression artifacts",
         "motion blur (limited animation = held cels, not motion)"
       ],
-      "color_science": "16mm Eastmancolor negative stock \u2014 warm saturated primaries, slight magenta shift in shadows, cel paint colors (bright chrome yellow, candy red, electric blue) punch through the film stock's warm bias"
+      "color_science": "16mm Eastmancolor negative stock — warm saturated primaries, slight magenta shift in shadows, cel paint colors (bright chrome yellow, candy red, electric blue) punch through the film stock's warm bias"
     },
     {
       "id": "1980s-cyberpunk-ova",
@@ -79,7 +79,7 @@
         "lens flare (cel animation, not live-action lens)",
         "motion blur (held cels with sudden motion, not continuous blur)"
       ],
-      "color_science": "35mm negative stock \u2014 rich blacks, deep cyans and magentas, neon highlights bloom against dark backgrounds. OVA budgets allowed theatrical-grade film with saturated cel paints (neon pink, electric cyan, chrome silver)"
+      "color_science": "35mm negative stock — rich blacks, deep cyans and magentas, neon highlights bloom against dark backgrounds. OVA budgets allowed theatrical-grade film with saturated cel paints (neon pink, electric cyan, chrome silver)"
     },
     {
       "id": "1980s-city-pop",
@@ -120,7 +120,7 @@
         "CGI artifacts",
         "heavy film damage (well-maintained broadcast stock)"
       ],
-      "color_science": "16mm Eastmancolor + Betacam SP broadcast transfer \u2014 pastel pinks, peach skies, lavender dusk, chrome highlights. Airbrushed soft gradients with warm sunset palette. Film stock warmth amplifies the aspirational golden-hour mood"
+      "color_science": "16mm Eastmancolor + Betacam SP broadcast transfer — pastel pinks, peach skies, lavender dusk, chrome highlights. Airbrushed soft gradients with warm sunset palette. Film stock warmth amplifies the aspirational golden-hour mood"
     },
     {
       "id": "1990s-visual-novel",
@@ -159,7 +159,7 @@
         "motion blur (static images)",
         "high-resolution textures (era-appropriate limits)"
       ],
-      "color_science": "256-color VGA/SVGA palette \u2014 dithered gradients, limited color depth, blue-black backgrounds with cyan UI highlights. Character portraits use anime color palette compressed into 8-bit. Slight color banding in skin tones and sky gradients"
+      "color_science": "256-color VGA/SVGA palette — dithered gradients, limited color depth, blue-black backgrounds with cyan UI highlights. Character portraits use anime color palette compressed into 8-bit. Slight color banding in skin tones and sky gradients"
     },
     {
       "id": "vhs-fansub",
@@ -199,7 +199,7 @@
         "H.264/HEVC compression",
         "motion blur (held cels, not live motion)"
       ],
-      "color_science": "VHS color-under encoding \u2014 limited chroma bandwidth causes color smearing, reds push hot, blues bleed sideways, generational dub darkens and desaturates with each copy. 3-4 generation deep fansub tapes show significant color shift and softness"
+      "color_science": "VHS color-under encoding — limited chroma bandwidth causes color smearing, reds push hot, blues bleed sideways, generational dub darkens and desaturates with each copy. 3-4 generation deep fansub tapes show significant color shift and softness"
     },
     {
       "id": "1990s-psychological",
@@ -238,14 +238,14 @@
         "bright saturated colors (muted by design)",
         "fast motion (psychological = slow, deliberate pacing)"
       ],
-      "color_science": "35mm negative with deliberate desaturation \u2014 muted blues, gray-greens, washed-out skin tones. Shadows crush to black. Occasional warm amber for emotional contrast. Film stock chosen for mood, not vibrancy"
+      "color_science": "35mm negative with deliberate desaturation — muted blues, gray-greens, washed-out skin tones. Shadows crush to black. Occasional warm amber for emotional contrast. Film stock chosen for mood, not vibrancy"
     },
     {
       "id": "1970s-shoujo",
-      "name": "1970s Sh\u014djo Melodrama Anime",
+      "name": "1970s Shōjo Melodrama Anime",
       "visual_description": "Rose overlays, lace curtains, tragic close-ups, glittering tears, candlelit mansions, theatrical poses, flowing hair, painted flowers. Emotional storms that arrive with operatic sincerity.",
       "wrongness": "Every feeling is too large for the frame.",
-      "historical_context": "Girls' manga, theatrical melodrama, European romance fantasies, TV schedules hungry for emotionally serialized stories. Faded as sh\u014djo visual language modernized, softened, and fragmented into newer romance and magical-girl forms.",
+      "historical_context": "Girls' manga, theatrical melodrama, European romance fantasies, TV schedules hungry for emotionally serialized stories. Faded as shōjo visual language modernized, softened, and fragmented into newer romance and magical-girl forms.",
       "best_uses": [
         "tragic confessions",
         "haunted aristocratic romances",
@@ -254,7 +254,7 @@
         "memory montages",
         "doomed friendship scenes"
       ],
-      "prompt_seed": "1978 Japanese sh\u014djo melodrama TV anime, aristocratic girl in a candlelit hallway clutching a sealed letter, rose overlays, lace shadows, elongated eyes, glittering tears, slow push-in, painted flower background, limited cel movement, soft film grain, beautiful and unbearably dramatic.",
+      "prompt_seed": "1978 Japanese shōjo melodrama TV anime, aristocratic girl in a candlelit hallway clutching a sealed letter, rose overlays, lace shadows, elongated eyes, glittering tears, slow push-in, painted flower background, limited cel movement, soft film grain, beautiful and unbearably dramatic.",
       "niche_affinity": [
         "fashion",
         "lifestyle",
@@ -278,7 +278,7 @@
         "motion blur (held cels, not motion)",
         "CGI particle effects"
       ],
-      "color_science": "16mm Eastmancolor with watercolor backgrounds \u2014 soft pinks, lavender, rose gold, sky blue. Watercolor bleed creates soft edges. Film stock warmth enhances the romantic palette. Sparkle overlays catch light physically on the animation stand"
+      "color_science": "16mm Eastmancolor with watercolor backgrounds — soft pinks, lavender, rose gold, sky blue. Watercolor bleed creates soft edges. Film stock warmth enhances the romantic palette. Sparkle overlays catch light physically on the animation stand"
     },
     {
       "id": "early-2000s-digital",
@@ -317,7 +317,7 @@
         "VHS tracking noise (digital master)",
         "heavy film damage (clean digital source)"
       ],
-      "color_science": "Early digital color pipeline \u2014 flat saturated colors without film stock warmth. Plastic-looking skin highlights. Colors are clean but lack the organic richness of cel-on-film. Slight color banding in gradients due to early digital bit depth"
+      "color_science": "Early digital color pipeline — flat saturated colors without film stock warmth. Plastic-looking skin highlights. Colors are clean but lack the organic richness of cel-on-film. Slight color banding in gradients due to early digital bit depth"
     },
     {
       "id": "1980s-idol",
@@ -356,7 +356,7 @@
         "CGI particles",
         "heavy motion blur"
       ],
-      "color_science": "16mm Eastmancolor + Betacam SP \u2014 bright saturated primaries (hot pink, electric blue, chrome yellow). Idol anime pushed color saturation for energetic music video feel. Broadcast transfer maintains vibrancy"
+      "color_science": "16mm Eastmancolor + Betacam SP — bright saturated primaries (hot pink, electric blue, chrome yellow). Idol anime pushed color saturation for energetic music video feel. Broadcast transfer maintains vibrancy"
     },
     {
       "id": "1990s-jrpg",
@@ -395,7 +395,7 @@
         "high-resolution textures (era limits)",
         "modern PBR/material rendering"
       ],
-      "color_science": "PS1/PS2 framebuffer \u2014 vertex-lit colors, limited texture resolution, baked lighting. Colors are saturated but flat (no dynamic shadows on characters). Pre-rendered backgrounds use higher detail than real-time scenes"
+      "color_science": "PS1/PS2 framebuffer — vertex-lit colors, limited texture resolution, baked lighting. Colors are saturated but flat (no dynamic shadows on characters). Pre-rendered backgrounds use higher detail than real-time scenes"
     },
     {
       "id": "corporate-training-vhs",
@@ -435,7 +435,7 @@
         "shallow depth of field (corporate = everything in focus)",
         "cinematic lighting (flat fluorescent)"
       ],
-      "color_science": "Consumer VHS color-under encoding \u2014 fluorescent lighting creates greenish cast, VHS red push makes ties/suits oversaturate, skin tones go slightly orange under office fluorescents. Generational dubs darken and desaturate"
+      "color_science": "Consumer VHS color-under encoding — fluorescent lighting creates greenish cast, VHS red push makes ties/suits oversaturate, skin tones go slightly orange under office fluorescents. Generational dubs darken and desaturate"
     },
     {
       "id": "british-info-film",
@@ -473,7 +473,7 @@
         "CGI effects",
         "saturated colors (deliberately muted)"
       ],
-      "color_science": "16mm reversal film in overcast British daylight \u2014 muted gray-greens, desaturated earth tones, flat overcast lighting. Film stock chosen for documentary realism, not beauty. Colors fade toward cool blue-gray"
+      "color_science": "16mm reversal film in overcast British daylight — muted gray-greens, desaturated earth tones, flat overcast lighting. Film stock chosen for documentary realism, not beauty. Colors fade toward cool blue-gray"
     },
     {
       "id": "cdrom-hacker",
@@ -512,7 +512,7 @@
         "motion blur (static images)",
         "high-resolution textures"
       ],
-      "color_science": "256-color VGA/SVGA \u2014 blue-black backgrounds, cyan/amber UI highlights, dithered gradients. Terminal green or amber phosphor glow. Character portraits use limited anime-influenced palette compressed to 8-bit"
+      "color_science": "256-color VGA/SVGA — blue-black backgrounds, cyan/amber UI highlights, dithered gradients. Terminal green or amber phosphor glow. Character portraits use limited anime-influenced palette compressed to 8-bit"
     },
     {
       "id": "eastern-european-scifi",
@@ -551,7 +551,7 @@
         "CGI or compositing",
         "fast camera movement (theatrical pacing)"
       ],
-      "color_science": "16mm Soviet/Eastern European film stock (Svema or equivalent) \u2014 muted cyan-greens, desaturated earth tones, flat stage lighting. Colors shift toward cool blue. Film stock quality lower than Western equivalents"
+      "color_science": "16mm Soviet/Eastern European film stock (Svema or equivalent) — muted cyan-greens, desaturated earth tones, flat stage lighting. Colors shift toward cool blue. Film stock quality lower than Western equivalents"
     },
     {
       "id": "mall-kiosk",
@@ -591,11 +591,11 @@
         "cinematic depth of field (product demo = everything sharp)",
         "high production value"
       ],
-      "color_science": "Consumer VHS color-under \u2014 chrome product shots push VHS red/yellow hot, studio lighting creates harsh highlights, magenta-blue gels bleed sideways on chroma encoding. Generational dubs darken product shots"
+      "color_science": "Consumer VHS color-under — chrome product shots push VHS red/yellow hot, studio lighting creates harsh highlights, magenta-blue gels bleed sideways on chroma encoding. Generational dubs darken product shots"
     },
     {
       "id": "tokusatsu",
-      "name": "1960s\u201370s Japanese Tokusatsu Miniature Disaster Television",
+      "name": "1960s–70s Japanese Tokusatsu Miniature Disaster Television",
       "visual_description": "Rubber suits, sparks, smoke pots, miniature city blocks, visible wires, heroic low angles, toy-like vehicles, and painted skies. The monster is physical, heavy, clumsy, and glorious. Buildings crumble like balsa wood, but the emotional stakes are completely sincere.",
       "wrongness": "Obvious fakery performed with total conviction.",
       "historical_context": "Television needed weekly spectacle before digital effects, and toy/sponsor ecosystems rewarded repeatable creature designs. Faded when CGI and global superhero grammar replaced the handmade monster stage.",
@@ -630,7 +630,7 @@
         "film grain (shot on broadcast video tape)",
         "modern compositing"
       ],
-      "color_science": "Betacam SP component color \u2014 cleaner than composite VHS, overbright toyetic colors (saturated primaries for toy marketing), smoke-pot diffusion softens highlights. Broadcast-grade but deliberately bright and saturated for children's programming"
+      "color_science": "Betacam SP component color — cleaner than composite VHS, overbright toyetic colors (saturated primaries for toy marketing), smoke-pot diffusion softens highlights. Broadcast-grade but deliberately bright and saturated for children's programming"
     },
     {
       "id": "public-access",
@@ -670,7 +670,7 @@
         "high production value",
         "professional audio quality"
       ],
-      "color_science": "Consumer VHS camcorder \u2014 auto white balance hunting, fluorescent greenish cast, chroma-key spill from imperfect compositing. Colors are washed out from cheap camcorder sensors and VHS encoding"
+      "color_science": "Consumer VHS camcorder — auto white balance hunting, fluorescent greenish cast, chroma-key spill from imperfect compositing. Colors are washed out from cheap camcorder sensors and VHS encoding"
     },
     {
       "id": "mental-hygiene",
@@ -708,7 +708,7 @@
         "tape artifacts (film medium)",
         "cinematic production value"
       ],
-      "color_science": "16mm black-and-white reversal film \u2014 high contrast, flat school fluorescent lighting, no color. Film stock chosen for cheapness and durability for classroom use. Heavy grain on generational prints"
+      "color_science": "16mm black-and-white reversal film — high contrast, flat school fluorescent lighting, no color. Film stock chosen for cheapness and durability for classroom use. Heavy grain on generational prints"
     },
     {
       "id": "car-dealership",
@@ -747,7 +747,7 @@
         "cinematic depth of field",
         "professional production value"
       ],
-      "color_science": "Consumer VHS with deliberate oversaturation \u2014 sun-blasted asphalt whites out, red price graphics push VHS encoding to maximum, skin tones go orange in harsh daylight. VHS red push makes everything look more aggressive"
+      "color_science": "Consumer VHS with deliberate oversaturation — sun-blasted asphalt whites out, red price graphics push VHS encoding to maximum, skin tones go orange in harsh daylight. VHS red push makes everything look more aggressive"
     },
     {
       "id": "hype-williams-music-video",
@@ -788,13 +788,13 @@
         "low production value",
         "flat lighting (maximalist lighting design)"
       ],
-      "color_science": "35mm negative stock with high-saturation push processing \u2014 chrome and gold surfaces reflect hot, neon strobes bloom, fish-eye lens creates color fringing at edges. Deliberately pushed color saturation for MTV impact"
+      "color_science": "35mm negative stock with high-saturation push processing — chrome and gold surfaces reflect hot, neon strobes bloom, fish-eye lens creates color fringing at edges. Deliberately pushed color saturation for MTV impact"
     },
     {
       "id": "hood-cinema",
       "name": "1990s Hood Cinema Golden Hour",
       "visual_description": "Warm golden tones, slow-motion walks down palm-lined streets, low-rider hydraulics catching sunlight, corner store neon, chain-link fences, basketball courts at dusk. The camera treats everyday blocks like a Michael Mann film. Colors are rich, shadows are deep, and every frame feels like a memory you didn't live.",
-      "wrongness": "Cinematic beauty applied to systemic struggle \u2014 the gorgeous light makes the hardship feel like art instead of injustice.",
+      "wrongness": "Cinematic beauty applied to systemic struggle — the gorgeous light makes the hardship feel like art instead of injustice.",
       "historical_context": "Films like Boyz n the Hood, Menace II Society, and South Central created a visual grammar for Black American urban life that Hollywood had never attempted. It faded when streaming services homogenized the look and gentrification changed the blocks.",
       "best_uses": [
         "storytime",
@@ -828,13 +828,13 @@
         "flat lighting (cinematic golden hour)",
         "low production value"
       ],
-      "color_science": "35mm negative with warm golden-hour grading \u2014 deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette. Film stock warmth enhanced in telecine transfer for cinematic beauty"
+      "color_science": "35mm negative with warm golden-hour grading — deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette. Film stock warmth enhanced in telecine transfer for cinematic beauty"
     },
     {
       "id": "mixtape-dvd",
       "name": "2000s Mixtape DVD Cover Art",
       "visual_description": "Low-resolution Photoshop composites, aggressive lens flares, gold foil text, airbrushed faces, luxury cars floating in void space, stacks of cash, bulletproof vests, and the artist's name in a font that looks like molten metal. Everything is oversaturated and slightly blurry from being printed on a Kinko's printer.",
-      "wrongness": "Raw ambition compressed into a DVD case with the graphic design sophistication of a ransom note made from magazine cutouts \u2014 except somehow it works.",
+      "wrongness": "Raw ambition compressed into a DVD case with the graphic design sophistication of a ransom note made from magazine cutouts — except somehow it works.",
       "historical_context": "Before SoundCloud and streaming, mixtapes sold hand-to-hand at barbershops and street corners. The DVD cover was your album art, your billboard, and your brand identity all at once. It died when digital distribution killed physical media.",
       "best_uses": [
         "music promotion",
@@ -868,13 +868,13 @@
         "natural lighting (studio product photography)",
         "high-resolution output (print-shop quality)"
       ],
-      "color_science": "Digital Photoshop composite \u2014 oversaturated golds, chrome gradients, airbrushed skin tones pushed warm. Colors are digitally enhanced beyond realistic. Print output adds slight blur and color shift from cheap printers"
+      "color_science": "Digital Photoshop composite — oversaturated golds, chrome gradients, airbrushed skin tones pushed warm. Colors are digitally enhanced beyond realistic. Print output adds slight blur and color shift from cheap printers"
     },
     {
       "id": "dirty-south-crunk",
       "name": "2000s Dirty South Crunk Visual",
       "visual_description": "Purple and neon color washes, low-rider rims spinning, candy paint reflections, chopped and screwed visual rhythms, gold grills catching club lights, Cadillac interiors, and the specific humidity of a Houston or Atlanta night. The visuals move slow while the energy is frantic.",
-      "wrongness": "Hypnotic, syrupy visual pacing paired with aggressive, high-energy music \u2014 the body wants to move fast but the eyes are stuck in molasses.",
+      "wrongness": "Hypnotic, syrupy visual pacing paired with aggressive, high-energy music — the body wants to move fast but the eyes are stuck in molasses.",
       "historical_context": "Southern hip-hop developed its own visual identity separate from the East/West coast aesthetic. The purple-tinged, slow-motion style reflected both the music's chopped-and-screwed production and the cultural pace of the South. It faded as trap's darker aesthetic took over.",
       "best_uses": [
         "music content",
@@ -909,7 +909,7 @@
         "flat lighting (styled neon/club lighting)",
         "low production value (professional music video budget)"
       ],
-      "color_science": "35mm negative with purple/neon push \u2014 deep purples, electric blues, candy paint chrome reflections, neon club lighting. Color science deliberately pushed toward purple/blue for dirty south aesthetic. Warm skin tones against cool neon backgrounds"
+      "color_science": "35mm negative with purple/neon push — deep purples, electric blues, candy paint chrome reflections, neon club lighting. Color science deliberately pushed toward purple/blue for dirty south aesthetic. Warm skin tones against cool neon backgrounds"
     },
     {
       "id": "block-party-doc",
@@ -951,14 +951,14 @@
         "professional lighting (natural daylight)",
         "steady camera (handheld documentary style)"
       ],
-      "color_science": "Consumer VHS camcorder in daylight \u2014 washed-out colors, VHS color-under encoding, golden afternoon light slightly blown out. Colors desaturate with each generational dub. Raw, unstyled, documentary realism"
+      "color_science": "Consumer VHS camcorder in daylight — washed-out colors, VHS color-under encoding, golden afternoon light slightly blown out. Colors desaturate with each generational dub. Raw, unstyled, documentary realism"
     },
     {
       "id": "trap-neon",
       "name": "Modern Trap Neon Aesthetic",
       "visual_description": "Deep blacks, neon green and purple accents, designer brand close-ups, smoke machine haze, LED strip lighting, chrome teeth grills, and the specific blue-black palette of a 3AM studio session. Everything is moody, expensive-looking, and slightly menacing.",
-      "wrongness": "Luxury signifiers isolated in darkness \u2014 a $4,000 jacket lit like it's in a crime scene photo.",
-      "historical_context": "Modern trap visuals evolved from SoundCloud era aesthetics \u2014 lo-fi, DIY, but increasingly polished as the genre went mainstream. The dark-neon palette reflects both the nocturnal lifestyle and the genre's emotional register of paranoia flexed through materialism.",
+      "wrongness": "Luxury signifiers isolated in darkness — a $4,000 jacket lit like it's in a crime scene photo.",
+      "historical_context": "Modern trap visuals evolved from SoundCloud era aesthetics — lo-fi, DIY, but increasingly polished as the genre went mainstream. The dark-neon palette reflects both the nocturnal lifestyle and the genre's emotional register of paranoia flexed through materialism.",
       "best_uses": [
         "music content",
         "fashion",
@@ -991,14 +991,14 @@
         "VHS color bleed",
         "low production value (modern music video budgets)"
       ],
-      "color_science": "Digital cinema (Arri Alexa/RED) with neon grade \u2014 deep blacks, neon green and purple accents, chrome grill reflections, LED strip color. Modern digital color science with deliberate teal-orange or purple-green grading. Clean digital quality, no analog warmth"
+      "color_science": "Digital cinema (Arri Alexa/RED) with neon grade — deep blacks, neon green and purple accents, chrome grill reflections, LED strip color. Modern digital color science with deliberate teal-orange or purple-green grading. Clean digital quality, no analog warmth"
     },
     {
       "id": "gojira-1954",
-      "name": "1954 Original Gojira \u2014 Post-War Horror",
-      "visual_description": "Stark black-and-white, Godzilla as a walking nuclear metaphor, ruined Tokyo miniature sets, hospital wards full of burned children, Geiger counter clicks, and a scientist's sacrifice. The monster is barely seen but always felt \u2014 a shadow, a roar, a footprint full of radioactive water.",
+      "name": "1954 Original Gojira — Post-War Horror",
+      "visual_description": "Stark black-and-white, Godzilla as a walking nuclear metaphor, ruined Tokyo miniature sets, hospital wards full of burned children, Geiger counter clicks, and a scientist's sacrifice. The monster is barely seen but always felt — a shadow, a roar, a footprint full of radioactive water.",
       "wrongness": "A children's monster movie that is actually a devastating anti-nuclear war film disguised as creature feature entertainment.",
-      "historical_context": "Made 9 years after Hiroshima, Gojira was Japan processing collective trauma through cinema. The rubber suit was never the point \u2014 the horror was real, recent, and still radioactive. It became a franchise, but the original was never really about a monster.",
+      "historical_context": "Made 9 years after Hiroshima, Gojira was Japan processing collective trauma through cinema. The rubber suit was never the point — the horror was real, recent, and still radioactive. It became a franchise, but the original was never really about a monster.",
       "best_uses": [
         "horror content",
         "social commentary",
@@ -1031,13 +1031,13 @@
         "tape artifacts (film medium)",
         "modern compositing"
       ],
-      "color_science": "35mm black-and-white negative \u2014 high contrast, deep blacks, bright highlights. No color. Film stock chosen for dramatic impact and wartime availability. Heavy grain adds to horror atmosphere"
+      "color_science": "35mm black-and-white negative — high contrast, deep blacks, bright highlights. No color. Film stock chosen for dramatic impact and wartime availability. Heavy grain adds to horror atmosphere"
     },
     {
       "id": "godzilla-ektachrome",
       "name": "1970s Godzilla Ektachrome Slide Film",
-      "visual_description": "Godzilla and the Showa-era kaiju captured as if shot on Kodak Ektachrome slide film \u2014 saturated greens and blues, warm blown-out highlights, that distinctive cross-processed color shift where skies go magenta and skin tones glow amber. Miniature Tokyo sets rendered in rich, candy-colored film stock. Smoke and sparks catch the light like stained glass. Everything looks like a vintage National Geographic photo of an impossible event.",
-      "wrongness": "The most beautiful, saturated, magazine-quality photography ever applied to a man in a rubber suit stomping on balsa wood buildings \u2014 the film stock makes destruction look like a travel brochure.",
+      "visual_description": "Godzilla and the Showa-era kaiju captured as if shot on Kodak Ektachrome slide film — saturated greens and blues, warm blown-out highlights, that distinctive cross-processed color shift where skies go magenta and skin tones glow amber. Miniature Tokyo sets rendered in rich, candy-colored film stock. Smoke and sparks catch the light like stained glass. Everything looks like a vintage National Geographic photo of an impossible event.",
+      "wrongness": "The most beautiful, saturated, magazine-quality photography ever applied to a man in a rubber suit stomping on balsa wood buildings — the film stock makes destruction look like a travel brochure.",
       "historical_context": "Ektachrome was Kodak's professional slide film, beloved for its vivid color reproduction in the 1960s-80s. It was used for nature photography, fashion, and photojournalism. Applying its distinctive warm-cool color science to kaiju tokusatsu creates a surreal tension between the film stock's aspirational beauty and the genre's handmade chaos. The film was discontinued in 2012, making this a doubly lost future.",
       "best_uses": [
         "kaiju content",
@@ -1075,11 +1075,11 @@
         "CGI effects (practical production)",
         "digital color grading (photochemical process)"
       ],
-      "color_science": "Kodak Ektachrome 64 slide film \u2014 saturated greens and electric blues, cool cyan shadows, warm amber highlights. Cross-processed version shifts skies to magenta. Slide film has high contrast with limited shadow detail. Candy-colored destruction looks like a travel magazine"
+      "color_science": "Kodak Ektachrome 64 slide film — saturated greens and electric blues, cool cyan shadows, warm amber highlights. Cross-processed version shifts skies to magenta. Slide film has high contrast with limited shadow detail. Candy-colored destruction looks like a travel magazine"
     },
     {
       "id": "showa-godzilla",
-      "name": "1960s\u201370s Showa Godzilla Family Spectacle",
+      "name": "1960s–70s Showa Godzilla Family Spectacle",
       "visual_description": "Bright primary colors, Godzilla doing karate kicks, Minilla learning to shoot atomic breath, rubber suit wrestling matches, alien invaders in silver jumpsuits, and the Toho studio lot reused so many times you can spot the same buildings. The tone is earnest, campy, and aimed at kids who believe everything.",
       "wrongness": "A nuclear apocalypse metaphor gradually transformed into a children's wrestling league with alien subplots.",
       "historical_context": "The Showa era (1954-1975) saw Godzilla evolve from horror villain to antihero to children's mascot. Toho needed to keep making monster movies on tight budgets, so the suits got reused, the plots got wilder, and Godzilla eventually started doing dance moves. It's the most charming cinematic de-escalation in history.",
@@ -1116,13 +1116,13 @@
         "tape tracking noise (shot on film, dubbed to broadcast tape)",
         "modern compositing"
       ],
-      "color_science": "35mm Eastmancolor negative \u2014 bright saturated primaries (toyetic colors for merchandise), warm skin tones, vibrant miniature set colors. Toho color palette pushed bright and cheerful for family audience. Film stock warmth enhances campy tone"
+      "color_science": "35mm Eastmancolor negative — bright saturated primaries (toyetic colors for merchandise), warm skin tones, vibrant miniature set colors. Toho color palette pushed bright and cheerful for family audience. Film stock warmth enhances campy tone"
     },
     {
       "id": "heisei-godzilla",
-      "name": "1980s\u201390s Heisei Godzilla \u2014 Serious Spectacle",
-      "visual_description": "Darker blues and steel grays, more detailed miniature sets, animatronic Godzilla heads, military hardware that looks almost real, Destoyah's melting flesh, and the specific weight of a 200-pound suit actor moving through painstakingly detailed Tokyo districts. The tone is grave \u2014 this Godzilla doesn't dance.",
-      "wrongness": "Genuine cinematic ambition constrained by the physical reality that your star is still a man in a rubber suit \u2014 every serious dramatic beat is one angle away from looking silly.",
+      "name": "1980s–90s Heisei Godzilla — Serious Spectacle",
+      "visual_description": "Darker blues and steel grays, more detailed miniature sets, animatronic Godzilla heads, military hardware that looks almost real, Destoyah's melting flesh, and the specific weight of a 200-pound suit actor moving through painstakingly detailed Tokyo districts. The tone is grave — this Godzilla doesn't dance.",
+      "wrongness": "Genuine cinematic ambition constrained by the physical reality that your star is still a man in a rubber suit — every serious dramatic beat is one angle away from looking silly.",
       "historical_context": "The Heisei era (1984-1995) rebooted Godzilla as a serious threat. Toho invested in better miniatures, animatronics, and optical effects. The films tackled biotechnology, time travel, and environmental collapse. It was the franchise's last gasp before CGI made practical effects feel quaint.",
       "best_uses": [
         "action content",
@@ -1156,13 +1156,13 @@
         "VHS consumer artifacts (theatrical production)",
         "low production value (highest Toho budgets)"
       ],
-      "color_science": "35mm theatrical negative \u2014 darker blues and steel grays, serious dramatic grading, detailed miniature lighting. Heisei era pushed toward cooler, more serious palette than Showa. Theatrical-quality color science with deliberate desaturation for gravitas"
+      "color_science": "35mm theatrical negative — darker blues and steel grays, serious dramatic grading, detailed miniature lighting. Heisei era pushed toward cooler, more serious palette than Showa. Theatrical-quality color science with deliberate desaturation for gravitas"
     },
     {
       "id": "godzilla-anime",
-      "name": "Godzilla Anime Crossover \u2014 Cel-Painted Kaiju",
-      "visual_description": "Godzilla reimagined through anime cel animation \u2014 speed lines radiating from atomic breath, dramatic still-frame impact poses, cherry blossoms floating past a 300-foot monster, and the specific energy of a mecha anime where the mecha is just... Godzilla. Kaiju battles rendered with the dramatic weight of Evangelion but the charm of a Saturday morning cartoon.",
-      "wrongness": "The world's most physical, rubber-and-sparks monster translated into a medium where nothing has weight \u2014 every punch looks floaty, every fall looks graceful, and the charm of practical effects is replaced by beautiful but weightless animation.",
+      "name": "Godzilla Anime Crossover — Cel-Painted Kaiju",
+      "visual_description": "Godzilla reimagined through anime cel animation — speed lines radiating from atomic breath, dramatic still-frame impact poses, cherry blossoms floating past a 300-foot monster, and the specific energy of a mecha anime where the mecha is just... Godzilla. Kaiju battles rendered with the dramatic weight of Evangelion but the charm of a Saturday morning cartoon.",
+      "wrongness": "The world's most physical, rubber-and-sparks monster translated into a medium where nothing has weight — every punch looks floaty, every fall looks graceful, and the charm of practical effects is replaced by beautiful but weightless animation.",
       "historical_context": "While Godzilla never got a proper traditional anime series (until Netflix's 2017 trilogy), the aesthetic overlap between kaiju and anime has always been enormous. Fans have imagined this crossover for decades. The visual language of impact frames, speed lines, and dramatic stills maps perfectly to kaiju battles.",
       "best_uses": [
         "gaming",
@@ -1197,13 +1197,13 @@
         "digital macroblocking",
         "modern digital compositing"
       ],
-      "color_science": "Cel animation on film \u2014 bold saturated colors (anime palette), speed lines in black ink, impact frames with high contrast. Cherry blossom pinks, atomic breath blues, dramatic reds. Film stock enhances the bold cel paint colors"
+      "color_science": "Cel animation on film — bold saturated colors (anime palette), speed lines in black ink, impact frames with high contrast. Cherry blossom pinks, atomic breath blues, dramatic reds. Film stock enhances the bold cel paint colors"
     },
     {
       "id": "youth-mystery-giallo",
       "name": "1972 Italian Youth Mystery Giallo",
       "visual_description": "Teen mystery crew near colorful van outside roadside motel. Red and green gels, black-gloved figure reflected in window, foggy parking lot, wide collars, patterned clothes, innocence corrupted by murder-mystery cinema. 35mm Techniscope Eastmancolor.",
-      "wrongness": "Bright giallo color palette applied to youth coming-of-age story \u2014 the murder-mystery visual language contaminates what should be a wholesome teen adventure.",
+      "wrongness": "Bright giallo color palette applied to youth coming-of-age story — the murder-mystery visual language contaminates what should be a wholesome teen adventure.",
       "historical_context": "Italian giallo filmmakers in the early 1970s applied their signature visual style to any genre, including teen mysteries. Techniscope's 2-perf format meant grainier images but wider aspect ratio for dramatic compositions.",
       "best_uses": [
         "teen mystery content",
@@ -1234,13 +1234,13 @@
         "modern slasher polish",
         "CGI effects"
       ],
-      "color_science": "35mm Techniscope (2-perf) on Eastmancolor 5254 \u2014 grainier than standard 4-perf (smaller negative area), warm with magenta fade in prints, Italian color timing, saturated red and green gels. Eastmancolor shifts toward magenta with age. Techniscope's 2.35:1 aspect ratio creates cinematic widescreen framing."
+      "color_science": "35mm Techniscope (2-perf) on Eastmancolor 5254 — grainier than standard 4-perf (smaller negative area), warm with magenta fade in prints, Italian color timing, saturated red and green gels. Eastmancolor shifts toward magenta with age. Techniscope's 2.35:1 aspect ratio creates cinematic widescreen framing."
     },
     {
       "id": "cosmonaut-broadcast",
       "name": "1978 Eastern Bloc Cosmonaut Broadcast Sci-Fi",
       "visual_description": "Small studio spaceship interior, painted control panels, tinny CRT monitors, padded walls, lonely cosmonaut in worn suit, philosophical silence, gray-blue institutional light, slow pan. 2\" quad SECAM broadcast.",
-      "wrongness": "The contrast between the cosmic ambition of space exploration and the threadbare, institutional reality of Eastern Bloc TV production \u2014 padded walls instead of gleaming chrome, philosophical silence instead of dramatic tension.",
+      "wrongness": "The contrast between the cosmic ambition of space exploration and the threadbare, institutional reality of Eastern Bloc TV production — padded walls instead of gleaming chrome, philosophical silence instead of dramatic tension.",
       "historical_context": "Eastern Bloc television produced space-themed dramas on minimal budgets using 2\" quad videotape and SECAM color encoding. The result was an oddly meditative, low-fi vision of the future filtered through collectivist aesthetics.",
       "best_uses": [
         "philosophical sci-fi content",
@@ -1270,13 +1270,13 @@
         "H.264 macroblocking (analog broadcast)",
         "glossy space opera lighting"
       ],
-      "color_science": "SECAM FM color-difference encoding \u2014 no cross-color artifacts (unlike PAL/NTSC), gray-blue institutional palette, muted and desaturated. SECAM's line-alternating system creates distinctive color artifacts on vertical edges. Monochrome-leaning in low light due to tube camera sensitivity limits."
+      "color_science": "SECAM FM color-difference encoding — no cross-color artifacts (unlike PAL/NTSC), gray-blue institutional palette, muted and desaturated. SECAM's line-alternating system creates distinctive color artifacts on vertical edges. Monochrome-leaning in low light due to tube camera sensitivity limits."
     },
     {
       "id": "cloud-gardener-storybook",
       "name": "1983 Cloud Gardener Storybook Children's TV",
       "visual_description": "Cloud gardener tending handmade cloud plants, painted sky backdrop, felt flowers, cotton clouds, soft pastel set, slow gentle camera, warm studio lighting, melancholy educational wonder, handmade puppetry, paper props. 16mm reversal film.",
-      "wrongness": "The earnest handmade quality of the props and sets creates an almost heartbreaking sincerity \u2014 cotton clouds and felt flowers presented with the gravity of actual horticulture, as if teaching children that imagination is real.",
+      "wrongness": "The earnest handmade quality of the props and sets creates an almost heartbreaking sincerity — cotton clouds and felt flowers presented with the gravity of actual horticulture, as if teaching children that imagination is real.",
       "historical_context": "1980s public broadcasting children's programming used 16mm reversal film telerecorded for broadcast. Low budgets meant handmade props and puppetry, but the gentle pacing and warm lighting created a dreamlike quality that modern CGI cannot replicate.",
       "best_uses": [
         "children's content",
@@ -1306,13 +1306,13 @@
         "modern saturation push",
         "fast motion (gentle pacing)"
       ],
-      "color_science": "16mm reversal film \u2014 soft pastel palette, warm studio lighting, reversal stock pushes highlights toward bloom (gentle white glow) rather than clipping. Colors are warm and muted, like faded watercolors. Film chosen for durability in educational distribution, not beauty."
+      "color_science": "16mm reversal film — soft pastel palette, warm studio lighting, reversal stock pushes highlights toward bloom (gentle white glow) rather than clipping. Colors are warm and muted, like faded watercolors. Film chosen for durability in educational distribution, not beauty."
     },
     {
       "id": "british-danger-psa",
       "name": "1976 British Public Information Danger PSA",
       "visual_description": "Children near canal lock or roadside hazard, flat gray daylight, stiff acting, ominous narrator mood, practical danger signage, awkward pause before accident, moral warning. 16mm Kodachrome reversal.",
-      "wrongness": "The cheerful Kodachrome color palette applied to scenes of children in imminent danger \u2014 bright reds and warm magentas making playground hazards look almost inviting, the visual warmth directly contradicting the life-safety message.",
+      "wrongness": "The cheerful Kodachrome color palette applied to scenes of children in imminent danger — bright reds and warm magentas making playground hazards look almost inviting, the visual warmth directly contradicting the life-safety message.",
       "historical_context": "Britain's Central Office of Information produced public safety films on 16mm Kodachrome and Ektachrome reversal stock. The warm, saturated colors of Kodachrome accidentally made danger look beautiful, creating an uncanny dissonance between message and medium.",
       "best_uses": [
         "safety content",
@@ -1343,13 +1343,13 @@
         "cinematic horror lighting (institutional production)",
         "modern public safety production values"
       ],
-      "color_science": "16mm Kodachrome reversal \u2014 warm reds and magenta cast, muted British daylight, institutional flat lighting. Kodachrome's signature warm palette makes even gray overcast days look warm. Reversal stock has high contrast with limited shadow detail. Colors remain stable over decades (Kodachrome is archival-stable)."
+      "color_science": "16mm Kodachrome reversal — warm reds and magenta cast, muted British daylight, institutional flat lighting. Kodachrome's signature warm palette makes even gray overcast days look warm. Reversal stock has high contrast with limited shadow detail. Colors remain stable over decades (Kodachrome is archival-stable)."
     },
     {
       "id": "soviet-industrial-doc",
       "name": "1974 Soviet Industrial Documentary",
       "visual_description": "Factory floor, workers in heavy coats, steel machinery, control panels, steam pipes, gray winter light through high windows, red safety signs, slow pan, institutional seriousness. 35mm Svema stock.",
-      "wrongness": "The collectivist grandeur of industrial might rendered through cheap Soviet film stock that can barely hold the image together \u2014 coarser grain, cyan-green cast, the machinery more real than the film capturing it.",
+      "wrongness": "The collectivist grandeur of industrial might rendered through cheap Soviet film stock that can barely hold the image together — coarser grain, cyan-green cast, the machinery more real than the film capturing it.",
       "historical_context": "Soviet documentary filmmakers used domestically-produced Svema film stock, which had coarser grain and distinctive cyan-green color cast compared to Western stocks. The cold winter light of factory interiors pushed the stock toward monochrome in shadows.",
       "best_uses": [
         "industrial content",
@@ -1379,13 +1379,13 @@
         "cyberpunk neon (institutional production)",
         "modern factory cleanliness"
       ],
-      "color_science": "35mm Svema film stock \u2014 muted cyan-green cast, coarser grain than Kodak/Agfa, desaturated collectivist palette, cold winter light. Svema's color science shifted toward cyan-green in all conditions. Low light pushed the stock toward near-monochrome. Film quality reflected Soviet manufacturing limitations."
+      "color_science": "35mm Svema film stock — muted cyan-green cast, coarser grain than Kodak/Agfa, desaturated collectivist palette, cold winter light. Svema's color science shifted toward cyan-green in all conditions. Low light pushed the stock toward near-monochrome. Film quality reflected Soviet manufacturing limitations."
     },
     {
       "id": "endtimes-instructional-vhs",
       "name": "1993 Christian End-Times Instructional VHS",
       "visual_description": "Church basement classroom, folding chairs, felt-board prophecy chart, overhead projector, nervous family watching training video, beige walls, fluorescent lights, sincere moral panic, handmade warning graphics, cheap analog-switcher CG title. VHS distribution.",
-      "wrongness": "The eternal fate of humanity presented through the same visual language as a church bake-sale announcement \u2014 felt boards, overhead projectors, and analog-switcher title cards carrying the weight of apocalyptic prophecy with complete sincerity.",
+      "wrongness": "The eternal fate of humanity presented through the same visual language as a church bake-sale announcement — felt boards, overhead projectors, and analog-switcher title cards carrying the weight of apocalyptic prophecy with complete sincerity.",
       "historical_context": "1990s evangelical training videos were shot on consumer VHS or Video8 and distributed on VHS tapes through church bookstores. The production values matched a PTA meeting, but the content carried the urgency of the Rapture.",
       "best_uses": [
         "religious content",
@@ -1415,13 +1415,13 @@
         "cinematic lighting (church basement fluorescents)",
         "modern apocalypse blockbuster production values"
       ],
-      "color_science": "Consumer VHS white balance \u2014 beige fluorescent cast, washed-out colors, sincere muted tone. VHS color-under encoding bleeds colors on edges. Fluorescent lighting pushes everything greenish. Cheap analog video switcher CG titles have limited color palette (usually white/yellow text on blue background)."
+      "color_science": "Consumer VHS white balance — beige fluorescent cast, washed-out colors, sincere muted tone. VHS color-under encoding bleeds colors on edges. Fluorescent lighting pushes everything greenish. Cheap analog video switcher CG titles have limited color palette (usually white/yellow text on blue background)."
     },
     {
       "id": "dead-mall-arcade",
-      "name": "1988 Dead Mall Arcade \u2014 Video8 Camcorder",
+      "name": "1988 Dead Mall Arcade — Video8 Camcorder",
       "visual_description": "Darkened arcade with rows of CRT cabinets glowing in the dark, carpet pattern worn from thousands of feet, token machines with flickering fluorescent tubes, teenager filming friends playing games, abandoned pizza counter, echo of quarter-eating machines. Video8 camcorder.",
-      "wrongness": "The bright neon and exciting game content on the CRT screens contrasting with the decaying physical space around them \u2014 the mall dying while the games inside still promise adventure, filmed by a teenager who doesn't know this will all be gone in 10 years.",
+      "wrongness": "The bright neon and exciting game content on the CRT screens contrasting with the decaying physical space around them — the mall dying while the games inside still promise adventure, filmed by a teenager who doesn't know this will all be gone in 10 years.",
       "historical_context": "Late 1980s arcades in dying malls were documented by teenagers with new consumer Video8 camcorders. The format's compact size meant anyone could film, creating accidental time capsules of spaces that would become 'dead malls' within a decade.",
       "best_uses": [
         "nostalgia content",
@@ -1452,13 +1452,13 @@
         "modern liminal space aesthetic",
         "steady professional camera work"
       ],
-      "color_science": "Video8 color-under encoding \u2014 similar to VHS but slightly higher bandwidth, colors bleed less but still smear on high-contrast edges. Auto white balance hunts between fluorescent overhead and CRT glow. Dark arcade scenes push the camcorder into high gain, adding visible noise. Neon game screens bloom against dark backgrounds."
+      "color_science": "Video8 color-under encoding — similar to VHS but slightly higher bandwidth, colors bleed less but still smear on high-contrast edges. Auto white balance hunts between fluorescent overhead and CRT glow. Dark arcade scenes push the camcorder into high gain, adding visible noise. Neon game screens bloom against dark backgrounds."
     },
     {
       "id": "pizza-palace-cctv",
-      "name": "2010s Pizza Palace CCTV \u2014 H.264 NVR",
+      "name": "2010s Pizza Palace CCTV — H.264 NVR",
       "visual_description": "Night-shift security NVR interface, camera grid layout, CAM-01 to CAM-08 labels, timestamp, battery indicator, power warning, static bars on dead feeds, black-and-white and greenish IR feeds, party-room thumbnails, maintenance warning text, cheap security software UI.",
-      "wrongness": "The cheerful family-restaurant setting (party rooms, arcade games, animatronic mascot) rendered through the cold, clinical lens of security surveillance \u2014 birthday party spaces looking like crime scenes, the animatronic bear watching empty rooms at 3AM.",
+      "wrongness": "The cheerful family-restaurant setting (party rooms, arcade games, animatronic mascot) rendered through the cold, clinical lens of security surveillance — birthday party spaces looking like crime scenes, the animatronic bear watching empty rooms at 3AM.",
       "historical_context": "2010s family entertainment centers installed H.264 NVR security systems with multiple camera feeds. The low-bitrate compression and IR night vision accidentally turned Chuck E. Cheese-style venues into horror settings, fueling the 'mascot corruption' internet aesthetic.",
       "best_uses": [
         "horror content",
@@ -1475,7 +1475,7 @@
       ],
       "energy_level": "low",
       "accurate_artifacts": [
-        "H.264 macroblocking per feed (correct \u2014 digital codec)",
+        "H.264 macroblocking per feed (correct — digital codec)",
         "low-bitrate motion stutter",
         "grid UI layout with camera labels",
         "static bars on dead camera feeds",
@@ -1489,13 +1489,13 @@
         "VHS tracking noise (IP cameras)",
         "cinematic lighting (security cameras)"
       ],
-      "color_science": "H.264 NVR digital surveillance \u2014 desaturated daytime feeds, green IR night vision, UI chrome in blue/gray. Each camera feed has independent color balance. H.264 compression creates macroblocks in motion areas (correct for digital codec). Low bitrate causes motion stutter and posterization. Security software UI uses utilitarian blue-gray interface."
+      "color_science": "H.264 NVR digital surveillance — desaturated daytime feeds, green IR night vision, UI chrome in blue/gray. Each camera feed has independent color balance. H.264 compression creates macroblocks in motion areas (correct for digital codec). Low bitrate causes motion stutter and posterization. Security software UI uses utilitarian blue-gray interface."
     },
     {
       "id": "prestige-puppet-noir",
-      "name": "2012 Prestige Puppet Crime Drama \u2014 Arri Alexa",
+      "name": "2012 Prestige Puppet Crime Drama — Arri Alexa",
       "visual_description": "Felt puppet detective in rainy city alley, tiny puppet hands holding evidence photo, noir streetlight, wet pavement, smoky interrogation mood, serious HBO framing, shallow depth of field, muted blues and amber practicals, teal-orange grade, puppet felt texture, glass bead eyes.",
-      "wrongness": "The full weight and production value of prestige HBO television applied to felt puppets \u2014 the cinematic seriousness of Breaking Bad or The Wire lavished on puppet characters, creating cognitive dissonance between the medium and the message.",
+      "wrongness": "The full weight and production value of prestige HBO television applied to felt puppets — the cinematic seriousness of Breaking Bad or The Wire lavished on puppet characters, creating cognitive dissonance between the medium and the message.",
       "historical_context": "2010s prestige television used Arri Alexa digital cinema cameras for their signature look. The concept of applying this visual language to puppet characters (after the success of puppet-adult-content aesthetics) creates a surreal collision of children's medium and grown-up storytelling.",
       "best_uses": [
         "puppet content",
@@ -1526,13 +1526,13 @@
         "children's show brightness (noir grading)",
         "VHS color bleed"
       ],
-      "color_science": "Arri Alexa log digital cinema \u2014 muted blues and amber practicals, shallow DOF, teal-orange grade. Clean digital image with fine sensor noise in shadows. The Alexa's wide dynamic range captures both neon highlights and dark alley shadows. Teal-orange color grade is the signature prestige TV look of the 2010s. No tape artifacts, no film grain \u2014 pure digital cinema."
+      "color_science": "Arri Alexa log digital cinema — muted blues and amber practicals, shallow DOF, teal-orange grade. Clean digital image with fine sensor noise in shadows. The Alexa's wide dynamic range captures both neon highlights and dark alley shadows. Teal-orange color grade is the signature prestige TV look of the 2010s. No tape artifacts, no film grain — pure digital cinema."
     },
     {
       "id": "sea-town-puppet-horror",
-      "name": "1990s Sea-Town Puppet Horror \u2014 Public Access VHS",
+      "name": "1990s Sea-Town Puppet Horror — Public Access VHS",
       "visual_description": "Coastal fishing town public-access show, handmade sea creature puppets on driftwood stage, painted ocean backdrop, fishing net props, child narrator with puppet, lighthouse lamp, salt-stained set pieces, gentle horror where the puppets start moving wrong, local access sincerity.",
-      "wrongness": "Handmade children's puppets in a coastal public-access show that gradually becomes unsettling \u2014 the puppets' glass eyes start following the camera, the painted ocean backdrop seems to move, the child narrator doesn't notice the wrongness happening behind them.",
+      "wrongness": "Handmade children's puppets in a coastal public-access show that gradually becomes unsettling — the puppets' glass eyes start following the camera, the painted ocean backdrop seems to move, the child narrator doesn't notice the wrongness happening behind them.",
       "historical_context": "1990s public-access television in small coastal towns featured local puppet shows filmed on consumer VHS. The low production values, combined with the eerie atmosphere of seaside towns in winter, accidentally created horror-adjacent content that predated the internet puppet-horror genre by decades.",
       "best_uses": [
         "puppet horror content",
@@ -1563,7 +1563,7 @@
         "cinematic horror lighting (public access fluorescents)",
         "modern puppet production values"
       ],
-      "color_science": "Consumer VHS camcorder \u2014 auto white balance hunting between fluorescents and practical lamps, greenish fluorescent cast, color-under bleed on puppet edges. Coastal public-access studios had poor lighting (mixed fluorescents and tungsten desk lamps), creating inconsistent color temperature. VHS encoding smears the handmade puppet textures."
+      "color_science": "Consumer VHS camcorder — auto white balance hunting between fluorescents and practical lamps, greenish fluorescent cast, color-under bleed on puppet edges. Coastal public-access studios had poor lighting (mixed fluorescents and tungsten desk lamps), creating inconsistent color temperature. VHS encoding smears the handmade puppet textures."
     },
     {
       "visual_description": "Bright primary colors, still frames with Ken Burns zoom, cheerful narrator voiceover, hand-drawn diagrams, film projector clicks between slides, optimistic tone about science and progress.",
@@ -1590,7 +1590,7 @@
         "CGI effects",
         "modern color grading"
       ],
-      "color_science": "Kodachrome reversal film \u2014 high saturation, warm reds, cool blues, archival stability",
+      "color_science": "Kodachrome reversal film — high saturation, warm reds, cool blues, archival stability",
       "niche_affinity": [
         "education",
         "lifestyle",
@@ -1626,7 +1626,7 @@
         "HD clarity",
         "modern motion graphics"
       ],
-      "color_science": "U-matic oxide tape \u2014 purple and gold pushed to clipping, chroma noise on saturated colors, late-night broadcast contrast boost",
+      "color_science": "U-matic oxide tape — purple and gold pushed to clipping, chroma noise on saturated colors, late-night broadcast contrast boost",
       "niche_affinity": [
         "lifestyle",
         "comedy",
@@ -1634,7 +1634,7 @@
       ],
       "id": "psychic-hotline",
       "name": "1980s Public Access Psychic Hotline",
-      "wrongness": "Mystical promises delivered through the cheapest possible production values \u2014 cosmic wisdom via public access cable.",
+      "wrongness": "Mystical promises delivered through the cheapest possible production values — cosmic wisdom via public access cable.",
       "historical_context": ""
     },
     {
@@ -1662,7 +1662,7 @@
         "handheld camera",
         "indie film aesthetics"
       ],
-      "color_science": "Betacam SP component video \u2014 fluorescent green cast, saturated reds on food, corporate color correction pushing warmth",
+      "color_science": "Betacam SP component video — fluorescent green cast, saturated reds on food, corporate color correction pushing warmth",
       "niche_affinity": [
         "food",
         "brand",
@@ -1698,7 +1698,7 @@
         "digital effects",
         "modern CGI"
       ],
-      "color_science": "35mm black and white reversal \u2014 high contrast, crushed blacks, blown highlights, newsreel processing speed",
+      "color_science": "35mm black and white reversal — high contrast, crushed blacks, blown highlights, newsreel processing speed",
       "niche_affinity": [
         "horror",
         "comedy",
@@ -1734,7 +1734,7 @@
         "professional camera work",
         "modern fitness aesthetics"
       ],
-      "color_science": "VHS color-under \u2014 neon colors bleed and smear, high saturation on workout gear, studio fluorescent mixed with practical lights",
+      "color_science": "VHS color-under — neon colors bleed and smear, high saturation on workout gear, studio fluorescent mixed with practical lights",
       "niche_affinity": [
         "fitness",
         "lifestyle",
@@ -1770,7 +1770,7 @@
         "modern color grading",
         "contemporary fashion"
       ],
-      "color_science": "35mm Eastmancolor \u2014 warm skin tones, faded magentas, urban location color cast, trailer print generation loss",
+      "color_science": "35mm Eastmancolor — warm skin tones, faded magentas, urban location color cast, trailer print generation loss",
       "niche_affinity": [
         "comedy",
         "lifestyle",
@@ -1778,7 +1778,7 @@
       ],
       "id": "blaxploitation-trailer",
       "name": "1970s Blaxploitation Trailer",
-      "wrongness": "Exploitation cinema aesthetics applied to mundane modern scenarios \u2014 treating everyday life like a 1970s action film.",
+      "wrongness": "Exploitation cinema aesthetics applied to mundane modern scenarios — treating everyday life like a 1970s action film.",
       "historical_context": ""
     },
     {
@@ -1806,7 +1806,7 @@
         "smooth animations",
         "professional production"
       ],
-      "color_science": "CRT monitor capture \u2014 limited color palette, scan line artifacts, phosphor glow, Windows 95 default color scheme",
+      "color_science": "CRT monitor capture — limited color palette, scan line artifacts, phosphor glow, Windows 95 default color scheme",
       "niche_affinity": [
         "education",
         "tech",
@@ -1842,7 +1842,7 @@
         "film grain",
         "modern production values"
       ],
-      "color_science": "U-matic component video \u2014 office fluorescent cast, corporate color correction, low contrast for 'professional' look",
+      "color_science": "U-matic component video — office fluorescent cast, corporate color correction, low contrast for 'professional' look",
       "niche_affinity": [
         "brand",
         "comedy",
@@ -1878,7 +1878,7 @@
         "desaturated color grading",
         "modern horror aesthetics"
       ],
-      "color_science": "35mm Technicolor three-strip \u2014 oversaturated reds, deep blacks, art deco color palette, Italian film processing",
+      "color_science": "35mm Technicolor three-strip — oversaturated reds, deep blacks, art deco color palette, Italian film processing",
       "niche_affinity": [
         "horror",
         "comedy",
@@ -1886,7 +1886,7 @@
       ],
       "id": "giallo-horror",
       "name": "1970s Italian Giallo Horror",
-      "wrongness": "Beautiful cinematography applied to gruesome content \u2014 treating horror like high art.",
+      "wrongness": "Beautiful cinematography applied to gruesome content — treating horror like high art.",
       "historical_context": ""
     },
     {
@@ -1914,7 +1914,7 @@
         "subtle marketing",
         "modern production values"
       ],
-      "color_science": "U-matic broadcast \u2014 high contrast for product demos, saturated before/after comparisons, late-night broadcast color boost",
+      "color_science": "U-matic broadcast — high contrast for product demos, saturated before/after comparisons, late-night broadcast color boost",
       "niche_affinity": [
         "brand",
         "comedy",
@@ -1950,7 +1950,7 @@
         "digital effects",
         "modern color grading"
       ],
-      "color_science": "16mm black and white or Kodachrome \u2014 natural lighting, high contrast, European film stock characteristics",
+      "color_science": "16mm black and white or Kodachrome — natural lighting, high contrast, European film stock characteristics",
       "niche_affinity": [
         "lifestyle",
         "comedy",
@@ -1958,7 +1958,7 @@
       ],
       "id": "french-new-wave",
       "name": "1960s French New Wave",
-      "wrongness": "Pretentious art cinema aesthetics applied to mundane modern life \u2014 treating coffee runs like existential crises.",
+      "wrongness": "Pretentious art cinema aesthetics applied to mundane modern life — treating coffee runs like existential crises.",
       "historical_context": ""
     },
     {
@@ -1986,7 +1986,7 @@
         "cinematic lighting",
         "modern music video aesthetics"
       ],
-      "color_science": "Betacam SP component video \u2014 saturated urban colors, graffiti color cast, MTV broadcast color correction",
+      "color_science": "Betacam SP component video — saturated urban colors, graffiti color cast, MTV broadcast color correction",
       "niche_affinity": [
         "music",
         "dance",
@@ -1994,7 +1994,7 @@
       ],
       "id": "mtv-music-video",
       "name": "1990s MTV Music Video",
-      "wrongness": "High-energy music video aesthetics applied to non-musical content \u2014 treating everything like a rap video.",
+      "wrongness": "High-energy music video aesthetics applied to non-musical content — treating everything like a rap video.",
       "historical_context": ""
     },
     {
@@ -2022,7 +2022,7 @@
         "modern martial arts",
         "contemporary fashion"
       ],
-      "color_science": "35mm Eastmancolor \u2014 faded martial arts film colors, studio lighting, Hong Kong film processing",
+      "color_science": "35mm Eastmancolor — faded martial arts film colors, studio lighting, Hong Kong film processing",
       "niche_affinity": [
         "dance",
         "comedy",
@@ -2030,7 +2030,7 @@
       ],
       "id": "kung-fu-movie",
       "name": "1970s Kung Fu Movie",
-      "wrongness": "Martial arts cinema grandeur applied to everyday conflicts \u2014 treating minor inconveniences like epic battles.",
+      "wrongness": "Martial arts cinema grandeur applied to everyday conflicts — treating minor inconveniences like epic battles.",
       "historical_context": ""
     },
     {
@@ -2058,7 +2058,7 @@
         "modern city pop revival",
         "HD quality"
       ],
-      "color_science": "VHS color-under \u2014 neon color bleed, pastel saturation, night shooting color cast, Japanese consumer camcorder characteristics",
+      "color_science": "VHS color-under — neon color bleed, pastel saturation, night shooting color cast, Japanese consumer camcorder characteristics",
       "niche_affinity": [
         "music",
         "lifestyle",
@@ -2066,7 +2066,7 @@
       ],
       "id": "city-pop",
       "name": "1980s Japanese City Pop",
-      "wrongness": "Luxurious lifestyle content filtered through low-quality home video \u2014 champagne tastes on a beer budget aesthetic.",
+      "wrongness": "Luxurious lifestyle content filtered through low-quality home video — champagne tastes on a beer budget aesthetic.",
       "historical_context": ""
     },
     {
@@ -2094,7 +2094,7 @@
         "professional lighting",
         "modern music video polish"
       ],
-      "color_science": "Betacam SP with desaturation \u2014 muted grunge palette, warehouse fluorescent, MTV broadcast color correction pushing 'authentic' look",
+      "color_science": "Betacam SP with desaturation — muted grunge palette, warehouse fluorescent, MTV broadcast color correction pushing 'authentic' look",
       "niche_affinity": [
         "music",
         "comedy",
@@ -2102,7 +2102,7 @@
       ],
       "id": "grunge-music-video",
       "name": "1990s Grunge Music Video",
-      "wrongness": "Authentic angst delivered through corporate music television \u2014 rebellion packaged for mass consumption.",
+      "wrongness": "Authentic angst delivered through corporate music television — rebellion packaged for mass consumption.",
       "historical_context": ""
     },
     {
@@ -2130,7 +2130,7 @@
         "modern CGI",
         "contemporary fashion"
       ],
-      "color_science": "35mm Eastmancolor with optical printing \u2014 generation loss, faded colors, disaster film color palette, trailer print characteristics",
+      "color_science": "35mm Eastmancolor with optical printing — generation loss, faded colors, disaster film color palette, trailer print characteristics",
       "niche_affinity": [
         "comedy",
         "horror",
@@ -2138,7 +2138,7 @@
       ],
       "id": "disaster-movie",
       "name": "1970s Disaster Movie Trailer",
-      "wrongness": "Catastrophic scenarios treated with 1970s special effects limitations \u2014 obvious miniatures and matte paintings presented as realistic disasters.",
+      "wrongness": "Catastrophic scenarios treated with 1970s special effects limitations — obvious miniatures and matte paintings presented as realistic disasters.",
       "historical_context": ""
     },
     {
@@ -2166,7 +2166,7 @@
         "subtle marketing",
         "modern production values"
       ],
-      "color_science": "U-matic component video \u2014 product demo lighting, high contrast for visibility, late-night broadcast color correction",
+      "color_science": "U-matic component video — product demo lighting, high contrast for visibility, late-night broadcast color correction",
       "niche_affinity": [
         "brand",
         "comedy",
@@ -2174,7 +2174,7 @@
       ],
       "id": "home-shopping",
       "name": "1980s Home Shopping Network",
-      "wrongness": "Desperate sales tactics disguised as friendly advice \u2014 treating viewers like marks while pretending to be their friend.",
+      "wrongness": "Desperate sales tactics disguised as friendly advice — treating viewers like marks while pretending to be their friend.",
       "historical_context": ""
     },
     {
@@ -2202,7 +2202,7 @@
         "modern surf cinematography",
         "contemporary fashion"
       ],
-      "color_science": "16mm Kodachrome \u2014 saturated beach colors, warm skin tones, ocean blues, California film processing",
+      "color_science": "16mm Kodachrome — saturated beach colors, warm skin tones, ocean blues, California film processing",
       "niche_affinity": [
         "lifestyle",
         "travel",
@@ -2210,7 +2210,7 @@
       ],
       "id": "surf-movie",
       "name": "1960s Surf Movie",
-      "wrongness": "Carefree beach lifestyle documented with serious cinematic technique \u2014 treating surfing like high art.",
+      "wrongness": "Carefree beach lifestyle documented with serious cinematic technique — treating surfing like high art.",
       "historical_context": ""
     },
     {
@@ -2238,7 +2238,7 @@
         "sensationalism",
         "modern documentary aesthetics"
       ],
-      "color_science": "Betacam SP component video \u2014 educational color correction, historical footage color cast, PBS broadcast standards",
+      "color_science": "Betacam SP component video — educational color correction, historical footage color cast, PBS broadcast standards",
       "niche_affinity": [
         "education",
         "comedy",
@@ -2246,7 +2246,7 @@
       ],
       "id": "pbs-documentary",
       "name": "1990s PBS Documentary",
-      "wrongness": "Scholarly documentary treatment of trivial modern topics \u2014 treating memes with the gravity of historical events.",
+      "wrongness": "Scholarly documentary treatment of trivial modern topics — treating memes with the gravity of historical events.",
       "historical_context": ""
     },
     {
@@ -2274,7 +2274,7 @@
         "modern gaming aesthetics",
         "professional production"
       ],
-      "color_science": "VHS color-under \u2014 neon arcade colors bleed, CRT screen capture artifacts, commercial color correction",
+      "color_science": "VHS color-under — neon arcade colors bleed, CRT screen capture artifacts, commercial color correction",
       "niche_affinity": [
         "gaming",
         "comedy",
@@ -2282,7 +2282,7 @@
       ],
       "id": "arcade-commercial",
       "name": "1980s Arcade Game Commercial",
-      "wrongness": "Treating arcade games with the production values of car commercials \u2014 serious advertising for children's entertainment.",
+      "wrongness": "Treating arcade games with the production values of car commercials — serious advertising for children's entertainment.",
       "historical_context": ""
     },
     {
@@ -2310,7 +2310,7 @@
         "modern cinematography",
         "contemporary fashion"
       ],
-      "color_science": "35mm Eastmancolor \u2014 urban color palette, car chase motion blur, TV broadcast color correction, 70s cop show aesthetics",
+      "color_science": "35mm Eastmancolor — urban color palette, car chase motion blur, TV broadcast color correction, 70s cop show aesthetics",
       "niche_affinity": [
         "comedy",
         "lifestyle",
@@ -2318,7 +2318,7 @@
       ],
       "id": "cop-show-credits",
       "name": "1970s Cop Show Opening Credits",
-      "wrongness": "Dramatic television opening credits for mundane daily activities \u2014 treating morning commutes like police procedurals.",
+      "wrongness": "Dramatic television opening credits for mundane daily activities — treating morning commutes like police procedurals.",
       "historical_context": ""
     },
     {
@@ -2346,7 +2346,7 @@
         "modern skate cinematography",
         "HD quality"
       ],
-      "color_science": "VHS color-under \u2014 urban color cast, fish-eye color distortion, skate video color correction",
+      "color_science": "VHS color-under — urban color cast, fish-eye color distortion, skate video color correction",
       "niche_affinity": [
         "fitness",
         "lifestyle",
@@ -2354,7 +2354,7 @@
       ],
       "id": "skate-video",
       "name": "1990s Skate Video",
-      "wrongness": "Amateur skate videos with professional-level production aspirations \u2014 DIY aesthetics meeting genuine skill.",
+      "wrongness": "Amateur skate videos with professional-level production aspirations — DIY aesthetics meeting genuine skill.",
       "historical_context": ""
     },
     {
@@ -2382,7 +2382,7 @@
         "natural lighting",
         "modern TV production"
       ],
-      "color_science": "U-matic component video \u2014 studio lighting, dramatic color correction, soap opera color palette",
+      "color_science": "U-matic component video — studio lighting, dramatic color correction, soap opera color palette",
       "niche_affinity": [
         "comedy",
         "lifestyle",
@@ -2390,7 +2390,7 @@
       ],
       "id": "soap-opera",
       "name": "1980s Soap Opera",
-      "wrongness": "Melodramatic soap opera treatment of everyday relationships \u2014 treating minor disagreements like epic betrayals.",
+      "wrongness": "Melodramatic soap opera treatment of everyday relationships — treating minor disagreements like epic betrayals.",
       "historical_context": ""
     },
     {
@@ -2418,7 +2418,7 @@
         "digital effects",
         "contemporary fashion"
       ],
-      "color_science": "2-inch quad tape \u2014 live broadcast color correction, studio lighting, variety show color palette",
+      "color_science": "2-inch quad tape — live broadcast color correction, studio lighting, variety show color palette",
       "niche_affinity": [
         "music",
         "dance",
@@ -2426,7 +2426,7 @@
       ],
       "id": "variety-show",
       "name": "1970s Variety Show",
-      "wrongness": "Lavish variety show production for simple talent \u2014 treating amateur performances like Broadway spectacles.",
+      "wrongness": "Lavish variety show production for simple talent — treating amateur performances like Broadway spectacles.",
       "historical_context": ""
     },
     {
@@ -2454,7 +2454,7 @@
         "professional actors",
         "modern reality TV polish"
       ],
-      "color_science": "Betacam SP component video \u2014 location lighting variation, confessional studio lighting, reality TV color correction",
+      "color_science": "Betacam SP component video — location lighting variation, confessional studio lighting, reality TV color correction",
       "niche_affinity": [
         "comedy",
         "lifestyle",
@@ -2462,7 +2462,7 @@
       ],
       "id": "reality-tv",
       "name": "1990s Reality TV",
-      "wrongness": "'Real' people performing for cameras while pretending to be authentic \u2014 manufactured drama presented as documentary.",
+      "wrongness": "'Real' people performing for cameras while pretending to be authentic — manufactured drama presented as documentary.",
       "historical_context": ""
     },
     {
@@ -2490,7 +2490,7 @@
         "modern anime aesthetics",
         "video tape"
       ],
-      "color_science": "16mm film with cel animation \u2014 saturated anime colors, transformation sequence color effects, Japanese film processing",
+      "color_science": "16mm film with cel animation — saturated anime colors, transformation sequence color effects, Japanese film processing",
       "niche_affinity": [
         "gaming",
         "comedy",
@@ -2498,7 +2498,7 @@
       ],
       "id": "anime-opening",
       "name": "1980s Anime Opening",
-      "wrongness": "Epic anime opening treatment of mundane activities \u2014 treating morning routines like magical girl transformations.",
+      "wrongness": "Epic anime opening treatment of mundane activities — treating morning routines like magical girl transformations.",
       "historical_context": ""
     },
     {
@@ -2526,7 +2526,7 @@
         "digital effects",
         "contemporary set design"
       ],
-      "color_science": "2-inch quad tape \u2014 studio lighting, game show color palette, broadcast color correction",
+      "color_science": "2-inch quad tape — studio lighting, game show color palette, broadcast color correction",
       "niche_affinity": [
         "comedy",
         "brand",
@@ -2534,7 +2534,7 @@
       ],
       "id": "game-show",
       "name": "1970s Game Show",
-      "wrongness": "High-stakes game show excitement for trivial prizes \u2014 treating everyday choices like life-changing opportunities.",
+      "wrongness": "High-stakes game show excitement for trivial prizes — treating everyday choices like life-changing opportunities.",
       "historical_context": ""
     },
     {
@@ -2562,7 +2562,7 @@
         "professional production",
         "smooth animations"
       ],
-      "color_science": "Screen capture \u2014 limited color palette, software UI colors, low-resolution color reproduction",
+      "color_science": "Screen capture — limited color palette, software UI colors, low-resolution color reproduction",
       "niche_affinity": [
         "education",
         "tech",
@@ -2570,7 +2570,7 @@
       ],
       "id": "tech-demo",
       "name": "1990s Tech Demo",
-      "wrongness": "Treating basic software features with the excitement of moon landings \u2014 revolutionary claims for incremental improvements.",
+      "wrongness": "Treating basic software features with the excitement of moon landings — revolutionary claims for incremental improvements.",
       "historical_context": ""
     },
     {
@@ -2598,7 +2598,7 @@
         "modern wrestling production",
         "cinematic lighting"
       ],
-      "color_science": "VHS color-under \u2014 dramatic lighting color cast, pyrotechnic color effects, wrestling promo color correction",
+      "color_science": "VHS color-under — dramatic lighting color cast, pyrotechnic color effects, wrestling promo color correction",
       "niche_affinity": [
         "fitness",
         "comedy",
@@ -2606,7 +2606,7 @@
       ],
       "id": "wrestling-promo",
       "name": "1980s Wrestling Promo",
-      "wrongness": "Over-the-top wrestling theatrics applied to mundane conflicts \u2014 treating minor disagreements like championship grudge matches.",
+      "wrongness": "Over-the-top wrestling theatrics applied to mundane conflicts — treating minor disagreements like championship grudge matches.",
       "historical_context": ""
     },
     {
@@ -2634,7 +2634,7 @@
         "modern cinematography",
         "contemporary fashion"
       ],
-      "color_science": "35mm Eastmancolor \u2014 noir color palette, smoky office lighting, detective show color correction",
+      "color_science": "35mm Eastmancolor — noir color palette, smoky office lighting, detective show color correction",
       "niche_affinity": [
         "comedy",
         "lifestyle",
@@ -2642,7 +2642,7 @@
       ],
       "id": "detective-show",
       "name": "1970s Detective Show",
-      "wrongness": "Hardboiled detective noir applied to modern problems \u2014 treating lost keys like murder investigations.",
+      "wrongness": "Hardboiled detective noir applied to modern problems — treating lost keys like murder investigations.",
       "historical_context": ""
     },
     {
@@ -2767,7 +2767,7 @@
       "id": "super8-hover-scooter-holiday",
       "name": "1967 West German Super 8 Kodachrome Hover-Scooter Holiday",
       "visual_description": "A family vacation imagines personal transport through toy-like scooters, ferry terminals, and helmeted teenagers grinning beside plastic prototypes. The future is recreational, sunburned, and awkwardly parked next to ordinary beach chairs.",
-      "wrongness": "The promised mobility revolution looks like a dad\u2019s hobby project briefly tolerated by the rest of the family.",
+      "wrongness": "The promised mobility revolution looks like a dad’s hobby project briefly tolerated by the rest of the family.",
       "historical_context": "",
       "best_uses": [
         "travel clips",
@@ -4111,7 +4111,7 @@
     {
       "id": "greenscreen-municipal-mermaid-explainer",
       "name": "2021 TikTok Green-Screen Municipal Mermaid Explainer",
-      "visual_description": "A creator explains coastal zoning as a low-budget mermaid over city council PDFs, storm maps, and comment bubbles. The future is civic, aquatic, and algorithmic, with green-screen edges making public policy feel like children\u2019s theater.",
+      "visual_description": "A creator explains coastal zoning as a low-budget mermaid over city council PDFs, storm maps, and comment bubbles. The future is civic, aquatic, and algorithmic, with green-screen edges making public policy feel like children’s theater.",
       "wrongness": "Climate adaptation becomes a costume lecture where the background scrolls more convincingly than the speaker exists.",
       "historical_context": "",
       "best_uses": [
@@ -4300,7 +4300,7 @@
         "modern LED lighting (natural/available light)",
         "cinematic depth of field (small sensor)"
       ],
-      "color_science": "Consumer camcorder with Ektachrome-inspired color processing \u2014 warm yellows, saturated reds/oranges, rich browns. Skin tones glow in golden hour. Shadows lean toward blue-green. Overall warmth suggests nostalgia and care."
+      "color_science": "Consumer camcorder with Ektachrome-inspired color processing — warm yellows, saturated reds/oranges, rich browns. Skin tones glow in golden hour. Shadows lean toward blue-green. Overall warmth suggests nostalgia and care."
     },
     {
       "id": "early-2000s-hood-reality-tv",
@@ -4335,7 +4335,7 @@
         "shallow depth of field (small sensor)",
         "natural lighting (controlled set)"
       ],
-      "color_science": "Early digital video with broadcast TV color correction \u2014 slightly oversaturated, contrast boosted for drama, skin tones can look orange under harsh lighting. Whites clip easily. Overall reality TV orange aesthetic."
+      "color_science": "Early digital video with broadcast TV color correction — slightly oversaturated, contrast boosted for drama, skin tones can look orange under harsh lighting. Whites clip easily. Overall reality TV orange aesthetic."
     },
     {
       "id": "1970s-blaxploitation-cinema",
@@ -4370,7 +4370,7 @@
         "steady-cam smoothness (handheld/zoom)",
         "CGI effects (practical only)"
       ],
-      "color_science": "35mm Eastmancolor with exploitation film processing \u2014 warm oranges and browns, slightly faded blacks, skin tones glow with golden undertones. Reds pop (blood, clothing). Overall funky color palette that is both gritty and stylish."
+      "color_science": "35mm Eastmancolor with exploitation film processing — warm oranges and browns, slightly faded blacks, skin tones glow with golden undertones. Reds pop (blood, clothing). Overall funky color palette that is both gritty and stylish."
     },
     {
       "id": "1954-godzilla-toho-films",
@@ -4405,7 +4405,7 @@
         "modern film speed (slow 1950s stock)",
         "digital sharpness"
       ],
-      "color_science": "High-contrast black and white 35mm film \u2014 deep blacks, bright highlights, limited midtones. Night scenes have that classic day-for-night look. Newsreel footage sections are grainier and more contrasty. Overall somber, documentary-like tone."
+      "color_science": "High-contrast black and white 35mm film — deep blacks, bright highlights, limited midtones. Night scenes have that classic day-for-night look. Newsreel footage sections are grainier and more contrasty. Overall somber, documentary-like tone."
     },
     {
       "id": "1990s-godzilla-heisei-era",
@@ -4440,7 +4440,7 @@
         "modern color grading (broadcast TV look)",
         "digital stabilization"
       ],
-      "color_science": "1990s broadcast TV color with VHS recording \u2014 slightly oversaturated primary colors, energy beam effects glow with blue/purple. Skin tones are TV-standard. Overall more colorful and less somber than 1950s, but still has that Japanese TV drama color palette."
+      "color_science": "1990s broadcast TV color with VHS recording — slightly oversaturated primary colors, energy beam effects glow with blue/purple. Skin tones are TV-standard. Overall more colorful and less somber than 1950s, but still has that Japanese TV drama color palette."
     },
     {
       "id": "1980s-kaiju-vs-military-newsreel",
@@ -4475,7 +4475,7 @@
         "modern graphics (period-accurate overlays)",
         "digital sharpness (16mm film)"
       ],
-      "color_science": "16mm news film with harsh processing \u2014 high contrast, limited dynamic range, colors look broadcast TV news (slightly oversaturated reds for urgency). Night scenes are very grainy. Overall you were not supposed to see this aesthetic."
+      "color_science": "16mm news film with harsh processing — high contrast, limited dynamic range, colors look broadcast TV news (slightly oversaturated reds for urgency). Night scenes are very grainy. Overall you were not supposed to see this aesthetic."
     },
     {
       "id": "1970s-ektachrome-street-photography",
@@ -4510,7 +4510,7 @@
         "HDR dynamic range (slide film has limited latitude)",
         "CGI elements"
       ],
-      "color_science": "Kodak Ektachrome slide film \u2014 distinctive warm color palette with saturated yellows and reds, slightly cool shadows, high contrast. Skin tones glow with warmth. Blues are slightly muted. Overall golden age feel that is both vibrant and nostalgic. Very different from Kodachrome."
+      "color_science": "Kodak Ektachrome slide film — distinctive warm color palette with saturated yellows and reds, slightly cool shadows, high contrast. Skin tones glow with warmth. Blues are slightly muted. Overall golden age feel that is both vibrant and nostalgic. Very different from Kodachrome."
     },
     {
       "id": "1980s-ektachrome-urban-decay",
@@ -4545,7 +4545,7 @@
         "artificial lighting (available light only)",
         "CGI restoration"
       ],
-      "color_science": "Ektachrome slide film in harsh lighting conditions \u2014 saturated rust oranges, deep shadow blacks, bright highlights from sunlight through broken glass. The wrongness of beautiful colors documenting ugly decay. Warm overall palette despite cold subject matter."
+      "color_science": "Ektachrome slide film in harsh lighting conditions — saturated rust oranges, deep shadow blacks, bright highlights from sunlight through broken glass. The wrongness of beautiful colors documenting ugly decay. Warm overall palette despite cold subject matter."
     },
     {
       "id": "2000s-ghetto-fabulous-music-video",
@@ -4580,7 +4580,7 @@
         "stable tripod shots (dynamic movement)",
         "muted colors (saturated is key)"
       ],
-      "color_science": "Early 2000s music video color grading \u2014 heavily saturated primary colors, lens flares bloom white/cyan, skin tones slightly orange from lighting. Overall shiny aesthetic with high contrast. Very different from 1990s hip-hop (grittier) or 2010s (more cinematic)."
+      "color_science": "Early 2000s music video color grading — heavily saturated primary colors, lens flares bloom white/cyan, skin tones slightly orange from lighting. Overall shiny aesthetic with high contrast. Very different from 1990s hip-hop (grittier) or 2010s (more cinematic)."
     },
     {
       "id": "1960s-japanese-kaiju-tokusatsu",
@@ -4615,12 +4615,12 @@
         "modern film speed (1960s stock)",
         "digital stabilization"
       ],
-      "color_science": "35mm Eastmancolor with 1960s processing \u2014 bright saturated primary colors (red, blue, yellow on suits and miniatures), slightly faded blacks, warm skin tones. More colorful and optimistic than 1950s. Overall Saturday matinee color palette that is fun and vibrant."
+      "color_science": "35mm Eastmancolor with 1960s processing — bright saturated primary colors (red, blue, yellow on suits and miniatures), slightly faded blacks, warm skin tones. More colorful and optimistic than 1950s. Overall Saturday matinee color palette that is fun and vibrant."
     },
     {
       "id": "1990s-south-central-golden-hour",
       "name": "1990s South Central LA Golden Hour",
-      "visual_description": "Palm trees silhouetted against orange sky, low-rider Impalas on Crenshaw, corner store neon flickering on, basketball courts at dusk, chain-link fences catching last light. John Singleton visual poetry \u2014 warm amber tones, slow-motion walks, hydraulic suspension bouncing.",
+      "visual_description": "Palm trees silhouetted against orange sky, low-rider Impalas on Crenshaw, corner store neon flickering on, basketball courts at dusk, chain-link fences catching last light. John Singleton visual poetry — warm amber tones, slow-motion walks, hydraulic suspension bouncing.",
       "wrongness": "Beauty extracted from systemic neglect.",
       "best_uses": [
         "hood storytelling",
@@ -4651,12 +4651,12 @@
         "flat lighting (cinematic golden hour)",
         "4K clarity (1990s film stock)"
       ],
-      "color_science": "35mm negative with warm golden-hour grading \u2014 deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette"
+      "color_science": "35mm negative with warm golden-hour grading — deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette"
     },
     {
       "id": "2000s-atlanta-trap-house",
       "name": "2000s Atlanta Trap House Aesthetic",
-      "visual_description": "Purple lean haze, candy paint reflections, gold grills catching studio lights, stripper poles in music videos, diamond chains sparkling. T.I. and Young Jeezy era \u2014 luxury as survival, excess as statement.",
+      "visual_description": "Purple lean haze, candy paint reflections, gold grills catching studio lights, stripper poles in music videos, diamond chains sparkling. T.I. and Young Jeezy era — luxury as survival, excess as statement.",
       "wrongness": "Aspirational wealth built on illegal foundations.",
       "best_uses": [
         "trap music content",
@@ -4687,12 +4687,12 @@
         "natural lighting (studio production)",
         "modern digital artifacts"
       ],
-      "color_science": "Consumer camcorder with saturated color grading \u2014 purple and magenta dominance, candy paint reflections, gold highlights, lean cup purple. T.I./Young Jeezy era color palette"
+      "color_science": "Consumer camcorder with saturated color grading — purple and magenta dominance, candy paint reflections, gold highlights, lean cup purple. T.I./Young Jeezy era color palette"
     },
     {
       "id": "1990s-brooklyn-brownstone",
       "name": "1990s Brooklyn Brownstone Summer",
-      "visual_description": "Fire escape parties, stoop conversations, bodega cats, double-dutch on the sidewalk, boom boxes blasting. Spike Lee joint energy \u2014 vibrant community, summer heat, cultural pride.",
+      "visual_description": "Fire escape parties, stoop conversations, bodega cats, double-dutch on the sidewalk, boom boxes blasting. Spike Lee joint energy — vibrant community, summer heat, cultural pride.",
       "wrongness": "Gentrification's ghost before it arrived.",
       "best_uses": [
         "Brooklyn culture",
@@ -4723,12 +4723,12 @@
         "4K clarity (1990s 16mm)",
         "color grading (natural documentary look)"
       ],
-      "color_science": "16mm documentary stock in summer daylight \u2014 warm natural tones, vibrant street colors, brownstone red brick, summer green foliage. Spike Lee/Do the Right Thing palette"
+      "color_science": "16mm documentary stock in summer daylight — warm natural tones, vibrant street colors, brownstone red brick, summer green foliage. Spike Lee/Do the Right Thing palette"
     },
     {
       "id": "2010s-chicago-drill",
       "name": "2010s Chicago Drill Documentary",
-      "visual_description": "Grey sky projects, O-Block signage, black hoodies in winter, iPhone 4 front camera quality, raw authenticity. Chief Keef and Lil Durk era \u2014 no glamour, just survival documentation.",
+      "visual_description": "Grey sky projects, O-Block signage, black hoodies in winter, iPhone 4 front camera quality, raw authenticity. Chief Keef and Lil Durk era — no glamour, just survival documentation.",
       "wrongness": "Trauma as entertainment, violence as content.",
       "best_uses": [
         "drill music content",
@@ -4758,12 +4758,12 @@
         "studio lighting",
         "professional camera artifacts"
       ],
-      "color_science": "iPhone 4 sensor in overcast Chicago winter \u2014 desaturated greys, muted blacks, pale skin tones, no color grading. Raw documentary authenticity"
+      "color_science": "iPhone 4 sensor in overcast Chicago winter — desaturated greys, muted blacks, pale skin tones, no color grading. Raw documentary authenticity"
     },
     {
       "id": "1980s-hip-hop-graffiti",
       "name": "1980s Hip-Hop Graffiti Era",
-      "visual_description": "Wildstyle letters on subway trains, breakdancers on cardboard, boom boxes, Kangol hats, Adidas shells, rope chains. Wild Style and Beat Street era \u2014 hip-hop's visual birth certificate.",
+      "visual_description": "Wildstyle letters on subway trains, breakdancers on cardboard, boom boxes, Kangol hats, Adidas shells, rope chains. Wild Style and Beat Street era — hip-hop's visual birth certificate.",
       "wrongness": "Cultural revolution commodified as fashion.",
       "best_uses": [
         "hip-hop history",
@@ -4795,12 +4795,12 @@
         "4K clarity (1980s film)",
         "color grading (documentary authenticity)"
       ],
-      "color_science": "16mm documentary stock \u2014 vibrant graffiti colors pop against grey subway walls, natural skin tones, available light. Wild Style/Beat Street palette"
+      "color_science": "16mm documentary stock — vibrant graffiti colors pop against grey subway walls, natural skin tones, available light. Wild Style/Beat Street palette"
     },
     {
       "id": "2000s-mixtape-dvd",
       "name": "2000s Mixtape DVD Cover Art",
-      "visual_description": "Photoshop composites with aggressive lens flares, gold foil text, airbrushed faces, luxury cars floating in void, diamond-encrusted logos. DJ Drama and Gangsta Grillz era \u2014 digital maximalism before templates.",
+      "visual_description": "Photoshop composites with aggressive lens flares, gold foil text, airbrushed faces, luxury cars floating in void, diamond-encrusted logos. DJ Drama and Gangsta Grillz era — digital maximalism before templates.",
       "wrongness": "Aspirational excess as marketing strategy.",
       "best_uses": [
         "mixtape releases",
@@ -4831,12 +4831,12 @@
         "minimalist design (maximalist era)",
         "modern design trends"
       ],
-      "color_science": "Digital Photoshop composite \u2014 saturated golds, diamond whites, black void backgrounds, aggressive lens flares. DJ Drama/Gangsta Grillz color palette"
+      "color_science": "Digital Photoshop composite — saturated golds, diamond whites, black void backgrounds, aggressive lens flares. DJ Drama/Gangsta Grillz color palette"
     },
     {
       "id": "1990s-hood-horror",
       "name": "1990s Hood Horror Aesthetic",
-      "visual_description": "Tales from the Hood energy \u2014 supernatural justice, urban legends, red and green lighting, VHS horror rental store vibe. Horror as social commentary, monsters as metaphors for systemic oppression.",
+      "visual_description": "Tales from the Hood energy — supernatural justice, urban legends, red and green lighting, VHS horror rental store vibe. Horror as social commentary, monsters as metaphors for systemic oppression.",
       "wrongness": "Real horror dressed as genre entertainment.",
       "best_uses": [
         "horror content",
@@ -4866,12 +4866,12 @@
         "modern horror aesthetics",
         "digital color grading"
       ],
-      "color_science": "35mm horror film with red/green lighting gels \u2014 deep shadows, high contrast, supernatural color palette. Tales from the Hood/Def by Temptation aesthetic"
+      "color_science": "35mm horror film with red/green lighting gels — deep shadows, high contrast, supernatural color palette. Tales from the Hood/Def by Temptation aesthetic"
     },
     {
       "id": "2010s-soundcloud-rap",
       "name": "2010s SoundCloud Rap Aesthetic",
-      "visual_description": "Face tattoos, rainbow dreads, moshpit energy, iPhone front camera, DIY music videos. XXXTentacion, Lil Uzi Vert, Playboi Carti era \u2014 punk energy meets trap, lo-fi authenticity.",
+      "visual_description": "Face tattoos, rainbow dreads, moshpit energy, iPhone front camera, DIY music videos. XXXTentacion, Lil Uzi Vert, Playboi Carti era — punk energy meets trap, lo-fi authenticity.",
       "wrongness": "Self-destruction as artistic statement.",
       "best_uses": [
         "SoundCloud rap content",
@@ -4902,7 +4902,7 @@
         "cinematic color grading",
         "studio production values"
       ],
-      "color_science": "iPhone sensor in low-light moshpit \u2014 desaturated with occasional neon pops, motion blur, authentic chaos. SoundCloud rap visual palette"
+      "color_science": "iPhone sensor in low-light moshpit — desaturated with occasional neon pops, motion blur, authentic chaos. SoundCloud rap visual palette"
     },
     {
       "id": "south_central_golden_hour_cinema",
@@ -4953,7 +4953,7 @@
       "id": "brooklyn_brownstone_summer",
       "name": "1990s Brooklyn Brownstone Summer Block Aesthetic",
       "visual_description": "Dense stoop-and-sidewalk visual language rooted in Brooklyn brownstones, hydrant spray, folding chairs, bodegas, handball courts, barber shops, church fans, gold jewelry, hoop earrings, mesh tanks, short sets, Timbs, basketball jerseys, and kids weaving through adult conversations. The camera is close, conversational, sweaty, and neighborhood-scaled: stoop-level tracking shots, wide lenses, sidewalk blocking, compressed crowds, and music leaking from windows.",
-      "wrongness": "The wrongness is social overcrowding turned into choreography. Everyone is in everyone else\u2019s frame; privacy barely exists, but that pressure creates warmth, comedy, gossip, and danger.",
+      "wrongness": "The wrongness is social overcrowding turned into choreography. Everyone is in everyone else’s frame; privacy barely exists, but that pressure creates warmth, comedy, gossip, and danger.",
       "best_uses": [
         "block party scenes",
         "stoop conversations",
@@ -5041,7 +5041,7 @@
     },
     {
       "id": "atlanta_trap_house_aesthetic",
-      "name": "2000s\u20132010s Atlanta Trap House Video Register",
+      "name": "2000s–2010s Atlanta Trap House Video Register",
       "visual_description": "Southern trap visual ecosystem built from rental-house interiors, apartment complexes, gas stations, strip-mall parking lots, red plastic cups, wood-paneled rooms, kitchen fluorescents, heavy jewelry, designer knockoff textures, white tees, fitted caps, sneakers, cars idling at night, and neighborhood crews packed into shallow spaces. Camera language is music-video handheld: wide-angle lens distortion, flash cuts, low-angle performance shots, whip zooms, underlit faces, and practical lights doing too much work.",
       "wrongness": "The wrongness is aspirational luxury squeezed into cramped domestic architecture. The house is both workplace, stage, shelter, and myth machine.",
       "best_uses": [
@@ -5176,7 +5176,7 @@
     },
     {
       "id": "hood_horror_cinema",
-      "name": "1990s\u20132000s Hood Horror VHS/DVD Cinema",
+      "name": "1990s–2000s Hood Horror VHS/DVD Cinema",
       "visual_description": "Urban horror register from direct-to-video shelves and late-night cable: apartment hallways, abandoned houses, corner stores after closing, boiler rooms, church basements, projects stairwells, cheap fog, colored bulbs, practical gore props kept mostly off-camera, leather coats, hoodies, candles, occult graffiti, and flashlight beams. The camera is low-budget but committed: Dutch angles, overlong hallway walks, jump-scare zooms, rubbery prosthetics, and night exteriors that fall into video noise.",
       "wrongness": "The wrongness is supernatural dread grafted onto real housing stress. The monster is scary, but the broken hallway light may be scarier.",
       "best_uses": [
@@ -5353,6 +5353,186 @@
         "highlight_behavior": "headlights smear and on-camera light flattens faces",
         "saturation": "high on cars and clothing, dirty in shadows"
       }
+    },
+    {
+      "id": "andes-school-bus-sci-fi-psa",
+      "name": "1980s Andean School-Bus Sci-Fi Safety PSA",
+      "visual_description": "Rural highland futurism staged like an educational road-safety film: children in wool sweaters board a battered yellow bus retrofitted with blinking radio equipment, hand-painted constellations on metal panels, foggy mountain switchbacks, practical miniature landslides, and institutional narration implied through solemn compositions. The camera is mostly locked-off 16mm with slow zooms, flat daylight, dust on the lens, and awkwardly sincere child performances against vast cold landscapes.",
+      "wrongness": "The future arrives as a municipal safety lesson: cosmic technology is explained through cardboard diagrams, bus-company sponsorship logic, and nervous adults pretending a patched diesel vehicle is a space-age civic machine.",
+      "prompt_seed": "1984 Peruvian-Bolivian Andean educational sci-fi public safety film, shot on faded Kodak 7247 16mm color negative, a rural school bus converted into a radio-guided mountain rescue vehicle, children in knitted sweaters looking out fogged windows, high-altitude switchback road, painted stars and warning icons on metal panels, flat overcast daylight, dusty lens, slow institutional zoom, miniature rockslide effect, slight gate weave, color-faded print, moral seriousness, not glossy, the right amount of wrong",
+      "niche_affinity": "public safety futurism, rural sci-fi, educational film collectors, analog civic media, Latin American retro-institutional aesthetics",
+      "energy_level": "quiet-anxious",
+      "accurate_artifacts": [
+        "16mm gate weave",
+        "dust specks",
+        "overexposed mountain sky",
+        "painted cardboard diagrams",
+        "flat institutional narration feel",
+        "awkward child blocking",
+        "miniature debris effects"
+      ],
+      "forbidden_artifacts": [
+        "sleek cyberpunk neon",
+        "modern drone shots",
+        "clean digital subtitles",
+        "Hollywood disaster scale",
+        "anime cel shading",
+        "perfectly stabilized footage"
+      ],
+      "color_science": "Faded Kodak 7247 palette with pale cyan shadows, chalky yellow highlights, sun-bleached reds, low contrast, and thin mountain atmosphere flattening the image.",
+      "best_uses": [
+        "rural rescue robot concepts",
+        "educational sci-fi thumbnails",
+        "alternate-history transit posters",
+        "children discovering strange technology",
+        "public warning videos from imaginary governments",
+        "mountain-road survival scenes"
+      ],
+      "historical_context": ""
+    },
+    {
+      "id": "post-soviet-bathhouse-telepresence",
+      "name": "1990s Post-Soviet Bathhouse Telepresence Drama",
+      "visual_description": "A tiled municipal bathhouse becomes a low-budget future communications hub: steam, cracked blue ceramic, plastic sandals, wall-mounted CRT monitors, damp extension cords, and elderly patrons receiving video calls from distant relatives on unreliable state infrastructure. The image language is severe and theatrical, with long static shots, green fluorescent light, visible microphone shadows, and faces framed through condensation.",
+      "wrongness": "The networked future is wet, communal, bureaucratic, and slightly unsafe; advanced telepresence looks like a repurposed bathhouse announcement system held together by electricians and hope.",
+      "prompt_seed": "1996 post-Soviet municipal bathhouse telepresence drama, shot on ORWO-style 35mm print stock transferred to Betacam SP, cracked turquoise tile walls, steam clouds, elderly bathhouse patrons watching relatives on wall-mounted CRT monitors, damp cables taped above radiators, green fluorescent lighting, long static theatrical framing, soft tape noise, condensation on lens, visible boom shadow, exhausted tenderness, economic collapse futurism",
+      "niche_affinity": "post-Soviet infrastructure fiction, municipal interiors, analog telepresence, bathhouse culture, bureaucratic futurism",
+      "energy_level": "humid-melancholic",
+      "accurate_artifacts": [
+        "Betacam SP softness",
+        "fluorescent green cast",
+        "CRT scanlines",
+        "condensation haze",
+        "visible cable runs",
+        "static theatrical blocking",
+        "municipal tile textures"
+      ],
+      "forbidden_artifacts": [
+        "luxury spa lighting",
+        "holograms",
+        "clean modern UI",
+        "neon cyberpunk signage",
+        "fast action cutting",
+        "high-key wellness commercial gloss"
+      ],
+      "color_science": "Green-biased fluorescent midtones, cyan ceramic reflections, muddy magenta skin recovery from tape transfer, crushed black corners, and low-saturation vapor bloom.",
+      "best_uses": [
+        "analog video-call scenes",
+        "infrastructure-collapse sci-fi",
+        "melancholic family reunion imagery",
+        "municipal AI assistant concepts",
+        "retro network failure visuals",
+        "steam-filled surveillance rooms"
+      ],
+      "historical_context": ""
+    },
+    {
+      "id": "sahelian-solar-cassette-weathercast",
+      "name": "Late-1980s Sahelian Solar Cassette Weathercast",
+      "visual_description": "A regional weather broadcast from a desert-edge TV station where solar panels, cassette decks, paper maps, and hand-lettered wind arrows form a fragile climate-prediction machine. Presenters stand before wrinkled cloth backdrops painted with dunes and radio towers, while cutaway inserts show farmers holding transistor radios under harsh white sun. It feels half forecast, half development-aid demo.",
+      "wrongness": "The future of climate technology is trapped inside donor-funded broadcast grammar: optimistic solar panels, failing audio cassettes, hand-painted maps, and presenters trying to make drought logistics sound like progress.",
+      "prompt_seed": "1988 Sahelian regional television solar weathercast, shot on Ektachrome 7242 16mm reversal and transferred to U-matic tape, presenter beside hand-painted desert rainfall map, cassette deck feeding weather data, small solar panel on studio table, wrinkled cloth backdrop with dunes and radio towers, harsh studio tungsten mixed with desert daylight inserts, locked camera, slow zoom on paper wind arrows, tape dropout, oversaturated yellows, earnest development-broadcast tone",
+      "niche_affinity": "climate media history, development TV, desert futurism, analog weather systems, regional broadcast design",
+      "energy_level": "dry-hopeful",
+      "accurate_artifacts": [
+        "U-matic tape dropout",
+        "hand-painted weather maps",
+        "misaligned lower-third cards",
+        "cassette deck close-ups",
+        "wrinkled studio backdrop",
+        "overheated tungsten highlights",
+        "slow analog zooms"
+      ],
+      "forbidden_artifacts": [
+        "satellite CGI globes",
+        "modern weather app interfaces",
+        "luxury solar-punk utopia",
+        "crisp HD studio lighting",
+        "futuristic holographic maps",
+        "rain-soaked cyber-noir"
+      ],
+      "color_science": "Ektachrome reversal with blazing ochres, brittle cyan skies, reddish-brown skin tones, clipped white sunlight, and tape-era chroma crawl around yellow graphics.",
+      "best_uses": [
+        "climate adaptation visuals",
+        "fictional regional broadcasts",
+        "solar technology origin myths",
+        "weather-control storytelling",
+        "development agency retrofutures",
+        "desert radio-network scenes"
+      ],
+      "historical_context": ""
+    },
+    {
+      "id": "malay-vcd-orchid-biotech-melodrama",
+      "name": "Early-2000s Malay VCD Orchid Biotech Melodrama",
+      "visual_description": "A domestic science-fiction melodrama built from VCD-era video texture: humid greenhouse corridors, orchids tagged with barcode labels, plastic lab coats, family secrets, cheap digital dissolves, and glowing petri dishes that look suspiciously like aquarium lights. The camera drifts with soap-opera patience, favoring tearful close-ups, reflective glass, and overexposed tropical windows.",
+      "wrongness": "Biotechnology is staged like a family soap and sold like a market-stall VCD; the science is sincere but visibly assembled from aquarium bulbs, office printers, and melodramatic inheritance disputes.",
+      "prompt_seed": "2002 Malaysian VCD orchid biotechnology melodrama, shot on Sony DSR-PD150 miniDV and mastered to low-bitrate Video CD, humid greenhouse laboratory full of orchids with barcode tags, young botanist in plastic lab coat holding glowing petri dish, aquarium-light bioluminescence, overexposed tropical windows, soap-opera close-up, cheap digital dissolve, interlaced video combing, compression blocks, teal-green shadows, magenta flower highlights, emotional family-secret tone",
+      "niche_affinity": "Southeast Asian VCD cinema, botanical sci-fi, domestic melodrama, low-budget biotech, tropical video texture",
+      "energy_level": "humid-dramatic",
+      "accurate_artifacts": [
+        "miniDV interlacing",
+        "VCD compression blocks",
+        "cheap digital dissolves",
+        "overexposed windows",
+        "aquarium-light glow",
+        "barcode label props",
+        "soap-opera close-ups"
+      ],
+      "forbidden_artifacts": [
+        "sterile Apple-store laboratory",
+        "high-budget genetic holograms",
+        "cinematic anamorphic bokeh",
+        "Western pharmaceutical ad polish",
+        "slick cyberpunk implants",
+        "crystal-clear 4K video"
+      ],
+      "color_science": "MiniDV tropical palette with clipped white windows, green-tinted shadows, waxy skin highlights, saturated orchid magentas, and blocky low-bitrate chroma transitions.",
+      "best_uses": [
+        "botanical AI lab imagery",
+        "greenhouse mystery scenes",
+        "family biotech melodrama posters",
+        "low-budget science romance",
+        "VCD-era trailer frames",
+        "tropical corporate sabotage concepts"
+      ],
+      "historical_context": ""
+    },
+    {
+      "id": "basque-hydrofoil-labor-union-futurism",
+      "name": "1970s Basque Hydrofoil Labor-Union Futurism",
+      "visual_description": "A coastal industrial future imagined through union halls, shipyard murals, hydrofoil prototypes, rain-slick concrete, cigarette smoke, and practical model boats tested in gray harbor water. Workers in heavy jackets study blueprint tables under sodium lamps while a hand-painted banner promises maritime modernization. The camera alternates documentary realism with stiff sponsor-film optimism.",
+      "wrongness": "The future is collective, damp, and negotiated in a union meeting; sleek maritime technology keeps being interrupted by paperwork, labor politics, smoke, rain, and scale-model compromises.",
+      "prompt_seed": "1977 Basque coastal hydrofoil labor-union futurism, shot on Agfa-Gevaert 35mm industrial documentary film stock, rainy shipyard union hall overlooking gray harbor, workers in heavy jackets around blueprint table, hand-painted banner about maritime modernization, practical scale model hydrofoil in test tank, sodium industrial lamps, cigarette smoke, documentary handheld inserts mixed with stiff sponsor-film tableau, muted steel blues and rust reds, film scratches, subdued political optimism, economic death not creative death",
+      "niche_affinity": "industrial documentary, labor futurism, maritime design history, regional European modernism, shipyard media",
+      "energy_level": "stern-collective",
+      "accurate_artifacts": [
+        "Agfa industrial film grain",
+        "rain-streaked harbor glass",
+        "scale-model hydrofoil shots",
+        "hand-painted union banners",
+        "cigarette smoke haze",
+        "blueprint close-ups",
+        "sponsor-film pacing"
+      ],
+      "forbidden_artifacts": [
+        "luxury yacht commercial gloss",
+        "futuristic glass skyscrapers",
+        "clean digital CAD overlays",
+        "sunny Mediterranean tourism palette",
+        "military action spectacle",
+        "CGI ocean physics"
+      ],
+      "color_science": "Cool Agfa industrial color with steel-blue shadows, rust-orange accents, low-saturation skin, sodium yellow pools, gray harbor diffusion, and heavy grain in underlit interiors.",
+      "best_uses": [
+        "worker-built future concepts",
+        "industrial alternate history",
+        "shipyard innovation scenes",
+        "regional labor posters",
+        "maritime prototype imagery",
+        "rainy civic sci-fi frames"
+      ],
+      "historical_context": ""
     }
   ],
   "matching_rules": {
