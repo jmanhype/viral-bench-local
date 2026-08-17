@@ -1697,7 +1697,14 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
             "guidance_scale": 1.0,
             "embedded_guidance_scale": 6.0,
             "sliding_window_size": 124,
-            "sliding_window_overlap": 1
+            "sliding_window_overlap": 1,
+            # ── Ref2VA lip-sync fields (optional; additive for music-video pipeline) ──
+            # Set these when generating keeper-song lip-sync shots via Ref2VA.
+            # Omit for standard FL2VA multishot / T2V briefs — backward compatible.
+            "audio_prompt_type": None,       # "A" to enable audio_guide conditioning
+            "audio_guide": None,             # path to keeper song slice (.wav) for this shot
+            "image_refs": None,              # list of identity still paths for Ref2VA <Picture N>
+            "video_prompt_type": None,       # "I" when using image_refs + audio_guide together
         },
         "voiceover_text": voiceover_text,
         "dialogue": dialogue,
