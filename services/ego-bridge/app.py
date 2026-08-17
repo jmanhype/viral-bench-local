@@ -50,7 +50,8 @@ const task = await useOrCreateTaskSpace('{TASK_SPACE_NAME}')
     if result.returncode != 0:
         logger.error(f"ego-browser failed: {result.stderr[:500]}")
         raise RuntimeError(result.stderr[:1000])
-    return result.stdout
+    # ego-browser cliLog() writes to stderr, not stdout
+    return result.stderr or result.stdout
 
 
 # ─── Models ───────────────────────────────────────────────────────────────────
