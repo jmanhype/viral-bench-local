@@ -95,7 +95,7 @@ def _db() -> sqlite3.Connection:
 
 
 def _ensure_publish_columns(conn: sqlite3.Connection) -> None:
-    """Add publish tracking columns to jobs table if missing."""
+    """Add publish tracking columns to jobs table and drafts table if missing."""
     cursor = conn.execute("PRAGMA table_info(jobs)")
     existing_cols = {row[1] for row in cursor.fetchall()}
     if "publish_id" not in existing_cols:
@@ -108,6 +108,13 @@ def _ensure_publish_columns(conn: sqlite3.Connection) -> None:
         conn.execute("ALTER TABLE jobs ADD COLUMN fail_reason TEXT")
     if "publish_method" not in existing_cols:
         conn.execute("ALTER TABLE jobs ADD COLUMN publish_method TEXT DEFAULT 'api'")
+
+    # Ensure drafts table has updated_at column (referenced by list_drafts query)
+    cursor = conn.execute("PRAGMA table_info(drafts)")
+    draft_cols = {row[1] for row in cursor.fetchall()}
+    if "updated_at" not in draft_cols:
+        conn.execute("ALTER TABLE drafts ADD COLUMN updated_at TIMESTAMP")
+
     conn.commit()
 
 
@@ -460,6 +467,10 @@ async def publish_draft(req: PublishRequest):
     job_id = uuid.uuid4().hex[:16]
     now = datetime.now(timezone.utc).isoformat()
 
+    # Ensure publish_id is always set for status lookups
+    # When browser publish fails, use job_id as the canonical identifier
+    effective_publish_id = publish_id or job_id
+
     # Check if a job already exists for this draft
     existing_job = conn.execute(
         "SELECT id FROM jobs WHERE draft_id = ? ORDER BY created_at DESC LIMIT 1",
@@ -472,19 +483,19 @@ async def publish_draft(req: PublishRequest):
                 status=?, publish_id=?, tiktok_status=?, post_url=?,
                 fail_reason=?, publish_method=?
             WHERE id=?
-        """, (status, publish_id, status, post_url, fail_reason, method, existing_job["id"]))
+        """, (status, effective_publish_id, status, post_url, fail_reason, method, existing_job["id"]))
         job_id = existing_job["id"]
     else:
         conn.execute("""
             INSERT INTO jobs (id, draft_id, status, created_at, publish_id, tiktok_status, post_url, fail_reason, publish_method)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, (job_id, req.draft_id, status, now, publish_id, status, post_url, fail_reason, method))
+        """, (job_id, req.draft_id, status, now, effective_publish_id, status, post_url, fail_reason, method))
 
     conn.commit()
     conn.close()
 
     return PublishResponse(
-        publish_id=publish_id or job_id,
+        publish_id=effective_publish_id,
         status=status,
         post_url=post_url,
         method=method,
@@ -504,11 +515,17 @@ async def get_status(publish_id: str, access_token: str = ""):
     conn = _db()
     _ensure_publish_columns(conn)
 
-    # Look up in our DB first
+    # Look up in our DB first — try publish_id, then fall back to job id
     row = conn.execute(
         "SELECT * FROM jobs WHERE publish_id = ? ORDER BY created_at DESC LIMIT 1",
         (publish_id,),
     ).fetchone()
+
+    if not row:
+        row = conn.execute(
+            "SELECT * FROM jobs WHERE id = ? ORDER BY created_at DESC LIMIT 1",
+            (publish_id,),
+        ).fetchone()
 
     if not row:
         conn.close()
