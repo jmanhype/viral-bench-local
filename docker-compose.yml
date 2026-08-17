@@ -172,6 +172,41 @@ services:
       minio:
         condition: service_healthy
 
+  # ─── ego-browser Bridge (HOST-ONLY, not containerized) ──────
+  # ego-browser is a macOS-native binary — cannot run in Linux containers.
+  # This service runs on the host and is reachable from containers via
+  # host.docker.internal:8040. Start manually: python services/ego-bridge/app.py
+  # Listed here for documentation; NOT started by `docker compose up`.
+  # ego-bridge:
+  #   build: N/A — runs on host
+  #   ports: ["127.0.0.1:8040:8040"]
+
+  # ─── SGOS Backend (H3 pipeline + keeper metadata API) ────────
+  # Containerized sgos-backend with SSH access to 3090 GPU server.
+  # Build context is ../sgos-backend (sibling repo).
+  sgos-backend:
+    build:
+      context: ../sgos-backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8420:8420"
+    volumes:
+      - "${HOME}/.ssh:/root/.ssh:ro"
+    environment:
+      H3_GPU_HOST: ${H3_GPU_HOST:-192.168.1.143}
+      H3_GPU_USER: ${H3_GPU_USER:-straughter}
+      H3_REMOTE_HOME: ${H3_REMOTE_HOME:-/home/straughter/Wan2GP}
+      SGOS_API_KEY: ${SGOS_API_KEY:-}
+    extra_hosts:
+      - "gpu-server:192.168.1.143"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8420/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
 volumes:
   pg_data:
   qdrant_data:
