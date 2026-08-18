@@ -138,7 +138,7 @@ def _hook_subject(hook: str) -> str:
     return h or hook.strip()
 
 
-def generate_dialogue(scenario: str, hook: str) -> list[dict]:
+def generate_dialogue(scenario: str, hook: str, guide: Optional[dict] = None) -> list[dict]:
     """Generate shootable dialogue lines timed to script beats.
 
     Each line: {time, character, line} — character includes delivery hints
@@ -147,8 +147,19 @@ def generate_dialogue(scenario: str, hook: str) -> list[dict]:
     Common-sense rule: spoken lines must share ONE subject — the concrete thing
     the hook is about. `subject` is the hook's topic with meta framing stripped,
     so the exchange reads like a real conversation, not canned one-liners.
+
+    Style-aware: when a style's `dialogue_guide` is supplied and the style is
+    NOT a hood/street style, dialogue is built from the guide's `examples` in the
+    guide's `tone` instead of the hardcoded hood templates. Banned_phrases are
+    always filtered out, regardless of style.
     """
     subject = _hook_subject(hook)
+    banned = [str(b).lower() for b in (guide or {}).get("banned_phrases") or []]
+
+    # Style-aware: non-hood styles use their guide's examples/tone, not hood lines.
+    if guide and not _is_hood_style(guide):
+        return _guide_dialogue(guide, hook, subject, scenario)
+
     DIALOGUES = {
         "block": [
             {"time": "0-2s", "character": "NARRATOR (VO)", "line": hook},
@@ -228,7 +239,46 @@ def generate_dialogue(scenario: str, hook: str) -> list[dict]:
             {"time": "15-20s", "character": "YOU", "line": "Yep. Every single time."},
         ],
     }
-    return DIALOGUES.get(scenario, [])
+    result = DIALOGUES.get(scenario, [])
+    if banned:
+        filtered = []
+        for d in result:
+            if not any(b in d["line"].lower() for b in banned):
+                filtered.append(d)
+        result = filtered
+    return result
+
+
+def _is_hood_style(guide: Optional[dict]) -> bool:
+    """True if the style's dialogue_guide is a hood/street/community style that
+    legitimately uses the existing casual 'y'all' templates."""
+    if not guide:
+        return False
+    tone = (guide.get("tone") or "").lower()
+    return ("hood" in tone or "street" in tone or "community" in tone or "real talk" in tone)
+
+
+def _is_helpful_guide(guide: Optional[dict]) -> bool:
+    """True if a dialogue_guide is usable: has a tone and at least one example."""
+    return bool(guide and (guide.get("tone") or (guide.get("examples") or [])))
+
+
+def _guide_dialogue(guide: dict, hook: str, subject: str, scenario: str) -> list[dict]:
+    """Build dialogue lines for a non-hood style from its dialogue_guide.
+
+    Uses the guide's `examples` (styled to the guide's tone) plus a hook-referencing
+    opener, so the exchange matches the aesthetic instead of hood culture.
+    """
+    examples = [e for e in (guide.get("examples") or []) if str(e).strip()]
+    hooks = [hook or subject] + examples
+    # Dedup, cap at 3-4 spoken lines + a narrator opener.
+    lines = []
+    narrator = "NARRATOR (VO)"
+    lines.append({"time": "0-2s", "character": narrator, "line": hook or (examples[0] if examples else subject)})
+    for i, ex in enumerate(hooks[:3]):
+        char = "YOU (to camera)" if i == 0 else ("OBSERVER" if i == 1 else "VOICE (room tone)")
+        lines.append({"time": f"{3 + i * 5}-{7 + i * 5}s", "character": char, "line": ex})
+    return lines
 
 
 # Voice texture per character archetype — baked into video prompts in the style of
@@ -250,7 +300,7 @@ VOICE_PROFILES = {
 }
 
 
-def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = None) -> str:
+def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = None, guide: Optional[dict] = None) -> str:
     """Render dialogue lines into one dense video-prompt clause.
 
     Style: character dropping "line" + voice texture — so video/lip-sync tools
@@ -261,16 +311,23 @@ def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = 
     overrides the generic archetype voice whenever that archetype speaks —
     same voice texture on every brief of the franchise.
     """
-    lines = generate_dialogue(scenario, hook)
+    lines = generate_dialogue(scenario, hook, guide) if guide is not None else generate_dialogue(scenario, hook)
     if not lines:
         return ""
     clauses = []
+    # Style-aware voice texture: non-hood styles describe the tone from their
+    # dialogue_guide instead of the hardcoded hood "natural conversational" voice.
+    guide_tone = (guide or {}).get("tone", "") if guide else ""
     for d in lines:
         char = d["character"]
         base_char = char.split("(")[0].strip()
         if base_char == "NARRATOR":
             continue  # voiceover, not on-screen speech
         voice = VOICE_PROFILES.get(char) or VOICE_PROFILES.get(base_char, "")
+        if guide_tone and not _is_hood_style(guide):
+            # Non-hood style: the guide tone replaces the hood archetype voice so
+            # prompts read e.g. 'you dropping "...", ominous military pilot tech-speak'.
+            voice = guide_tone
         # Franchise lock voice wins for the pinned character's archetype
         if character and character.get("archetype") == base_char and character.get("voice"):
             voice = character["voice"]
@@ -525,12 +582,20 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
             script_parts.append("  → The moment that makes people share it")
             script_parts.append("")
 
-        # Hood skit CTA
-        script_parts.append("[18-20s] OUTRO")
-        script_parts.append("  → No hard CTA — keep it natural")
-        script_parts.append("  → 'Y'all tell me if this happened to you' or")
-        script_parts.append("  → 'Tag someone who does this' — comment bait")
-        script_parts.append("  → End on a laugh or a look — don't break character")
+        # Hood/CTA comment bait — style-aware: non-hood styles get a non-hood
+        # comment hook instead of the casual 'y'all' phrase.
+        guide = (visual_style or {}).get("dialogue_guide")
+        if guide and not _is_hood_style(guide):
+            script_parts.append("[18-20s] OUTRO")
+            script_parts.append("  → No hard CTA — keep it natural")
+            script_parts.append("  → 'You had to be there' or 'Tag someone who knows' — comment bait")
+            script_parts.append("  → End on a beat — don't break the style tone")
+        else:
+            script_parts.append("[18-20s] OUTRO")
+            script_parts.append("  → No hard CTA — keep it natural")
+            script_parts.append("  → 'Y'all tell me if this happened to you' or")
+            script_parts.append("  → 'Tag someone who does this' — comment bait")
+            script_parts.append("  → End on a laugh or a look — don't break character")
         script_parts.append("")
 
     elif structure == "tutorial":
@@ -792,6 +857,7 @@ def match_visual_style(niche: str, format_type: str, energy_level: str = "medium
                 "accurate_artifacts": pinned.get("accurate_artifacts", []),
                 "forbidden_artifacts": pinned.get("forbidden_artifacts", []),
                 "color_science": pinned.get("color_science", ""),
+                "dialogue_guide": pinned.get("dialogue_guide"),
             }
         # Unknown style_id: log and fall through to auto-match
         logger.warning(f"style_id '{style_id}' not in visual register — falling back to auto-match")
@@ -995,6 +1061,7 @@ def match_visual_style(niche: str, format_type: str, energy_level: str = "medium
         "accurate_artifacts": pick.get("accurate_artifacts", []),
         "forbidden_artifacts": pick.get("forbidden_artifacts", []),
         "color_science": pick.get("color_science", ""),
+        "dialogue_guide": pick.get("dialogue_guide"),
     }
 
 
@@ -1684,12 +1751,17 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     # stays silent on-screen — the voiceover carries it.
     dialogue = []
     dialogue_prompt_clause = ""
-    if is_dialogue_content:
+    # Style-aware: any style with a dialogue_guide can carry on-screen speech in
+    # its own tone. Hood/skit content additionally gets scenario-specific hood
+    # dialogue; guide-based styles (kaiju/horror/music/etc.) use their examples.
+    guide = visual_direction.get("dialogue_guide")
+    if is_dialogue_content or (guide and _is_helpful_guide(guide)):
         scenario = _detect_hood_scenario(hook_lower_full)
         if scenario == "general" and hook_lower_full.startswith("pov"):
             scenario = "pov"
-        dialogue = generate_dialogue(scenario, hook)
-        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook, character)
+        guide_obj = guide if (guide and not (is_dialogue_content and guide and _is_hood_style(guide))) else None
+        dialogue = generate_dialogue(scenario, hook, guide_obj)
+        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook, character, guide_obj)
     
     # Append dialogue clause so video tools get who is talking + how they sound
     if dialogue_prompt_clause:
