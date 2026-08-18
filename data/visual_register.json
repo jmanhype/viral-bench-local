@@ -38,7 +38,20 @@
         "H.264 compression artifacts",
         "motion blur (limited animation = held cels, not motion)"
       ],
-      "color_science": "16mm Eastmancolor negative stock — warm saturated primaries, slight magenta shift in shadows, cel paint colors (bright chrome yellow, candy red, electric blue) punch through the film stock's warm bias"
+      "color_science": "16mm Eastmancolor negative stock — warm saturated primaries, slight magenta shift in shadows, cel paint colors (bright chrome yellow, candy red, electric blue) punch through the film stock's warm bias",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "1980s-cyberpunk-ova",
@@ -79,7 +92,16 @@
         "lens flare (cel animation, not live-action lens)",
         "motion blur (held cels with sudden motion, not continuous blur)"
       ],
-      "color_science": "35mm negative stock — rich blacks, deep cyans and magentas, neon highlights bloom against dark backgrounds. OVA budgets allowed theatrical-grade film with saturated cel paints (neon pink, electric cyan, chrome silver)"
+      "color_science": "35mm negative stock — rich blacks, deep cyans and magentas, neon highlights bloom against dark backgrounds. OVA budgets allowed theatrical-grade film with saturated cel paints (neon pink, electric cyan, chrome silver)",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1980s-city-pop",
@@ -120,7 +142,15 @@
         "CGI artifacts",
         "heavy film damage (well-maintained broadcast stock)"
       ],
-      "color_science": "16mm Eastmancolor + Betacam SP broadcast transfer — pastel pinks, peach skies, lavender dusk, chrome highlights. Airbrushed soft gradients with warm sunset palette. Film stock warmth amplifies the aspirational golden-hour mood"
+      "color_science": "16mm Eastmancolor + Betacam SP broadcast transfer — pastel pinks, peach skies, lavender dusk, chrome highlights. Airbrushed soft gradients with warm sunset palette. Film stock warmth amplifies the aspirational golden-hour mood",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1990s-visual-novel",
@@ -159,7 +189,21 @@
         "motion blur (static images)",
         "high-resolution textures (era-appropriate limits)"
       ],
-      "color_science": "256-color VGA/SVGA palette — dithered gradients, limited color depth, blue-black backgrounds with cyan UI highlights. Character portraits use anime color palette compressed into 8-bit. Slight color banding in skin tones and sky gradients"
+      "color_science": "256-color VGA/SVGA palette — dithered gradients, limited color depth, blue-black backgrounds with cyan UI highlights. Character portraits use anime color palette compressed into 8-bit. Slight color banding in skin tones and sky gradients",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "vhs-fansub",
@@ -199,7 +243,21 @@
         "H.264/HEVC compression",
         "motion blur (held cels, not live motion)"
       ],
-      "color_science": "VHS color-under encoding — limited chroma bandwidth causes color smearing, reds push hot, blues bleed sideways, generational dub darkens and desaturates with each copy. 3-4 generation deep fansub tapes show significant color shift and softness"
+      "color_science": "VHS color-under encoding — limited chroma bandwidth causes color smearing, reds push hot, blues bleed sideways, generational dub darkens and desaturates with each copy. 3-4 generation deep fansub tapes show significant color shift and softness",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "1990s-psychological",
@@ -238,7 +296,16 @@
         "bright saturated colors (muted by design)",
         "fast motion (psychological = slow, deliberate pacing)"
       ],
-      "color_science": "35mm negative with deliberate desaturation — muted blues, gray-greens, washed-out skin tones. Shadows crush to black. Occasional warm amber for emotional contrast. Film stock chosen for mood, not vibrancy"
+      "color_science": "35mm negative with deliberate desaturation — muted blues, gray-greens, washed-out skin tones. Shadows crush to black. Occasional warm amber for emotional contrast. Film stock chosen for mood, not vibrancy",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1970s-shoujo",
@@ -278,7 +345,15 @@
         "motion blur (held cels, not motion)",
         "CGI particle effects"
       ],
-      "color_science": "16mm Eastmancolor with watercolor backgrounds — soft pinks, lavender, rose gold, sky blue. Watercolor bleed creates soft edges. Film stock warmth enhances the romantic palette. Sparkle overlays catch light physically on the animation stand"
+      "color_science": "16mm Eastmancolor with watercolor backgrounds — soft pinks, lavender, rose gold, sky blue. Watercolor bleed creates soft edges. Film stock warmth enhances the romantic palette. Sparkle overlays catch light physically on the animation stand",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "early-2000s-digital",
@@ -317,7 +392,16 @@
         "VHS tracking noise (digital master)",
         "heavy film damage (clean digital source)"
       ],
-      "color_science": "Early digital color pipeline — flat saturated colors without film stock warmth. Plastic-looking skin highlights. Colors are clean but lack the organic richness of cel-on-film. Slight color banding in gradients due to early digital bit depth"
+      "color_science": "Early digital color pipeline — flat saturated colors without film stock warmth. Plastic-looking skin highlights. Colors are clean but lack the organic richness of cel-on-film. Slight color banding in gradients due to early digital bit depth",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1980s-idol",
@@ -356,7 +440,15 @@
         "CGI particles",
         "heavy motion blur"
       ],
-      "color_science": "16mm Eastmancolor + Betacam SP — bright saturated primaries (hot pink, electric blue, chrome yellow). Idol anime pushed color saturation for energetic music video feel. Broadcast transfer maintains vibrancy"
+      "color_science": "16mm Eastmancolor + Betacam SP — bright saturated primaries (hot pink, electric blue, chrome yellow). Idol anime pushed color saturation for energetic music video feel. Broadcast transfer maintains vibrancy",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1990s-jrpg",
@@ -395,7 +487,21 @@
         "high-resolution textures (era limits)",
         "modern PBR/material rendering"
       ],
-      "color_science": "PS1/PS2 framebuffer — vertex-lit colors, limited texture resolution, baked lighting. Colors are saturated but flat (no dynamic shadows on characters). Pre-rendered backgrounds use higher detail than real-time scenes"
+      "color_science": "PS1/PS2 framebuffer — vertex-lit colors, limited texture resolution, baked lighting. Colors are saturated but flat (no dynamic shadows on characters). Pre-rendered backgrounds use higher detail than real-time scenes",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "corporate-training-vhs",
@@ -435,7 +541,21 @@
         "shallow depth of field (corporate = everything in focus)",
         "cinematic lighting (flat fluorescent)"
       ],
-      "color_science": "Consumer VHS color-under encoding — fluorescent lighting creates greenish cast, VHS red push makes ties/suits oversaturate, skin tones go slightly orange under office fluorescents. Generational dubs darken and desaturate"
+      "color_science": "Consumer VHS color-under encoding — fluorescent lighting creates greenish cast, VHS red push makes ties/suits oversaturate, skin tones go slightly orange under office fluorescents. Generational dubs darken and desaturate",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "british-info-film",
@@ -473,7 +593,20 @@
         "CGI effects",
         "saturated colors (deliberately muted)"
       ],
-      "color_science": "16mm reversal film in overcast British daylight — muted gray-greens, desaturated earth tones, flat overcast lighting. Film stock chosen for documentary realism, not beauty. Colors fade toward cool blue-gray"
+      "color_science": "16mm reversal film in overcast British daylight — muted gray-greens, desaturated earth tones, flat overcast lighting. Film stock chosen for documentary realism, not beauty. Colors fade toward cool blue-gray",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "id": "cdrom-hacker",
@@ -512,7 +645,21 @@
         "motion blur (static images)",
         "high-resolution textures"
       ],
-      "color_science": "256-color VGA/SVGA — blue-black backgrounds, cyan/amber UI highlights, dithered gradients. Terminal green or amber phosphor glow. Character portraits use limited anime-influenced palette compressed to 8-bit"
+      "color_science": "256-color VGA/SVGA — blue-black backgrounds, cyan/amber UI highlights, dithered gradients. Terminal green or amber phosphor glow. Character portraits use limited anime-influenced palette compressed to 8-bit",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "eastern-european-scifi",
@@ -551,7 +698,16 @@
         "CGI or compositing",
         "fast camera movement (theatrical pacing)"
       ],
-      "color_science": "16mm Soviet/Eastern European film stock (Svema or equivalent) — muted cyan-greens, desaturated earth tones, flat stage lighting. Colors shift toward cool blue. Film stock quality lower than Western equivalents"
+      "color_science": "16mm Soviet/Eastern European film stock (Svema or equivalent) — muted cyan-greens, desaturated earth tones, flat stage lighting. Colors shift toward cool blue. Film stock quality lower than Western equivalents",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "mall-kiosk",
@@ -591,7 +747,21 @@
         "cinematic depth of field (product demo = everything sharp)",
         "high production value"
       ],
-      "color_science": "Consumer VHS color-under — chrome product shots push VHS red/yellow hot, studio lighting creates harsh highlights, magenta-blue gels bleed sideways on chroma encoding. Generational dubs darken product shots"
+      "color_science": "Consumer VHS color-under — chrome product shots push VHS red/yellow hot, studio lighting creates harsh highlights, magenta-blue gels bleed sideways on chroma encoding. Generational dubs darken product shots",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "tokusatsu",
@@ -630,7 +800,20 @@
         "film grain (shot on broadcast video tape)",
         "modern compositing"
       ],
-      "color_science": "Betacam SP component color — cleaner than composite VHS, overbright toyetic colors (saturated primaries for toy marketing), smoke-pot diffusion softens highlights. Broadcast-grade but deliberately bright and saturated for children's programming"
+      "color_science": "Betacam SP component color — cleaner than composite VHS, overbright toyetic colors (saturated primaries for toy marketing), smoke-pot diffusion softens highlights. Broadcast-grade but deliberately bright and saturated for children's programming",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "public-access",
@@ -670,7 +853,16 @@
         "high production value",
         "professional audio quality"
       ],
-      "color_science": "Consumer VHS camcorder — auto white balance hunting, fluorescent greenish cast, chroma-key spill from imperfect compositing. Colors are washed out from cheap camcorder sensors and VHS encoding"
+      "color_science": "Consumer VHS camcorder — auto white balance hunting, fluorescent greenish cast, chroma-key spill from imperfect compositing. Colors are washed out from cheap camcorder sensors and VHS encoding",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "mental-hygiene",
@@ -708,7 +900,16 @@
         "tape artifacts (film medium)",
         "cinematic production value"
       ],
-      "color_science": "16mm black-and-white reversal film — high contrast, flat school fluorescent lighting, no color. Film stock chosen for cheapness and durability for classroom use. Heavy grain on generational prints"
+      "color_science": "16mm black-and-white reversal film — high contrast, flat school fluorescent lighting, no color. Film stock chosen for cheapness and durability for classroom use. Heavy grain on generational prints",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "car-dealership",
@@ -747,7 +948,16 @@
         "cinematic depth of field",
         "professional production value"
       ],
-      "color_science": "Consumer VHS with deliberate oversaturation — sun-blasted asphalt whites out, red price graphics push VHS encoding to maximum, skin tones go orange in harsh daylight. VHS red push makes everything look more aggressive"
+      "color_science": "Consumer VHS with deliberate oversaturation — sun-blasted asphalt whites out, red price graphics push VHS encoding to maximum, skin tones go orange in harsh daylight. VHS red push makes everything look more aggressive",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "hype-williams-music-video",
@@ -788,7 +998,15 @@
         "low production value",
         "flat lighting (maximalist lighting design)"
       ],
-      "color_science": "35mm negative stock with high-saturation push processing — chrome and gold surfaces reflect hot, neon strobes bloom, fish-eye lens creates color fringing at edges. Deliberately pushed color saturation for MTV impact"
+      "color_science": "35mm negative stock with high-saturation push processing — chrome and gold surfaces reflect hot, neon strobes bloom, fish-eye lens creates color fringing at edges. Deliberately pushed color saturation for MTV impact",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "hood-cinema",
@@ -828,7 +1046,19 @@
         "flat lighting (cinematic golden hour)",
         "low production value"
       ],
-      "color_science": "35mm negative with warm golden-hour grading — deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette. Film stock warmth enhanced in telecine transfer for cinematic beauty"
+      "color_science": "35mm negative with warm golden-hour grading — deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette. Film stock warmth enhanced in telecine transfer for cinematic beauty",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "mixtape-dvd",
@@ -868,7 +1098,19 @@
         "natural lighting (studio product photography)",
         "high-resolution output (print-shop quality)"
       ],
-      "color_science": "Digital Photoshop composite — oversaturated golds, chrome gradients, airbrushed skin tones pushed warm. Colors are digitally enhanced beyond realistic. Print output adds slight blur and color shift from cheap printers"
+      "color_science": "Digital Photoshop composite — oversaturated golds, chrome gradients, airbrushed skin tones pushed warm. Colors are digitally enhanced beyond realistic. Print output adds slight blur and color shift from cheap printers",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "dirty-south-crunk",
@@ -909,7 +1151,15 @@
         "flat lighting (styled neon/club lighting)",
         "low production value (professional music video budget)"
       ],
-      "color_science": "35mm negative with purple/neon push — deep purples, electric blues, candy paint chrome reflections, neon club lighting. Color science deliberately pushed toward purple/blue for dirty south aesthetic. Warm skin tones against cool neon backgrounds"
+      "color_science": "35mm negative with purple/neon push — deep purples, electric blues, candy paint chrome reflections, neon club lighting. Color science deliberately pushed toward purple/blue for dirty south aesthetic. Warm skin tones against cool neon backgrounds",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "block-party-doc",
@@ -951,7 +1201,15 @@
         "professional lighting (natural daylight)",
         "steady camera (handheld documentary style)"
       ],
-      "color_science": "Consumer VHS camcorder in daylight — washed-out colors, VHS color-under encoding, golden afternoon light slightly blown out. Colors desaturate with each generational dub. Raw, unstyled, documentary realism"
+      "color_science": "Consumer VHS camcorder in daylight — washed-out colors, VHS color-under encoding, golden afternoon light slightly blown out. Colors desaturate with each generational dub. Raw, unstyled, documentary realism",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "trap-neon",
@@ -991,7 +1249,15 @@
         "VHS color bleed",
         "low production value (modern music video budgets)"
       ],
-      "color_science": "Digital cinema (Arri Alexa/RED) with neon grade — deep blacks, neon green and purple accents, chrome grill reflections, LED strip color. Modern digital color science with deliberate teal-orange or purple-green grading. Clean digital quality, no analog warmth"
+      "color_science": "Digital cinema (Arri Alexa/RED) with neon grade — deep blacks, neon green and purple accents, chrome grill reflections, LED strip color. Modern digital color science with deliberate teal-orange or purple-green grading. Clean digital quality, no analog warmth",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "gojira-1954",
@@ -1031,7 +1297,20 @@
         "tape artifacts (film medium)",
         "modern compositing"
       ],
-      "color_science": "35mm black-and-white negative — high contrast, deep blacks, bright highlights. No color. Film stock chosen for dramatic impact and wartime availability. Heavy grain adds to horror atmosphere"
+      "color_science": "35mm black-and-white negative — high contrast, deep blacks, bright highlights. No color. Film stock chosen for dramatic impact and wartime availability. Heavy grain adds to horror atmosphere",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "godzilla-ektachrome",
@@ -1075,7 +1354,20 @@
         "CGI effects (practical production)",
         "digital color grading (photochemical process)"
       ],
-      "color_science": "Kodak Ektachrome 64 slide film — saturated greens and electric blues, cool cyan shadows, warm amber highlights. Cross-processed version shifts skies to magenta. Slide film has high contrast with limited shadow detail. Candy-colored destruction looks like a travel magazine"
+      "color_science": "Kodak Ektachrome 64 slide film — saturated greens and electric blues, cool cyan shadows, warm amber highlights. Cross-processed version shifts skies to magenta. Slide film has high contrast with limited shadow detail. Candy-colored destruction looks like a travel magazine",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "showa-godzilla",
@@ -1116,7 +1408,20 @@
         "tape tracking noise (shot on film, dubbed to broadcast tape)",
         "modern compositing"
       ],
-      "color_science": "35mm Eastmancolor negative — bright saturated primaries (toyetic colors for merchandise), warm skin tones, vibrant miniature set colors. Toho color palette pushed bright and cheerful for family audience. Film stock warmth enhances campy tone"
+      "color_science": "35mm Eastmancolor negative — bright saturated primaries (toyetic colors for merchandise), warm skin tones, vibrant miniature set colors. Toho color palette pushed bright and cheerful for family audience. Film stock warmth enhances campy tone",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "heisei-godzilla",
@@ -1156,7 +1461,20 @@
         "VHS consumer artifacts (theatrical production)",
         "low production value (highest Toho budgets)"
       ],
-      "color_science": "35mm theatrical negative — darker blues and steel grays, serious dramatic grading, detailed miniature lighting. Heisei era pushed toward cooler, more serious palette than Showa. Theatrical-quality color science with deliberate desaturation for gravitas"
+      "color_science": "35mm theatrical negative — darker blues and steel grays, serious dramatic grading, detailed miniature lighting. Heisei era pushed toward cooler, more serious palette than Showa. Theatrical-quality color science with deliberate desaturation for gravitas",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "godzilla-anime",
@@ -1197,7 +1515,20 @@
         "digital macroblocking",
         "modern digital compositing"
       ],
-      "color_science": "Cel animation on film — bold saturated colors (anime palette), speed lines in black ink, impact frames with high contrast. Cherry blossom pinks, atomic breath blues, dramatic reds. Film stock enhances the bold cel paint colors"
+      "color_science": "Cel animation on film — bold saturated colors (anime palette), speed lines in black ink, impact frames with high contrast. Cherry blossom pinks, atomic breath blues, dramatic reds. Film stock enhances the bold cel paint colors",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "youth-mystery-giallo",
@@ -1234,7 +1565,20 @@
         "modern slasher polish",
         "CGI effects"
       ],
-      "color_science": "35mm Techniscope (2-perf) on Eastmancolor 5254 — grainier than standard 4-perf (smaller negative area), warm with magenta fade in prints, Italian color timing, saturated red and green gels. Eastmancolor shifts toward magenta with age. Techniscope's 2.35:1 aspect ratio creates cinematic widescreen framing."
+      "color_science": "35mm Techniscope (2-perf) on Eastmancolor 5254 — grainier than standard 4-perf (smaller negative area), warm with magenta fade in prints, Italian color timing, saturated red and green gels. Eastmancolor shifts toward magenta with age. Techniscope's 2.35:1 aspect ratio creates cinematic widescreen framing.",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "id": "cosmonaut-broadcast",
@@ -1270,7 +1614,21 @@
         "H.264 macroblocking (analog broadcast)",
         "glossy space opera lighting"
       ],
-      "color_science": "SECAM FM color-difference encoding — no cross-color artifacts (unlike PAL/NTSC), gray-blue institutional palette, muted and desaturated. SECAM's line-alternating system creates distinctive color artifacts on vertical edges. Monochrome-leaning in low light due to tube camera sensitivity limits."
+      "color_science": "SECAM FM color-difference encoding — no cross-color artifacts (unlike PAL/NTSC), gray-blue institutional palette, muted and desaturated. SECAM's line-alternating system creates distinctive color artifacts on vertical edges. Monochrome-leaning in low light due to tube camera sensitivity limits.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "cloud-gardener-storybook",
@@ -1306,7 +1664,16 @@
         "modern saturation push",
         "fast motion (gentle pacing)"
       ],
-      "color_science": "16mm reversal film — soft pastel palette, warm studio lighting, reversal stock pushes highlights toward bloom (gentle white glow) rather than clipping. Colors are warm and muted, like faded watercolors. Film chosen for durability in educational distribution, not beauty."
+      "color_science": "16mm reversal film — soft pastel palette, warm studio lighting, reversal stock pushes highlights toward bloom (gentle white glow) rather than clipping. Colors are warm and muted, like faded watercolors. Film chosen for durability in educational distribution, not beauty.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "british-danger-psa",
@@ -1343,7 +1710,21 @@
         "cinematic horror lighting (institutional production)",
         "modern public safety production values"
       ],
-      "color_science": "16mm Kodachrome reversal — warm reds and magenta cast, muted British daylight, institutional flat lighting. Kodachrome's signature warm palette makes even gray overcast days look warm. Reversal stock has high contrast with limited shadow detail. Colors remain stable over decades (Kodachrome is archival-stable)."
+      "color_science": "16mm Kodachrome reversal — warm reds and magenta cast, muted British daylight, institutional flat lighting. Kodachrome's signature warm palette makes even gray overcast days look warm. Reversal stock has high contrast with limited shadow detail. Colors remain stable over decades (Kodachrome is archival-stable).",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "soviet-industrial-doc",
@@ -1379,7 +1760,21 @@
         "cyberpunk neon (institutional production)",
         "modern factory cleanliness"
       ],
-      "color_science": "35mm Svema film stock — muted cyan-green cast, coarser grain than Kodak/Agfa, desaturated collectivist palette, cold winter light. Svema's color science shifted toward cyan-green in all conditions. Low light pushed the stock toward near-monochrome. Film quality reflected Soviet manufacturing limitations."
+      "color_science": "35mm Svema film stock — muted cyan-green cast, coarser grain than Kodak/Agfa, desaturated collectivist palette, cold winter light. Svema's color science shifted toward cyan-green in all conditions. Low light pushed the stock toward near-monochrome. Film quality reflected Soviet manufacturing limitations.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "endtimes-instructional-vhs",
@@ -1415,7 +1810,21 @@
         "cinematic lighting (church basement fluorescents)",
         "modern apocalypse blockbuster production values"
       ],
-      "color_science": "Consumer VHS white balance — beige fluorescent cast, washed-out colors, sincere muted tone. VHS color-under encoding bleeds colors on edges. Fluorescent lighting pushes everything greenish. Cheap analog video switcher CG titles have limited color palette (usually white/yellow text on blue background)."
+      "color_science": "Consumer VHS white balance — beige fluorescent cast, washed-out colors, sincere muted tone. VHS color-under encoding bleeds colors on edges. Fluorescent lighting pushes everything greenish. Cheap analog video switcher CG titles have limited color palette (usually white/yellow text on blue background).",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "dead-mall-arcade",
@@ -1452,7 +1861,21 @@
         "modern liminal space aesthetic",
         "steady professional camera work"
       ],
-      "color_science": "Video8 color-under encoding — similar to VHS but slightly higher bandwidth, colors bleed less but still smear on high-contrast edges. Auto white balance hunts between fluorescent overhead and CRT glow. Dark arcade scenes push the camcorder into high gain, adding visible noise. Neon game screens bloom against dark backgrounds."
+      "color_science": "Video8 color-under encoding — similar to VHS but slightly higher bandwidth, colors bleed less but still smear on high-contrast edges. Auto white balance hunts between fluorescent overhead and CRT glow. Dark arcade scenes push the camcorder into high gain, adding visible noise. Neon game screens bloom against dark backgrounds.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "pizza-palace-cctv",
@@ -1489,7 +1912,20 @@
         "VHS tracking noise (IP cameras)",
         "cinematic lighting (security cameras)"
       ],
-      "color_science": "H.264 NVR digital surveillance — desaturated daytime feeds, green IR night vision, UI chrome in blue/gray. Each camera feed has independent color balance. H.264 compression creates macroblocks in motion areas (correct for digital codec). Low bitrate causes motion stutter and posterization. Security software UI uses utilitarian blue-gray interface."
+      "color_science": "H.264 NVR digital surveillance — desaturated daytime feeds, green IR night vision, UI chrome in blue/gray. Each camera feed has independent color balance. H.264 compression creates macroblocks in motion areas (correct for digital codec). Low bitrate causes motion stutter and posterization. Security software UI uses utilitarian blue-gray interface.",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "id": "prestige-puppet-noir",
@@ -1526,7 +1962,16 @@
         "children's show brightness (noir grading)",
         "VHS color bleed"
       ],
-      "color_science": "Arri Alexa log digital cinema — muted blues and amber practicals, shallow DOF, teal-orange grade. Clean digital image with fine sensor noise in shadows. The Alexa's wide dynamic range captures both neon highlights and dark alley shadows. Teal-orange color grade is the signature prestige TV look of the 2010s. No tape artifacts, no film grain — pure digital cinema."
+      "color_science": "Arri Alexa log digital cinema — muted blues and amber practicals, shallow DOF, teal-orange grade. Clean digital image with fine sensor noise in shadows. The Alexa's wide dynamic range captures both neon highlights and dark alley shadows. Teal-orange color grade is the signature prestige TV look of the 2010s. No tape artifacts, no film grain — pure digital cinema.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "sea-town-puppet-horror",
@@ -1563,7 +2008,20 @@
         "cinematic horror lighting (public access fluorescents)",
         "modern puppet production values"
       ],
-      "color_science": "Consumer VHS camcorder — auto white balance hunting between fluorescents and practical lamps, greenish fluorescent cast, color-under bleed on puppet edges. Coastal public-access studios had poor lighting (mixed fluorescents and tungsten desk lamps), creating inconsistent color temperature. VHS encoding smears the handmade puppet textures."
+      "color_science": "Consumer VHS camcorder — auto white balance hunting between fluorescents and practical lamps, greenish fluorescent cast, color-under bleed on puppet edges. Coastal public-access studios had poor lighting (mixed fluorescents and tungsten desk lamps), creating inconsistent color temperature. VHS encoding smears the handmade puppet textures.",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "visual_description": "Bright primary colors, still frames with Ken Burns zoom, cheerful narrator voiceover, hand-drawn diagrams, film projector clicks between slides, optimistic tone about science and progress.",
@@ -1599,7 +2057,21 @@
       "id": "educational-filmstrip",
       "name": "1970s Educational Filmstrip",
       "wrongness": "Aggressively cheerful educational content that treats mundane topics (hygiene, recycling) with the gravity of space exploration.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Purple and gold graphics, crystal ball close-ups, tarot card spreads, mystic fog effects, dramatic zooms on caller reactions, late-night broadcast quality with tracking errors.",
@@ -1635,7 +2107,20 @@
       "id": "psychic-hotline",
       "name": "1980s Public Access Psychic Hotline",
       "wrongness": "Mystical promises delivered through the cheapest possible production values — cosmic wisdom via public access cable.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "visual_description": "Overhead shots of Sbarro and Panda Express, happy families eating, slow-motion cheese pulls, upbeat corporate jingle, bright fluorescent lighting, 'Coming Soon' graphics.",
@@ -1671,7 +2156,21 @@
       "id": "mall-food-court",
       "name": "1990s Mall Food Court Commercial",
       "wrongness": "Corporate optimism about mass-produced food, treating mall food courts like fine dining experiences.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Black and white 35mm news footage, Godzilla destroying miniature cities, dramatic orchestral stings, news anchor voiceover, film scratches, urgent tone.",
@@ -1707,7 +2206,20 @@
       "id": "kaiju-newsreel",
       "name": "1960s Japanese Kaiju Newsreel",
       "wrongness": "Treating fictional monster attacks with the gravitas of actual war footage.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "visual_description": "Neon leotards, high-waisted leggings, VHS camcorder quality, mirrored studio, enthusiastic instructor, synth soundtrack, 'Feel the Burn' graphics.",
@@ -1743,7 +2255,21 @@
       "id": "aerobics-instructional",
       "name": "1980s Aerobics Instructional",
       "wrongness": "Aggressive fitness enthusiasm delivered through low-quality home video production.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Funky wah-wah soundtrack, freeze frames with title cards, zoom-ins on cool poses, muscle cars, afros, urban locations, 'Coming to Theaters' graphics.",
@@ -1779,7 +2305,16 @@
       "id": "blaxploitation-trailer",
       "name": "1970s Blaxploitation Trailer",
       "wrongness": "Exploitation cinema aesthetics applied to mundane modern scenarios — treating everyday life like a 1970s action film.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Windows 95 desktop capture, modem connection sounds, pixelated cursor movements, 'You've Got Mail' notifications, low-resolution screen recordings, optimistic tech enthusiasm.",
@@ -1815,7 +2350,16 @@
       "id": "dialup-tutorial",
       "name": "1990s Dial-Up Internet Tutorial",
       "wrongness": "Treating painfully slow dial-up connections with the excitement of futuristic technology.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Awkward actors, stilted dialogue, cheesy reenactments, 'What Would You Do?' scenarios, motivational narrator, VHS distribution quality.",
@@ -1851,7 +2395,21 @@
       "id": "corporate-training",
       "name": "1980s Corporate Training Video",
       "wrongness": "Serious workplace scenarios performed by non-actors with the production values of a school play.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Vivid Technicolor reds, elaborate murder set pieces, progressive rock soundtrack, black-gloved killer POV, art deco interiors, stylized violence.",
@@ -1887,7 +2445,20 @@
       "id": "giallo-horror",
       "name": "1970s Italian Giallo Horror",
       "wrongness": "Beautiful cinematography applied to gruesome content — treating horror like high art.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "visual_description": "Hard sell tactics, 'But Wait There's More!' graphics, before/after demonstrations, toll-free number overlays, desperate enthusiasm, U-matic broadcast quality.",
@@ -1923,7 +2494,21 @@
       "id": "late-night-infomercial",
       "name": "1980s Late Night Infomercial",
       "wrongness": "Aggressive salesmanship for questionable products, delivered with manic energy at 3 AM.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Handheld 16mm camera, jump cuts, natural lighting, existential dialogue, cigarette smoking, Parisian locations, jazz soundtrack.",
@@ -1959,7 +2544,16 @@
       "id": "french-new-wave",
       "name": "1960s French New Wave",
       "wrongness": "Pretentious art cinema aesthetics applied to mundane modern life — treating coffee runs like existential crises.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Rapid cuts, fish-eye lens, graffiti backgrounds, hip-hop fashion, turntable scratching, 'World Premiere' graphics, Betacam SP broadcast quality.",
@@ -1995,7 +2589,15 @@
       "id": "mtv-music-video",
       "name": "1990s MTV Music Video",
       "wrongness": "High-energy music video aesthetics applied to non-musical content — treating everything like a rap video.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Shaw Brothers studio sets, wire-fu effects, dramatic zooms, orchestral stings, training montages, 'Coming Attractions' graphics.",
@@ -2031,7 +2633,15 @@
       "id": "kung-fu-movie",
       "name": "1970s Kung Fu Movie",
       "wrongness": "Martial arts cinema grandeur applied to everyday conflicts — treating minor inconveniences like epic battles.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Neon Tokyo nights, convertible driving, synth-pop soundtrack, pastel colors, beach sunsets, urban sophistication, VHS camcorder quality.",
@@ -2067,7 +2677,15 @@
       "id": "city-pop",
       "name": "1980s Japanese City Pop",
       "wrongness": "Luxurious lifestyle content filtered through low-quality home video — champagne tastes on a beer budget aesthetic.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Desaturated colors, handheld camera, flannel shirts, warehouse locations, distorted guitars, 'Alternative Nation' graphics, Betacam SP quality.",
@@ -2103,7 +2721,15 @@
       "id": "grunge-music-video",
       "name": "1990s Grunge Music Video",
       "wrongness": "Authentic angst delivered through corporate music television — rebellion packaged for mass consumption.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Star-studded cast, miniature effects, dramatic orchestral score, 'The Day the Earth Stood Still' graphics, optical printer effects, urgent narration.",
@@ -2139,7 +2765,20 @@
       "id": "disaster-movie",
       "name": "1970s Disaster Movie Trailer",
       "wrongness": "Catastrophic scenarios treated with 1970s special effects limitations — obvious miniatures and matte paintings presented as realistic disasters.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "visual_description": "Live product demonstrations, 'Only 5 Left!' urgency, host enthusiasm, call-in testimonials, U-matic broadcast quality, late-night scheduling.",
@@ -2175,7 +2814,21 @@
       "id": "home-shopping",
       "name": "1980s Home Shopping Network",
       "wrongness": "Desperate sales tactics disguised as friendly advice — treating viewers like marks while pretending to be their friend.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "16mm beach footage, surf rock soundtrack, slow-motion wave riding, woodie wagons, bikini-clad beachgoers, 'Endless Summer' aesthetics.",
@@ -2211,7 +2864,20 @@
       "id": "surf-movie",
       "name": "1960s Surf Movie",
       "wrongness": "Carefree beach lifestyle documented with serious cinematic technique — treating surfing like high art.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "grounded in the visual scene, period-appropriate",
+        "examples": [
+          "This scene is exactly what it looks like.",
+          "Everything down the middle — no overacting."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Ken Burns effect on photos, thoughtful narration, classical music, historical footage, educational tone, Betacam SP broadcast quality.",
@@ -2247,7 +2913,21 @@
       "id": "pbs-documentary",
       "name": "1990s PBS Documentary",
       "wrongness": "Scholarly documentary treatment of trivial modern topics — treating memes with the gravity of historical events.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Neon arcade cabinets, quarter-eating close-ups, excited kids, 'High Score' graphics, synth soundtrack, VHS commercial quality.",
@@ -2283,7 +2963,21 @@
       "id": "arcade-commercial",
       "name": "1980s Arcade Game Commercial",
       "wrongness": "Treating arcade games with the production values of car commercials — serious advertising for children's entertainment.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Freeze frames with character names, car chases, funk soundtrack, urban locations, 'Starring' graphics, 35mm film quality.",
@@ -2319,7 +3013,21 @@
       "id": "cop-show-credits",
       "name": "1970s Cop Show Opening Credits",
       "wrongness": "Dramatic television opening credits for mundane daily activities — treating morning commutes like police procedurals.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Fish-eye lens, VHS camcorder quality, punk soundtrack, urban locations, trick slow-motion, 'World Industries' graphics.",
@@ -2355,7 +3063,16 @@
       "id": "skate-video",
       "name": "1990s Skate Video",
       "wrongness": "Amateur skate videos with professional-level production aspirations — DIY aesthetics meeting genuine skill.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Dramatic zooms, orchestral stings, mansion interiors, romantic triangles, 'Previously On' recaps, U-matic broadcast quality.",
@@ -2391,7 +3108,21 @@
       "id": "soap-opera",
       "name": "1980s Soap Opera",
       "wrongness": "Melodramatic soap opera treatment of everyday relationships — treating minor disagreements like epic betrayals.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Live audience, multiple acts, glitter costumes, orchestra pit, 'And Now' introductions, 2-inch quad tape quality.",
@@ -2427,7 +3158,15 @@
       "id": "variety-show",
       "name": "1970s Variety Show",
       "wrongness": "Lavish variety show production for simple talent — treating amateur performances like Broadway spectacles.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "visual_description": "Handheld cameras, confessional interviews, dramatic music stings, 'Real World' aesthetics, Betacam SP quality.",
@@ -2463,7 +3202,21 @@
       "id": "reality-tv",
       "name": "1990s Reality TV",
       "wrongness": "'Real' people performing for cameras while pretending to be authentic — manufactured drama presented as documentary.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Cel animation, dramatic poses, J-pop soundtrack, title cards, transformation sequences, 16mm film quality.",
@@ -2499,7 +3252,21 @@
       "id": "anime-opening",
       "name": "1980s Anime Opening",
       "wrongness": "Epic anime opening treatment of mundane activities — treating morning routines like magical girl transformations.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Contestant podiums, buzzer sounds, prize showcases, enthusiastic host, 'Come On Down' graphics, 2-inch quad tape quality.",
@@ -2535,7 +3302,21 @@
       "id": "game-show",
       "name": "1970s Game Show",
       "wrongness": "High-stakes game show excitement for trivial prizes — treating everyday choices like life-changing opportunities.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Screen recordings, cursor movements, enthusiastic narration, 'Revolutionary' claims, low-resolution capture, optimistic tech enthusiasm.",
@@ -2571,7 +3352,21 @@
       "id": "tech-demo",
       "name": "1990s Tech Demo",
       "wrongness": "Treating basic software features with the excitement of moon landings — revolutionary claims for incremental improvements.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Muscular poses, dramatic lighting, trash talk, 'Coming to Your City' graphics, VHS commercial quality, pyrotechnics.",
@@ -2607,7 +3402,21 @@
       "id": "wrestling-promo",
       "name": "1980s Wrestling Promo",
       "wrongness": "Over-the-top wrestling theatrics applied to mundane conflicts — treating minor disagreements like championship grudge matches.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "visual_description": "Trench coats, smoky offices, jazz soundtrack, femme fatales, 'Private Eye' graphics, 35mm film quality.",
@@ -2643,7 +3452,20 @@
       "id": "detective-show",
       "name": "1970s Detective Show",
       "wrongness": "Hardboiled detective noir applied to modern problems — treating lost keys like murder investigations.",
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "id": "kodachrome-appliance-tomorrow-reel",
@@ -2683,7 +3505,21 @@
         "phone vertical HDR",
         "CRT scanline moire"
       ],
-      "color_science": "Kodachrome II has dense, archival-looking color with strong reds, clean yellows, and comparatively restrained grain. Highlights hold shape better than cheap video, while shadows can become warm and blocky under tungsten interiors."
+      "color_science": "Kodachrome II has dense, archival-looking color with strong reds, clean yellows, and comparatively restrained grain. Highlights hold shape better than cheap video, while shadows can become warm and blocky under tungsten interiors.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "ansco-drive-in-rocket-ballet",
@@ -2722,7 +3558,15 @@
         "VHS head switching",
         "smartphone lens flare"
       ],
-      "color_science": "Ansco Color often feels softer and less stable than Kodachrome, with candy reds, creamy yellows, and a tendency toward nostalgic fading. Skin and food can skew theatrical rather than natural, especially under hard studio lamps."
+      "color_science": "Ansco Color often feels softer and less stable than Kodachrome, with candy reds, creamy yellows, and a tendency toward nostalgic fading. Skin and food can skew theatrical rather than natural, especially under hard studio lamps.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "british-satellite-manners-16mm",
@@ -2761,7 +3605,21 @@
         "vertical phone framing",
         "AI glossy bokeh"
       ],
-      "color_science": "Black-and-white 16mm compresses the world into chalky mids, silvery highlights, and dense schoolroom shadows. Fluorescent lighting makes faces pale and institutional rather than cinematic."
+      "color_science": "Black-and-white 16mm compresses the world into chalky mids, silvery highlights, and dense schoolroom shadows. Fluorescent lighting makes faces pale and institutional rather than cinematic.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "super8-hover-scooter-holiday",
@@ -2801,7 +3659,21 @@
         "CCTV timestamp",
         "desktop cursor trails"
       ],
-      "color_science": "Super 8 Kodachrome produces jewel-like saturation in reds, blues, and sunlit skin, but highlights clip quickly in beach conditions. The small frame makes grain and softness part of the emotional texture."
+      "color_science": "Super 8 Kodachrome produces jewel-like saturation in reds, blues, and sunlit skin, but highlights clip quickly in beach conditions. The small frame makes grain and softness part of the emotional texture.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "portapak-dome-city-petition",
@@ -2840,7 +3712,21 @@
         "film sprocket holes",
         "DSLR shallow depth of field"
       ],
-      "color_science": "This Portapak register is black-and-white video, so color is replaced by coarse luma contrast and muddy gray separation. Bright paper and sky bloom early, while faces flatten into a civic-documentary softness."
+      "color_science": "This Portapak register is black-and-white video, so color is replaced by coarse luma contrast and muddy gray separation. Bright paper and sky bloom early, while faces flatten into a civic-documentary softness.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "umatic-expo-robot-host",
@@ -2879,7 +3765,20 @@
         "H.265 macroblocks",
         "screen-record cursor"
       ],
-      "color_science": "Early U-matic color is soft and unstable, with noisy reds, weak blues, and tube-camera highlight trails. Skin tones can look waxy because chroma resolution is much lower than luma detail."
+      "color_science": "Early U-matic color is soft and unstable, with noisy reds, weak blues, and tube-camera highlight trails. Skin tones can look waxy because chroma resolution is much lower than luma detail.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "agfa-autostrada-solar-motel",
@@ -2919,7 +3818,21 @@
         "vertical app UI",
         "digital sharpening halos"
       ],
-      "color_science": "Agfa-Gevaert color stock from this period can feel warm, earthy, and slightly muted compared with American sponsor-film color. Oranges and reds survive strongly while skies and shadows drift toward dusty cyan."
+      "color_science": "Agfa-Gevaert color stock from this period can feel warm, earthy, and slightly muted compared with American sponsor-film color. Oranges and reds survive strongly while skies and shadows drift toward dusty cyan.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "betamax-basement-weather-control",
@@ -2958,7 +3871,16 @@
         "TikTok beauty filter",
         "webcam autofocus pulsing"
       ],
-      "color_science": "Betamax often preserves sharper luminance than consumer VHS, but chroma remains soft and prone to crawl. Mixed household lighting creates yellow-green skin and a strangely serious basement atmosphere."
+      "color_science": "Betamax often preserves sharper luminance than consumer VHS, but chroma remains soft and prone to crawl. Mixed household lighting creates yellow-green skin and a strangely serious basement atmosphere.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "secam-videotex-future-desk",
@@ -2997,7 +3919,16 @@
         "smartphone vertical UI",
         "H.264 macroblocking"
       ],
-      "color_science": "SECAM video separates color differently from NTSC and PAL, often producing stable but soft chroma with muted office tones. CRT terminal colors glow harder than faces, making the screen feel more alive than the room."
+      "color_science": "SECAM video separates color differently from NTSC and PAL, often producing stable but soft chroma with muted office tones. CRT terminal colors glow harder than faces, making the screen feel more alive than the room.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "snowmobile-telemedicine-grant-film",
@@ -3036,7 +3967,21 @@
         "webcam compression",
         "anamorphic flare"
       ],
-      "color_science": "Fujicolor 16mm handles blues and greens with clean coolness, making snow scenes crisp but prone to glare. Fluorescent interiors push skin slightly green, reinforcing the institutional grant-film feel."
+      "color_science": "Fujicolor 16mm handles blues and greens with clean coolness, making snow scenes crisp but prone to glare. Fluorescent interiors push skin slightly green, reinforcing the institutional grant-film feel.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "video8-apartment-karaoke-future",
@@ -3076,7 +4021,15 @@
         "desktop mouse cursor",
         "CCTV infrared glare"
       ],
-      "color_science": "Video8 consumer color is noisy and compressed, especially in reds from neon signage and household decorations. Fluorescent light pushes skin green-blue while steam and highlights smear softly across the tape image."
+      "color_science": "Video8 consumer color is noisy and compressed, especially in reds from neon signage and household decorations. Fluorescent light pushes skin green-blue while steam and highlights smear softly across the tape image.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "betacam-sp-eco-office-launch",
@@ -3115,7 +4068,16 @@
         "phone HDR",
         "H.264 pixel blocks"
       ],
-      "color_science": "Betacam SP has cleaner component color than consumer tape, with controlled saturation and broadcast-safe highlights. Pale woods, plants, and skin tones stay calm rather than punchy, creating a restrained corporate color field."
+      "color_science": "Betacam SP has cleaner component color than consumer tape, with controlled saturation and broadcast-safe highlights. Pale woods, plants, and skin tones stay calm rather than punchy, creating a restrained corporate color field.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "hi8-solar-ranchera-infomercial",
@@ -3155,7 +4117,15 @@
         "web video buffering icon",
         "smartphone portrait blur"
       ],
-      "color_science": "Hi8 improves sharpness over Video8 but keeps noisy, fragile chroma. Harsh desert sun clips whites and pushes reds from clothing, instruments, and signage into smeared saturation."
+      "color_science": "Hi8 improves sharpness over Video8 but keeps noisy, fragile chroma. Harsh desert sun clips whites and pushes reds from clothing, instruments, and signage into smeared saturation.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "czech-stopmotion-transit-future",
@@ -3194,7 +4164,15 @@
         "smartphone HDR",
         "CCTV timestamp"
       ],
-      "color_science": "35mm tabletop animation captures warm tungsten highlights and dense shadows around tiny objects. Colors feel physical and paint-bound, with paper whites yellowing and brass elements catching hard specular glints."
+      "color_science": "35mm tabletop animation captures warm tungsten highlights and dense shadows around tiny objects. Colors feel physical and paint-bound, with paper whites yellowing and brass elements catching hard specular glints.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "laserdisc-fitness-karaoke",
@@ -3234,7 +4212,15 @@
         "Super 8 gate weave",
         "phone vertical crop"
       ],
-      "color_science": "LaserDisc preserves a relatively stable analog image but composite color can shimmer around saturated neon clothing and subtitles. Highlights are bright and video-clean, while edges show rainbow crawl from encoding."
+      "color_science": "LaserDisc preserves a relatively stable analog image but composite color can shimmer around saturated neon clothing and subtitles. Highlights are bright and video-clean, while edges show rainbow crawl from encoding.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "quicktake-pet-robot-demo",
@@ -3274,7 +4260,20 @@
         "interlaced motion",
         "CCTV infrared noise"
       ],
-      "color_science": "Early consumer digital color is crude, with weak dynamic range and odd white balance under tungsten lamps. Beige interiors become muddy, while flash-lit plastic jumps forward with harsh specular highlights."
+      "color_science": "Early consumer digital color is crude, with weak dynamic range and odd white balance under tungsten lamps. Beige interiors become muddy, while flash-lit plastic jumps forward with harsh specular highlights.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "pc98-cafeteria-tomorrow-cutscene",
@@ -3314,7 +4313,15 @@
         "modern vector UI blur",
         "ray-traced reflections"
       ],
-      "color_science": "PC-98 style color relies on restrained palettes and patterned dithering to suggest gradients. Fluorescent interiors become mint, beige, and lavender fields rather than photographic light."
+      "color_science": "PC-98 style color relies on restrained palettes and patterned dithering to suggest gradients. Fluorescent interiors become mint, beige, and lavender fields rather than photographic light.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "realvideo-dorm-web-prophet",
@@ -3354,7 +4361,15 @@
         "VHS tracking lines",
         "anamorphic bokeh"
       ],
-      "color_science": "Early webcam-to-RealVideo color is muddy, low-bit, and heavily quantized. Desk-lamp warmth becomes orange sludge, while blue computer light collapses into noisy gray-cyan."
+      "color_science": "Early webcam-to-RealVideo color is muddy, low-bit, and heavily quantized. Desk-lamp warmth becomes orange sludge, while blue computer light collapses into noisy gray-cyan.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "nokia-snow-sms-cinema",
@@ -3393,7 +4408,15 @@
         "VHS color bleed",
         "DSLR depth of field"
       ],
-      "color_science": "Early mobile CMOS color is weak, blue-biased in snow, and easily overwhelmed by streetlights. Skin tones flatten, while dark winter backgrounds dissolve into chroma noise."
+      "color_science": "Early mobile CMOS color is weak, blue-biased in snow, and easily overwhelmed by streetlights. Skin tones flatten, while dark winter backgrounds dissolve into chroma noise.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "minidv-aquarium-office-orientation",
@@ -3432,7 +4455,16 @@
         "CCTV infrared LEDs",
         "smartphone HDR stacking"
       ],
-      "color_science": "MiniDV gives crisp luma but weak color sampling, so saturated aquarium blues smear around edges. Fluorescent office light clips pale skin and makes glassy surfaces feel overexposed."
+      "color_science": "MiniDV gives crisp luma but weak color sampling, so saturated aquarium blues smear around edges. Fluorescent office light clips pale skin and makes glassy surfaces feel overexposed.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "flash-cyber-samba-banner",
@@ -3472,7 +4504,15 @@
         "analog interlacing",
         "cinematic lens blur"
       ],
-      "color_science": "Flash-era color is pure screen RGB rather than camera color, with saturated fills and simple gradients. There is no natural highlight rolloff; colors switch, pulse, and flatten like interface objects."
+      "color_science": "Flash-era color is pure screen RGB rather than camera color, with saturated fills and simple gradients. There is no natural highlight rolloff; colors switch, pulse, and flatten like interface objects.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "vcd-tuition-space-commerce",
@@ -3511,7 +4551,16 @@
         "VHS head switching",
         "smartphone vertical UI"
       ],
-      "color_science": "VCD color is heavily compressed and low resolution, so bright markers, shirts, and chroma-key backgrounds bleed into blocks. Fluorescent classroom lighting makes whites harsh and skin tones yellow-green."
+      "color_science": "VCD color is heavily compressed and low resolution, so bright markers, shirts, and chroma-key backgrounds bleed into blocks. Fluorescent classroom lighting makes whites harsh and skin tones yellow-green.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "h264-parking-smartcity-cctv",
@@ -3550,7 +4599,20 @@
         "handheld camcorder zoom",
         "shallow depth of field"
       ],
-      "color_science": "Early IP CCTV color is utilitarian and green-biased under fluorescent tubes. Compression sacrifices shadow nuance first, turning concrete corners and dark cars into pulsing block fields."
+      "color_science": "Early IP CCTV color is utilitarian and green-biased under fluorescent tubes. Compression sacrifices shadow nuance first, turning concrete corners and dark cars into pulsing block fields.",
+      "dialogue_guide": {
+        "tone": "whispered dread, fragmented sentences",
+        "examples": [
+          "Did you hear that?",
+          "Don't look behind you.",
+          "It's already inside the house."
+        ],
+        "banned_phrases": [
+          "lol",
+          "bruh",
+          "no cap"
+        ]
+      }
     },
     {
       "id": "dvd-menu-apartment-cooking-sim",
@@ -3589,7 +4651,16 @@
         "vertical phone interface",
         "VHS tracking noise"
       ],
-      "color_science": "DVD-era MPEG-2 preserves warm kitchen color but creates mosquito noise around text, steam, and shiny dishes. MiniDV source footage keeps crisp edges while chroma sampling softens reds and food detail."
+      "color_science": "DVD-era MPEG-2 preserves warm kitchen color but creates mosquito noise around text, steam, and shiny dishes. MiniDV source footage keeps crisp edges while chroma sampling softens reds and food detail.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "3gp-market-phone-drama",
@@ -3629,7 +4700,15 @@
         "desktop cursor",
         "anamorphic lens flare"
       ],
-      "color_science": "3GP phone video compresses color aggressively, turning saturated fabrics into noisy blocks. Harsh sun clips skin and metal surfaces while shaded stalls drop into muddy reds and browns."
+      "color_science": "3GP phone video compresses color aggressively, turning saturated fabrics into noisy blocks. Harsh sun clips skin and metal surfaces while shaded stalls drop into muddy reds and browns.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "dashcam-ice-road-delivery",
@@ -3669,7 +4748,15 @@
         "studio softbox reflection",
         "screen-record mouse cursor"
       ],
-      "color_science": "Early dashcam color is cold and limited, with blue shadows and blown headlight highlights. Compression treats snow and road texture as unstable gray blocks during motion."
+      "color_science": "Early dashcam color is cold and limited, with blue shadows and blown headlight highlights. Compression treats snow and road texture as unstable gray blocks during motion.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "avchd-microdrone-club",
@@ -3709,7 +4796,16 @@
         "CCTV timestamp",
         "Flash vector tweening"
       ],
-      "color_science": "Early AVCHD consumer HD is sharper than tape but fragile under fast motion. Gym fluorescents create pale green casts, while plastic drone highlights clip into hard digital whites."
+      "color_science": "Early AVCHD consumer HD is sharper than tape but fragile under fast motion. Gym fluorescents create pale green casts, while plastic drone highlights clip into hard digital whites.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "camtasia-wellness-portal",
@@ -3749,7 +4845,16 @@
         "handheld camera shake",
         "CCTV infrared glare"
       ],
-      "color_science": "Screen recording color is direct sRGB, with flat gradients and no camera response curve. Compression softens small text and turns pale interface blues into mushy corporate calm."
+      "color_science": "Screen recording color is direct sRGB, with flat gradients and no camera response curve. Compression softens small text and turns pale interface blues into mushy corporate calm.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "dslr-wedding-hologram-entrance",
@@ -3789,7 +4894,15 @@
         "16mm gate weave",
         "CCTV timestamp"
       ],
-      "color_science": "Early DSLR video gives attractive shallow focus but limited dynamic range and brittle H.264 color. Magenta DJ lights and tungsten banquet lamps collide, pushing skin between orange warmth and nightclub purple."
+      "color_science": "Early DSLR video gives attractive shallow focus but limited dynamic range and brittle H.264 color. Magenta DJ lights and tungsten banquet lamps collide, pushing skin between orange warmth and nightclub purple.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "android-busstop-augmented-menu",
@@ -3829,7 +4942,16 @@
         "desktop mouse cursor",
         "Betacam interlacing"
       ],
-      "color_science": "Early smartphone CMOS color in rain exaggerates neon and loses shadow separation. The screen overlay uses clean sRGB colors that feel unnaturally sharp against noisy live camera video."
+      "color_science": "Early smartphone CMOS color in rain exaggerates neon and loses shadow separation. The screen overlay uses clean sRGB colors that feel unnaturally sharp against noisy live camera video.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "vine-maker-robot-snack",
@@ -3869,7 +4991,20 @@
         "CCTV timestamp",
         "LaserDisc chapter pause"
       ],
-      "color_science": "Early smartphone video gives clean but thin color, with fluorescent greens and clipped highlights on metal parts. The square social frame compresses context and makes saturated snack packaging pop harder than the robot."
+      "color_science": "Early smartphone video gives clean but thin color, with fluorescent greens and clipped highlights on metal parts. The square social frame compresses context and makes saturated snack packaging pop harder than the robot.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "periscope-rooftop-farm-live",
@@ -3908,7 +5043,20 @@
         "DVD menu buttons",
         "CRT scanline moire"
       ],
-      "color_science": "Phone live-stream color is contrasty and adaptive, with sky backlight forcing plants and faces into exposure negotiation. Compression breaks leafy greens into moving patches during handheld pans."
+      "color_science": "Phone live-stream color is contrasty and adaptive, with sky backlight forcing plants and faces into exposure negotiation. Compression breaks leafy greens into moving patches during handheld pans.",
+      "dialogue_guide": {
+        "tone": "grounded in the visual scene, period-appropriate",
+        "examples": [
+          "This scene is exactly what it looks like.",
+          "Everything down the middle — no overacting."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "spectacles-pet-delivery-trial",
@@ -3947,7 +5095,16 @@
         "VHS head switching",
         "desktop cursor trails"
       ],
-      "color_science": "Spectacles-style color is bright, social, and phone-adjacent, with strong daylight saturation and limited highlight control. The circular crop makes lawns and sidewalks into curved color bands around the action."
+      "color_science": "Spectacles-style color is bright, social, and phone-adjacent, with strong daylight saturation and limited highlight control. The circular crop makes lawns and sidewalks into curved color bands around the action.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "boomerang-smart-mirror-salon",
@@ -3986,7 +5143,15 @@
         "VHS tracking bands",
         "LaserDisc menu pause"
       ],
-      "color_science": "Instagram-era phone color favors bright skin, pastel overlays, and compressed highlights from ring lights. AR hair colors sit in clean app-space RGB while real salon shadows remain warmer and noisier."
+      "color_science": "Instagram-era phone color favors bright skin, pastel overlays, and compressed highlights from ring lights. AR hair colors sit in clean app-space RGB while real salon shadows remain warmer and noisier.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "twitch-irl-nightmarket-vendor",
@@ -4026,7 +5191,15 @@
         "DVD chapter menu",
         "Super 8 sprocket jitter"
       ],
-      "color_science": "Mobile live-stream color under night-market light is chaotic, with neon blues, LED magentas, and tungsten food-stall orange competing. Compression collapses dark crowd areas while bright signs remain aggressively saturated."
+      "color_science": "Mobile live-stream color under night-market light is chaotic, with neon blues, LED magentas, and tungsten food-stall orange competing. Compression collapses dark crowd areas while bright signs remain aggressively saturated.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "zoom-beta-wellness-commune",
@@ -4066,7 +5239,15 @@
         "CCTV infrared",
         "MiniDV timecode"
       ],
-      "color_science": "Laptop webcam color varies wildly between tiles, with auto white balance making each room its own climate. Compression prioritizes faces while plants, crystals, and backgrounds smear during movement."
+      "color_science": "Laptop webcam color varies wildly between tiles, with auto white balance making each room its own climate. Compression prioritizes faces while plants, crystals, and backgrounds smear during movement.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "ring-doorbell-mutual-aid-robot",
@@ -4106,7 +5287,20 @@
         "handheld zooms",
         "desktop cursor"
       ],
-      "color_science": "Doorbell cameras favor exposure for faces near the porch and often blow out bright sidewalks. Infrared-assisted shade desaturates color, while compression flattens grocery bags and concrete texture."
+      "color_science": "Doorbell cameras favor exposure for faces near the porch and often blow out bright sidewalks. Infrared-assisted shade desaturates color, while compression flattens grocery bags and concrete texture.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "greenscreen-municipal-mermaid-explainer",
@@ -4145,7 +5339,16 @@
         "CCTV timestamp",
         "LaserDisc rainbow crawl"
       ],
-      "color_science": "TikTok phone color is bright and face-prioritized, with app overlays in crisp sRGB. Green-screen processing creates unnatural edge color, especially around hair, sequins, and fast hand gestures."
+      "color_science": "TikTok phone color is bright and face-prioritized, with app overlays in crisp sRGB. Green-screen processing creates unnatural edge color, especially around hair, sequins, and fast hand gestures.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "vertical-hdr-ghost-kitchen-dispatch",
@@ -4185,7 +5388,16 @@
         "CRT scanlines",
         "MiniDV interlacing"
       ],
-      "color_science": "Modern phone HDR holds stainless highlights and shadow detail simultaneously, producing a clean but slightly unreal kitchen image. Food colors look optimized, while skin and fabric can appear too processed and edge-sharpened."
+      "color_science": "Modern phone HDR holds stainless highlights and shadow detail simultaneously, producing a clean but slightly unreal kitchen image. Food colors look optimized, while skin and fabric can appear too processed and edge-sharpened.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "webar-giftshop-dinosaur-filter",
@@ -4225,7 +5437,16 @@
         "analog broadcast interlacing",
         "Super 8 sprocket jitter"
       ],
-      "color_science": "WebAR combines live phone camera color with clean rendered assets, so the dinosaur appears too evenly lit against retail LEDs. Plush colors saturate strongly while tracking errors reveal the gap between camera reality and browser graphics."
+      "color_science": "WebAR combines live phone camera color with clean rendered assets, so the dinosaur appears too evenly lit against retail LEDs. Plush colors saturate strongly while tracking errors reveal the gap between camera reality and browser graphics.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "ai-webcam-cooking-hotline",
@@ -4265,7 +5486,16 @@
         "LaserDisc chapter freeze",
         "Betacam tape dropout"
       ],
-      "color_science": "Webcam color is flat and face-biased, often warmed by monitor light and cooled by kitchen LEDs. AI compositing adds unnaturally smooth skin and inconsistent hand-edge color against real countertops."
+      "color_science": "Webcam color is flat and face-biased, often warmed by monitor light and cooled by kitchen LEDs. AI compositing adds unnaturally smooth skin and inconsistent hand-edge color against real countertops.",
+      "dialogue_guide": {
+        "tone": "casual banter, self-aware humor",
+        "examples": [
+          "This is fine.",
+          "Nobody asked for this.",
+          "Trust me, I planned absolutely none of this."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1990s-hood-documentary-vhs",
@@ -4300,7 +5530,19 @@
         "modern LED lighting (natural/available light)",
         "cinematic depth of field (small sensor)"
       ],
-      "color_science": "Consumer camcorder with Ektachrome-inspired color processing — warm yellows, saturated reds/oranges, rich browns. Skin tones glow in golden hour. Shadows lean toward blue-green. Overall warmth suggests nostalgia and care."
+      "color_science": "Consumer camcorder with Ektachrome-inspired color processing — warm yellows, saturated reds/oranges, rich browns. Skin tones glow in golden hour. Shadows lean toward blue-green. Overall warmth suggests nostalgia and care.",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "early-2000s-hood-reality-tv",
@@ -4335,7 +5577,19 @@
         "shallow depth of field (small sensor)",
         "natural lighting (controlled set)"
       ],
-      "color_science": "Early digital video with broadcast TV color correction — slightly oversaturated, contrast boosted for drama, skin tones can look orange under harsh lighting. Whites clip easily. Overall reality TV orange aesthetic."
+      "color_science": "Early digital video with broadcast TV color correction — slightly oversaturated, contrast boosted for drama, skin tones can look orange under harsh lighting. Whites clip easily. Overall reality TV orange aesthetic.",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "1970s-blaxploitation-cinema",
@@ -4370,7 +5624,15 @@
         "steady-cam smoothness (handheld/zoom)",
         "CGI effects (practical only)"
       ],
-      "color_science": "35mm Eastmancolor with exploitation film processing — warm oranges and browns, slightly faded blacks, skin tones glow with golden undertones. Reds pop (blood, clothing). Overall funky color palette that is both gritty and stylish."
+      "color_science": "35mm Eastmancolor with exploitation film processing — warm oranges and browns, slightly faded blacks, skin tones glow with golden undertones. Reds pop (blood, clothing). Overall funky color palette that is both gritty and stylish.",
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
+      }
     },
     {
       "id": "1954-godzilla-toho-films",
@@ -4405,7 +5667,20 @@
         "modern film speed (slow 1950s stock)",
         "digital sharpness"
       ],
-      "color_science": "High-contrast black and white 35mm film — deep blacks, bright highlights, limited midtones. Night scenes have that classic day-for-night look. Newsreel footage sections are grainier and more contrasty. Overall somber, documentary-like tone."
+      "color_science": "High-contrast black and white 35mm film — deep blacks, bright highlights, limited midtones. Night scenes have that classic day-for-night look. Newsreel footage sections are grainier and more contrasty. Overall somber, documentary-like tone.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "1990s-godzilla-heisei-era",
@@ -4440,7 +5715,20 @@
         "modern color grading (broadcast TV look)",
         "digital stabilization"
       ],
-      "color_science": "1990s broadcast TV color with VHS recording — slightly oversaturated primary colors, energy beam effects glow with blue/purple. Skin tones are TV-standard. Overall more colorful and less somber than 1950s, but still has that Japanese TV drama color palette."
+      "color_science": "1990s broadcast TV color with VHS recording — slightly oversaturated primary colors, energy beam effects glow with blue/purple. Skin tones are TV-standard. Overall more colorful and less somber than 1950s, but still has that Japanese TV drama color palette.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "1980s-kaiju-vs-military-newsreel",
@@ -4475,7 +5763,20 @@
         "modern graphics (period-accurate overlays)",
         "digital sharpness (16mm film)"
       ],
-      "color_science": "16mm news film with harsh processing — high contrast, limited dynamic range, colors look broadcast TV news (slightly oversaturated reds for urgency). Night scenes are very grainy. Overall you were not supposed to see this aesthetic."
+      "color_science": "16mm news film with harsh processing — high contrast, limited dynamic range, colors look broadcast TV news (slightly oversaturated reds for urgency). Night scenes are very grainy. Overall you were not supposed to see this aesthetic.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "1970s-ektachrome-street-photography",
@@ -4510,7 +5811,21 @@
         "HDR dynamic range (slide film has limited latitude)",
         "CGI elements"
       ],
-      "color_science": "Kodak Ektachrome slide film — distinctive warm color palette with saturated yellows and reds, slightly cool shadows, high contrast. Skin tones glow with warmth. Blues are slightly muted. Overall golden age feel that is both vibrant and nostalgic. Very different from Kodachrome."
+      "color_science": "Kodak Ektachrome slide film — distinctive warm color palette with saturated yellows and reds, slightly cool shadows, high contrast. Skin tones glow with warmth. Blues are slightly muted. Overall golden age feel that is both vibrant and nostalgic. Very different from Kodachrome.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "1980s-ektachrome-urban-decay",
@@ -4545,7 +5860,21 @@
         "artificial lighting (available light only)",
         "CGI restoration"
       ],
-      "color_science": "Ektachrome slide film in harsh lighting conditions — saturated rust oranges, deep shadow blacks, bright highlights from sunlight through broken glass. The wrongness of beautiful colors documenting ugly decay. Warm overall palette despite cold subject matter."
+      "color_science": "Ektachrome slide film in harsh lighting conditions — saturated rust oranges, deep shadow blacks, bright highlights from sunlight through broken glass. The wrongness of beautiful colors documenting ugly decay. Warm overall palette despite cold subject matter.",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "2000s-ghetto-fabulous-music-video",
@@ -4580,7 +5909,19 @@
         "stable tripod shots (dynamic movement)",
         "muted colors (saturated is key)"
       ],
-      "color_science": "Early 2000s music video color grading — heavily saturated primary colors, lens flares bloom white/cyan, skin tones slightly orange from lighting. Overall shiny aesthetic with high contrast. Very different from 1990s hip-hop (grittier) or 2010s (more cinematic)."
+      "color_science": "Early 2000s music video color grading — heavily saturated primary colors, lens flares bloom white/cyan, skin tones slightly orange from lighting. Overall shiny aesthetic with high contrast. Very different from 1990s hip-hop (grittier) or 2010s (more cinematic).",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "1960s-japanese-kaiju-tokusatsu",
@@ -4615,7 +5956,20 @@
         "modern film speed (1960s stock)",
         "digital stabilization"
       ],
-      "color_science": "35mm Eastmancolor with 1960s processing — bright saturated primary colors (red, blue, yellow on suits and miniatures), slightly faded blacks, warm skin tones. More colorful and optimistic than 1950s. Overall Saturday matinee color palette that is fun and vibrant."
+      "color_science": "35mm Eastmancolor with 1960s processing — bright saturated primary colors (red, blue, yellow on suits and miniatures), slightly faded blacks, warm skin tones. More colorful and optimistic than 1950s. Overall Saturday matinee color palette that is fun and vibrant.",
+      "dialogue_guide": {
+        "tone": "ominous military narrator or pilot tech-speak",
+        "examples": [
+          "Target emerging from sector 7",
+          "All units brace for impact",
+          "We are not in control of this landing."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr"
+        ]
+      }
     },
     {
       "id": "1990s-south-central-golden-hour",
@@ -4651,7 +6005,19 @@
         "flat lighting (cinematic golden hour)",
         "4K clarity (1990s film stock)"
       ],
-      "color_science": "35mm negative with warm golden-hour grading — deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette"
+      "color_science": "35mm negative with warm golden-hour grading — deep amber, rich oranges, warm skin tones, palm-green shadows. John Singleton/Boyz n the Hood palette",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "2000s-atlanta-trap-house",
@@ -4687,7 +6053,19 @@
         "natural lighting (studio production)",
         "modern digital artifacts"
       ],
-      "color_science": "Consumer camcorder with saturated color grading — purple and magenta dominance, candy paint reflections, gold highlights, lean cup purple. T.I./Young Jeezy era color palette"
+      "color_science": "Consumer camcorder with saturated color grading — purple and magenta dominance, candy paint reflections, gold highlights, lean cup purple. T.I./Young Jeezy era color palette",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "1990s-brooklyn-brownstone",
@@ -4723,7 +6101,19 @@
         "4K clarity (1990s 16mm)",
         "color grading (natural documentary look)"
       ],
-      "color_science": "16mm documentary stock in summer daylight — warm natural tones, vibrant street colors, brownstone red brick, summer green foliage. Spike Lee/Do the Right Thing palette"
+      "color_science": "16mm documentary stock in summer daylight — warm natural tones, vibrant street colors, brownstone red brick, summer green foliage. Spike Lee/Do the Right Thing palette",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "2010s-chicago-drill",
@@ -4758,7 +6148,19 @@
         "studio lighting",
         "professional camera artifacts"
       ],
-      "color_science": "iPhone 4 sensor in overcast Chicago winter — desaturated greys, muted blacks, pale skin tones, no color grading. Raw documentary authenticity"
+      "color_science": "iPhone 4 sensor in overcast Chicago winter — desaturated greys, muted blacks, pale skin tones, no color grading. Raw documentary authenticity",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "1980s-hip-hop-graffiti",
@@ -4795,7 +6197,19 @@
         "4K clarity (1980s film)",
         "color grading (documentary authenticity)"
       ],
-      "color_science": "16mm documentary stock — vibrant graffiti colors pop against grey subway walls, natural skin tones, available light. Wild Style/Beat Street palette"
+      "color_science": "16mm documentary stock — vibrant graffiti colors pop against grey subway walls, natural skin tones, available light. Wild Style/Beat Street palette",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "2000s-mixtape-dvd",
@@ -4831,7 +6245,19 @@
         "minimalist design (maximalist era)",
         "modern design trends"
       ],
-      "color_science": "Digital Photoshop composite — saturated golds, diamond whites, black void backgrounds, aggressive lens flares. DJ Drama/Gangsta Grillz color palette"
+      "color_science": "Digital Photoshop composite — saturated golds, diamond whites, black void backgrounds, aggressive lens flares. DJ Drama/Gangsta Grillz color palette",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "1990s-hood-horror",
@@ -4866,7 +6292,19 @@
         "modern horror aesthetics",
         "digital color grading"
       ],
-      "color_science": "35mm horror film with red/green lighting gels — deep shadows, high contrast, supernatural color palette. Tales from the Hood/Def by Temptation aesthetic"
+      "color_science": "35mm horror film with red/green lighting gels — deep shadows, high contrast, supernatural color palette. Tales from the Hood/Def by Temptation aesthetic",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "2010s-soundcloud-rap",
@@ -4902,7 +6340,19 @@
         "cinematic color grading",
         "studio production values"
       ],
-      "color_science": "iPhone sensor in low-light moshpit — desaturated with occasional neon pops, motion blur, authentic chaos. SoundCloud rap visual palette"
+      "color_science": "iPhone sensor in low-light moshpit — desaturated with occasional neon pops, motion blur, authentic chaos. SoundCloud rap visual palette",
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
+      }
     },
     {
       "id": "south_central_golden_hour_cinema",
@@ -4947,6 +6397,19 @@
         "black_levels": "slightly crushed but warm",
         "highlight_behavior": "soft halation around sunset edges",
         "saturation": "naturalistic, sun-faded, never glossy"
+      },
+      "dialogue_guide": {
+        "tone": "grounded in the visual scene, period-appropriate",
+        "examples": [
+          "This scene is exactly what it looks like.",
+          "Everything down the middle — no overacting."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr",
+          "bruh"
+        ]
       }
     },
     {
@@ -4992,6 +6455,18 @@
         "black_levels": "dense but not crushed",
         "highlight_behavior": "hard summer highlights with sweaty specular shine",
         "saturation": "rich but natural, slightly sun-baked"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5037,6 +6512,18 @@
         "black_levels": "murky in night scenes",
         "highlight_behavior": "harsh practical light blooms",
         "saturation": "graffiti colors pop against dirty neutrals"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5082,6 +6569,18 @@
         "black_levels": "crushed in corners",
         "highlight_behavior": "cheap camera clipping on jewelry and lights",
         "saturation": "uneven, with reds and chrome pushed forward"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5127,6 +6626,18 @@
         "black_levels": "deep but not cinematic-polished",
         "highlight_behavior": "winter sky often clipped or flat",
         "saturation": "desaturated, cold, documentary"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5172,6 +6683,18 @@
         "black_levels": "crushed for impact",
         "highlight_behavior": "fake lens flares and bevel shines",
         "saturation": "oversaturated, aggressive, deliberately tasteless"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5217,6 +6740,18 @@
         "black_levels": "muddy and unstable",
         "highlight_behavior": "fluorescent flicker and cheap gel bloom",
         "saturation": "selectively lurid, especially greens and reds"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5262,6 +6797,14 @@
         "black_levels": "crushed or lifted unpredictably",
         "highlight_behavior": "flash blowouts and clipped LEDs",
         "saturation": "unnatural, app-filtered, emotionally unstable"
+      },
+      "dialogue_guide": {
+        "tone": "lyrical, rhythmic, matches the beat",
+        "examples": [
+          "Drop it like the whole block's watching.",
+          "Night shift — we own this corner."
+        ],
+        "banned_phrases": []
       }
     },
     {
@@ -5307,6 +6850,19 @@
         "black_levels": "cleaner than VHS but not pristine",
         "highlight_behavior": "jewelry sparkle and green-screen edge glow",
         "saturation": "loud, commercial, regional-maximalist"
+      },
+      "dialogue_guide": {
+        "tone": "grounded in the visual scene, period-appropriate",
+        "examples": [
+          "This scene is exactly what it looks like.",
+          "Everything down the middle — no overacting."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr",
+          "bruh"
+        ]
       }
     },
     {
@@ -5352,6 +6908,18 @@
         "black_levels": "crushed and noisy",
         "highlight_behavior": "headlights smear and on-camera light flattens faces",
         "saturation": "high on cars and clothing, dirty in shadows"
+      },
+      "dialogue_guide": {
+        "tone": "natural, grounded, community-authentic real talk",
+        "examples": [
+          "This block never sleeps — you feel me?",
+          "They said we couldn't, so we built it anyway."
+        ],
+        "banned_phrases": [
+          "corporate filler",
+          "synergy",
+          "as per standard policy"
+        ]
       }
     },
     {
@@ -5388,7 +6956,21 @@
         "public warning videos from imaginary governments",
         "mountain-road survival scenes"
       ],
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "post-soviet-bathhouse-telepresence",
@@ -5424,7 +7006,21 @@
         "retro network failure visuals",
         "steam-filled surveillance rooms"
       ],
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "sahelian-solar-cassette-weathercast",
@@ -5460,7 +7056,21 @@
         "development agency retrofutures",
         "desert radio-network scenes"
       ],
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "malay-vcd-orchid-biotech-melodrama",
@@ -5496,7 +7106,20 @@
         "VCD-era trailer frames",
         "tropical corporate sabotage concepts"
       ],
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "grounded in the visual scene, period-appropriate",
+        "examples": [
+          "This scene is exactly what it looks like.",
+          "Everything down the middle — no overacting."
+        ],
+        "banned_phrases": [
+          "Y'all",
+          "no cap",
+          "fr fr",
+          "bruh"
+        ]
+      }
     },
     {
       "id": "basque-hydrofoil-labor-union-futurism",
@@ -5532,7 +7155,21 @@
         "maritime prototype imagery",
         "rainy civic sci-fi frames"
       ],
-      "historical_context": ""
+      "historical_context": "",
+      "dialogue_guide": {
+        "tone": "period-appropriate speech, formal or stylized",
+        "examples": [
+          "Commencing launch sequence.",
+          "Systems nominal. Proceed.",
+          "Attention, all personnel — this is not a drill."
+        ],
+        "banned_phrases": [
+          "gonna",
+          "wanna",
+          "no cap",
+          "bruh"
+        ]
+      }
     }
   ],
   "matching_rules": {
