@@ -252,6 +252,118 @@ def generate_dialogue(scenario: str, hook: str, guide: Optional[dict] = None, pr
     return result
 
 
+# Keyword → (tone, banned_phrases) for inferring dialogue tone from style_id/franchise names
+_TONE_HINTS = {
+    "kaiju": ("ominous military narrator or pilot tech-speak", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "godzilla": ("ominous military narrator or pilot tech-speak", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "gojira": ("ominous military narrator or pilot tech-speak", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "tokusatsu": ("dramatic narrator, heroic declarations", ["Y'all", "no cap", "fr fr"]),
+    "mecha": ("pilot tech-speak, mission briefing tone", ["Y'all", "no cap", "fr fr"]),
+    "super-robot": ("ominous military narrator or pilot tech-speak", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "sitcom": ("warm ensemble banter, comedic timing", ["Target emerging", "All units", "brace for impact"]),
+    "comedy": ("casual humor, self-aware wit", ["Target emerging", "All units", "brace for impact"]),
+    "laugh": ("warm ensemble banter, comedic timing", ["Target emerging", "All units"]),
+    "horror": ("whispered dread, fragmented sentences", ["Y'all", "no cap", "fr fr", "bruh", "lol"]),
+    "vhs": ("eerie narration, unsettling calm", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "space": ("retro-futuristic narration, formal scientific tone", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "astronaut": ("mission control formality, awe-struck wonder", ["Y'all", "no cap", "fr fr"]),
+    "futurism": ("retro-futuristic narration, optimistic technology tone", ["Y'all", "no cap", "fr fr"]),
+    "music": ("lyrical, rhythmic, matches beat energy", ["Target emerging", "All units"]),
+    "mtv": ("energetic VJ-style hype, music video energy", ["Target emerging", "All units"]),
+    "retro": ("period-appropriate speech, nostalgic warmth", ["Y'all", "no cap", "fr fr", "bruh"]),
+    "vintage": ("period-appropriate speech, formal or stylized", ["Y'all", "no cap", "fr fr"]),
+    "anime": ("stylized speech, dramatic declarations", ["no cap", "fr fr"]),
+    "noir": ("hardboiled narration, cynical inner monologue", ["Y'all", "no cap", "fr fr", "bruh", "lol"]),
+    "fantasy": ("archaic/formal speech, mythic tone", ["no cap", "fr fr", "bruh"]),
+    "punk": ("rebellious edge, raw energy", ["sir", "ma'am"]),
+    "western": ("frontier drawl, laconic stoicism", ["no cap", "fr fr"]),
+    "military": ("clipped commands, operational brevity", ["Y'all", "no cap", "fr fr"]),
+    "documentary": ("measured narrator, factual authority", ["Y'all", "no cap", "fr fr"]),
+    "news": ("broadcast authority, urgent clarity", ["Y'all", "no cap", "fr fr"]),
+    "cart": ("high-energy competition commentary", ["Target emerging", "All units"]),
+    "kart": ("high-energy competition commentary", ["Target emerging", "All units"]),
+}
+
+
+def _infer_tone_from_ids(style_id: str, franchise: str = "") -> Optional[dict]:
+    """Infer a dialogue_guide from style_id/franchise (two-tier).
+
+    TIER 1 (fast cache): keyword match over _TONE_HINTS — returned without an
+    API call. TIER 2 (dynamic LLM): if no keyword matches, ask the LLM what
+    tone/banned phrases suit this style name and cache the result for later.
+    FALLBACK: neutral default if the LLM is unavailable/fails.
+    """
+    combined = f"{style_id} {franchise}".lower().replace("-", " ").replace("_", " ")
+    for keyword, (tone, banned) in _TONE_HINTS.items():
+        if keyword in combined:
+            return {"tone": tone, "banned_phrases": banned, "examples": []}
+
+    # Tier 2: dynamic LLM inference for arbitrary style names.
+    guide = _run_async(_llm_infer_tone(style_id, franchise)) or {}
+    tone = guide.get("tone")
+    if not tone:
+        print(f"[TONE] No tone inferred for '{style_id}' (franchise '{franchise}'); using neutral default", flush=True)
+        return {"tone": "neutral in-scene narration", "banned_phrases": [], "examples": []}
+
+    # Cache so the same style doesn't hit the LLM again.
+    _TONE_HINTS[combined.strip() or style_id] = (tone, guide.get("banned_phrases") or [])
+    return {"tone": tone, "banned_phrases": guide.get("banned_phrases") or [], "examples": []}
+
+
+async def _llm_infer_tone(style_id: str, franchise: str) -> dict:
+    """Ask the LLM for dialogue tone + banned phrases for an arbitrary style name."""
+    try:
+        from services.research.app import call_llm
+    except Exception as exc:  # noqa: BLE001
+        print(f"[TONE] LLM client unavailable ({exc}); neutral fallback", flush=True)
+        return {}
+    user_msg = (
+        f'Given this video aesthetic/style name: "{style_id}" (franchise: "{franchise}"), '
+        f"what dialogue tone would be appropriate? What phrases should be BANNED because they "
+        f"clash with this aesthetic? Respond in JSON: "
+        f'{{"tone": "description of appropriate dialogue tone", "banned_phrases": ["phrase1", "phrase2"]}}'
+    )
+    messages = [
+        {"role": "system", "content": "You infer dialogue tone for AI video aesthetics. Reply only with valid JSON."},
+        {"role": "user", "content": user_msg},
+    ]
+    try:
+        raw = await call_llm(messages, max_tokens=256)
+    except Exception as exc:
+        print(f"[TONE] LLM tone inference failed: {exc}; neutral fallback", flush=True)
+        return {}
+    if not raw or (isinstance(raw, str) and raw.strip().lower().startswith("error")):
+        print("[TONE] LLM returned an error; neutral fallback", flush=True)
+        return {}
+    tone = _parse_tone_json(raw)
+    print(f"[TONE] Inferred for '{style_id}': {tone}", flush=True)
+    return tone
+
+
+def _parse_tone_json(raw: str) -> dict:
+    """Parse {tone, banned_phrases} from the LLM, tolerating fences/extra text."""
+    if not raw:
+        return {}
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw.strip())
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError:
+        # Try to extract a JSON object substring.
+        m = re.search(r"\{.*\}", text, re.DOTALL)
+        if not m:
+            return {}
+        try:
+            data = json.loads(m.group(0))
+        except json.JSONDecodeError:
+            return {}
+    if not isinstance(data, dict):
+        return {}
+    banned = data.get("banned_phrases") or []
+    if isinstance(banned, str):
+        banned = [banned]
+    return {"tone": str(data.get("tone", "")), "banned_phrases": [str(b) for b in banned]}
+
+
 def _is_hood_style(guide: Optional[dict]) -> bool:
     """True if the style's dialogue_guide is a hood/street/community style that
     legitimately uses the existing casual 'y'all' templates."""
@@ -1875,6 +1987,11 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     # its own tone. Hood/skit content additionally gets scenario-specific hood
     # dialogue; guide-based styles (kaiju/horror/music/etc.) use their examples.
     guide = visual_direction.get("dialogue_guide")
+    # Fallback: infer tone from style_id/franchise keywords when no guide exists
+    if not guide:
+        style_id = config.get("style_id", "") or (pick or {}).get("style_id", "")
+        franchise = (pick or {}).get("franchise", "")
+        guide = _infer_tone_from_ids(style_id, franchise)
     if is_dialogue_content or (guide and _is_helpful_guide(guide)):
         scenario = _detect_hood_scenario(hook_lower_full)
         if scenario == "general" and hook_lower_full.startswith("pov"):
