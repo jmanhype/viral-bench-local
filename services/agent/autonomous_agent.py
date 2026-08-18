@@ -715,6 +715,64 @@ def build_style_suffix(visual_direction: dict) -> str:
 FOUND_FOOTAGE_PREFIX = "found footage of"
 
 
+def _get_beat_map(format_type: str, energy_level: str, niche: str) -> list[tuple[str, int, int]]:
+    """Return content-appropriate beat timestamps as (label, start_s, end_s) pairs.
+
+    All videos are 20s. Different content types need different dramatic arcs:
+      horror/low  -> slow dread (build/tension/reveal/sting)
+      comedy/hi   -> rapid escalation (setup/escalation/payoff/tag/button)
+      music       -> beat-synced cuts (intro/verse/chorus/outro)
+      action/hi   -> (establishing/action/climax/resolution)
+      default     -> the prior 4-beat grid.
+    """
+    lo = (energy_level or "medium").lower()
+    if "horror" in niche.lower() or "low" == lo or "slow" in (niche or "").lower():
+        return [("build", 0, 5), ("tension", 5, 12), ("reveal", 12, 18), ("sting", 18, 20)]
+    if "music" in niche.lower() or "dance" in niche.lower() or any(
+        k in format_type.lower() for k in ("music", "rhythm", "beat")):
+        return [("intro", 0, 4), ("verse", 4, 10), ("chorus", 10, 16), ("outro", 16, 20)]
+    if "action" in niche.lower() or "high" == lo or "fast" == lo:
+        return [("hammer", 0, 3), ("push", 3, 8), ("climax", 8, 15), ("land", 15, 20)]
+    if "comedy" in niche.lower() or "skit" in niche.lower() or "hit" == lo:
+        return [("set", 0, 2), ("escalate", 2, 5), ("payoff", 5, 12), ("tag", 12, 17), ("button", 17, 20)]
+    return [("hook", 0, 2), ("build", 2, 7), ("payoff", 7, 15), ("out", 15, 20)]
+
+
+def _beat_label(beat_map: list[tuple[str, int, int]], label: str) -> str:
+    """Return '[Xs-Ys]' for the first beat whose label matches, else '[0-2s]'."""
+    for name, start, end in beat_map:
+        if name == label:
+            return f"[{start}-{end}s]"
+    return "[0-2s]"
+
+
+_FRANCHISE_CAMERA = {
+    "kaiju": "wide establishing shots, low angle, dramatic scale",
+    "mag-kai": "wide establishing shots, low angle, dramatic scale",
+    "proximity": "claustrophobic close-ups, handheld shake, intimate scale",
+    "kart": "tracking shots, speed lines, dynamic angles",
+    "sitcom": "medium shots, reaction cuts, static camera",
+    "horror": "slow push-ins, dutch angles, darkness framing",
+    "music": "rhythmic cuts, performance angles, stage lighting",
+    "mtv": "rhythmic cuts, performance angles, stage lighting",
+}
+
+
+def _get_franchise_camera(franchise: str, niche: str) -> str:
+    """Return a camera/composition directive for a franchise+niche.
+
+    The franchise name (or falling back to the niche) picks a camera language so
+    different franchises frame their scenes differently. Returns '' if unknown.
+    """
+    combined = f"{franchise} {niche}".lower().replace("-", " ").replace("_", " ")
+    # Check most-specific franchise keys first so e.g. proximity-kaju -> close-ups,
+    # not the generic kaiju wide-shot directive.
+    for key in ("proximity", "kart", "sitcom", "mag kai", "mag-kai", "kaiju", "horror", "music", "mtv"):
+        if key in combined:
+            return _FRANCHISE_CAMERA[key]
+    return ""
+
+
 def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_style: Optional[dict] = None) -> str:
     """Generate a structured video script from hook and format.
     
@@ -1065,8 +1123,42 @@ def generate_script(hook: str, format_type: str, goal: str, niche: str, visual_s
     script_parts.append("  → First 2 seconds: Hook must land immediately")
     script_parts.append("  → Text size: Large (readable on mobile)")
     script_parts.append("  → Audio: Trending sound or voiceover")
-    
-    return "\n".join(script_parts)
+
+    script = "\n".join(script_parts)
+    # Dynamic beats: re-map the section-header timestamps (in order) to the
+    # content-appropriate beat map (horror dread / comedy escalation / music cuts).
+    beat_map = _get_beat_map(format_type, "medium", niche)
+    if beat_map:
+        script = _remap_script_beats(script, beat_map)
+    return script
+
+
+def _remap_script_beats(script: str, beat_map: list[tuple[str, int, int]]) -> str:
+    """Replace the first N `[Xs-Ys]` section headers with the beat map's timestamps.
+
+    Keeps the label text (e.g. `[0-2s] HOOK:` -> `[0-5s] HOOK:` for a horror build)
+    so downstream parsers (H3 shot timing) pick up the new timings.
+    """
+    import re as _re
+    beats = list(beat_map)
+    idx = 0
+
+    def repl(m):
+        nonlocal idx
+        if idx >= len(beats):
+            return m.group(0)
+        name, start, end = beats[idx]
+        idx += 1
+        return f"[{start}-{end}s]"
+
+    lines = script.split("\n")
+    out = []
+    for line in lines:
+        # Only remap section-header lines (bracket timestamp + uppercase label).
+        if _re.match(r"^\[\d+-\d+s?\]\s+[A-Z]", line):
+            line = _re.sub(r"^\[\d+-\d+s?\]", repl, line, count=1)
+        out.append(line)
+    return "\n".join(out)
 
 
 
@@ -2075,9 +2167,14 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     guide = visual_direction.get("dialogue_guide")
     # Fallback: infer tone from style_id/franchise keywords when no guide exists
     if not guide:
-        style_id = config.get("style_id", "") or (pick or {}).get("style_id", "")
-        franchise = (pick or {}).get("franchise", "")
-        guide = _infer_tone_from_ids(style_id, franchise)
+        # NOTE: upstream code used `config`/`pick`, but those aren't params of this
+        # function — referencing them raised NameError and killed dialogue whenever
+        # a style had no guide (e.g. mtv-90s auto-matching to a no-guide register
+        # style -> ZERO dialogue). Use visual_direction's own style_id instead.
+        style_id = visual_direction.get("style_id", "")
+        guide = _infer_tone_from_ids(style_id, "")
+        if not guide:
+            guide = {"tone": "neutral in-scene narration", "banned_phrases": [], "examples": []}
     if is_dialogue_content or (guide and _is_helpful_guide(guide)):
         scenario = _detect_hood_scenario(hook_lower_full)
         if scenario == "general" and hook_lower_full.startswith("pov"):
@@ -2089,7 +2186,12 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
     # Append dialogue clause so video tools get who is talking + how they sound
     if dialogue_prompt_clause:
         contextual_prompt_parts.append(dialogue_prompt_clause)
-    
+
+    # ─── Franchise camera directive: different franchises frame scenes differently ───
+    camera = _get_franchise_camera(visual_direction.get("style_id", ""), niche)
+    if camera and camera not in " ".join(contextual_prompt_parts):
+        contextual_prompt_parts.append(camera)
+
     # ─── Fixed style suffix: same verbatim tail on every gen of the franchise ───
     style_suffix = build_style_suffix(visual_direction)
     if style_suffix:
