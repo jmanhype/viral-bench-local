@@ -519,13 +519,57 @@ def _guide_dialogue(guide: dict, hook: str, subject: str, scenario: str, premise
         if dynamic:
             return _lines_from(dynamic, hook or subject)
 
-    # Fallback: guide examples, else a premise-referencing in-scene line (so
-    # music/dance/any style with empty examples still gets dialogue).
-    examples = [e for e in (guide.get("examples") or []) if str(e).strip()]
-    if examples:
-        return _lines_from([hook or subject] + examples[:3], hook or subject)
-    scene_line = (premise or hook or subject).strip() or "the scene happens around us"
-    return _lines_from([scene_line, f"Stay with it — {scene_line[:60]}", "...and it changes everything."], hook or subject)
+    # Fallback: tone-aware, premise-embedding lines — NOT the shared category
+    # examples (which caused identical 'This is fine'/'Nobody asked' across
+    # styles). Different tones now yield different, scene-referencing lines.
+    return _lines_from(_style_dialogue_fallback(premise or hook or subject, tone), hook or subject)
+
+
+def _style_dialogue_fallback(scene: str, tone: str) -> list[str]:
+    """Tone-specific, premise-embedding fallback dialogue (used when the LLM fails).
+
+    Each category produces different lines AND each line folds the scene text in,
+    so two styles sharing a tone never emit identical, generic dialogue.
+    """
+    t = tone.lower()
+    scene = (scene or "the scene").strip()
+    head = " ".join(scene.split()[:9])  # short scene phrase to embed (no mangling: whole words)
+    if any(w in t for w in ("music", "lyric", "rhythm", "beat", "mtv", "energetic", "hype")):
+        return [
+            f"Drop it — this one is {head}.",
+            f"Everybody feel that beat? {head} — don't stop.",
+            "One more drop. One more frame. Keep moving.",
+        ]
+    if any(w in t for w in ("horror", "dread", "whisper", "eerie", "giallo", "doom", "dark")):
+        return [
+            f"Do you hear that in {head}?",
+            "It's in here with us — don't turn around.",
+            "We were never alone.",
+        ]
+    if any(w in t for w in ("comedy", "humor", "witty", "banter", "laugh", "self-aware", "sitcom")):
+        return [
+            f"Right now, in {head}, of course this happens.",
+            "I booked the room and it still went sideways.",
+            "Nobody signed up for this — which is exactly the point.",
+        ]
+    if any(w in t for w in ("formal", "period", "retro", "vintage", "instructional", "news", "documentary", "1960", "1970", "1980", "1990")):
+        return [
+            f"Proceed with {head} as briefed.",
+            f"All systems nominal — {head} is underway.",
+            "This concludes the sequence. Nothing out of the ordinary.",
+        ]
+    if any(w in t for w in ("military", "pilot", "mission", "tech", "ominous", "operational")):
+        return [
+            f"Target acquired — {head}.",
+            "Brace for impact. Do not break formation.",
+            "We hold position until it's clear.",
+        ]
+    # Neutral fallback: scene-embedding, no shared generic line.
+    return [
+        f"There is {head}.",
+        f"Watch {head} closely.",
+        "Something is about to change.",
+    ]
 
 
 def _lines_from(lines, fallback) -> list[dict]:
