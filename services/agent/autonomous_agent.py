@@ -14,6 +14,7 @@ Output: Ready-to-produce brief. Human handles video creation + posting.
 """
 import json
 import logging
+import re
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -1550,9 +1551,31 @@ def _build_multishot_config(
     }
 
 
-def generate_production_prompts(hook: str, script: str, visual_direction: dict, niche: str = "", character: Optional[dict] = None) -> dict:
+def _clean_goal_for_scene(goal: str) -> str:
+    """Turn a premise/goal string into a terse visual-scene clause for the flux3
+    prompt (the scene slot). Strips any /t2v command wrappers and trailing tool
+    params like duration/aspect_ratio/resolution so only the scene phrase remains.
+    """
+    if not goal:
+        return ""
+    scene = goal.strip()
+    # Strip an optional "/t2v prompt:" command prefix.
+    m = re.search(r"(?:/t2v\s+)?(?:prompt:)?(.*)", scene, flags=re.DOTALL)
+    if m:
+        scene = m.group(1)
+    # Cut tool params after a marker like ' duration:' / ' aspect_ratio:'.
+    for marker in (" duration:", " aspect_ratio:", " resolution:", " duration ", " -"):
+        idx = scene.find(marker)
+        if idx > 0:
+            scene = scene[:idx].rstrip(" .,;")
+            break
+    scene = scene.strip(" \"'\\n .,;")
+    return scene
+
+
+def generate_production_prompts(hook: str, script: str, visual_direction: dict, niche: str = "", character: Optional[dict] = None, goal: str = "") -> dict:
     """Generate tool-ready copy-paste prompts for video production tools.
-    
+
     Returns prompts formatted for:
     - FLUX3: Single dense line with /t2v wrapper
     - Kling: API call JSON with prompt, aspect_ratio, duration
@@ -1628,8 +1651,16 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         elif "70s" in style_name or "1970s" in style_name:
             contextual_prompt_parts.append("1970s aesthetic")
     else:
-        # Fallback: the style's prompt_seed IS the scene + treatment for that look
-        contextual_prompt_parts.append(prompt_seed if prompt_seed else hook_core)
+        # Scenario: the style's prompt_seed is the aesthetic *treatment*, but the
+        # actual scene must come from the requested premise/goal. Without this,
+        # every brief of an auto-matched style renders the SAME visual content
+        # regardless of premise (the bug where different franchises returned
+        # identical flux3 prompts). Prefer premise -> narrative_subject -> seed.
+        premise_scene = _clean_goal_for_scene(goal) if goal else ""
+        if premise_scene:
+            contextual_prompt_parts.append(premise_scene)
+        else:
+            contextual_prompt_parts.append(prompt_seed if prompt_seed else hook_core)
     
     # Framing slot: "found footage of" on dialogue/hood content (his #1 opener,
     # 98/156 prompts). Reads as a real recording, not a produced scene.
@@ -2052,7 +2083,8 @@ async def generate_brief(config: AgentConfig) -> Optional[ContentBrief]:
             script=best.script,
             visual_direction=visual_direction,
             niche=config.niche,
-            character=character
+            character=character,
+            goal=config.goal or "",
         )
 
     return ContentBrief(
