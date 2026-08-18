@@ -348,6 +348,7 @@ def _parse_tone_json(raw: str) -> dict:
     try:
         data = json.loads(text)
     except json.JSONDecodeError:
+        print(f"[TONE] JSON parse failed; trying regex extraction", flush=True)
         # Try to extract a JSON object substring.
         m = re.search(r"\{.*\}", text, re.DOTALL)
         if not m:
@@ -355,6 +356,7 @@ def _parse_tone_json(raw: str) -> dict:
         try:
             data = json.loads(m.group(0))
         except json.JSONDecodeError:
+            print(f"[TONE] Regex extraction also failed; returning empty tone", flush=True)
             return {}
     if not isinstance(data, dict):
         return {}
@@ -491,6 +493,7 @@ def _parse_dialogue_json(raw: str) -> list[str]:
             return [str(x) for x in arr] if isinstance(arr, list) else []
         return []
     except json.JSONDecodeError:
+        print(f"[DIALOGUE] JSON parse failed; falling back to line-split", flush=True)
         # Raw newline-separated lines fallback.
         return [l.strip() for l in text.splitlines() if l.strip()]
 
