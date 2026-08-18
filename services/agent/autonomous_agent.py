@@ -399,9 +399,11 @@ def _generate_dynamic_dialogue_sync(
     tone: str,
     banned_phrases: Optional[list] = None,
     num_lines: int = 3,
+    force_scene: bool = False,
+    emphasize_scene: bool = False,
 ) -> list[str]:
     """Dynamic LLM dialogue for a video scene (sync wrapper)."""
-    coro = _generate_dynamic_dialogue(premise, tone, banned_phrases, num_lines)
+    coro = _generate_dynamic_dialogue(premise, tone, banned_phrases, num_lines, force_scene, emphasize_scene)
     return _run_async(coro) or []
 
 
@@ -410,6 +412,8 @@ async def _generate_dynamic_dialogue(
     tone: str,
     banned_phrases: Optional[list] = None,
     num_lines: int = 3,
+    force_scene: bool = False,
+    emphasize_scene: bool = False,
 ) -> list[str]:
     """Generate dialogue lines with the LLM (the same client used for briefs).
 
@@ -426,12 +430,18 @@ async def _generate_dynamic_dialogue(
         return []
 
     banned = ", ".join(banned_phrases or []) or "none"
+    scene_emphasis = (
+        " Each line MUST directly reference the scene you just described (reuse "
+        "its key nouns and setting) — do not write generic lines."
+        if (force_scene or emphasize_scene) else ""
+    )
     user_msg = (
         f'Generate {num_lines} short dialogue lines (under 15 words each) for this '
         f'video scene: "{premise}". '
         f"Tone: {tone}. "
         f"NEVER use these phrases: {banned}. "
         f"Each line should be spoken by a character IN the scene. "
+        f"{scene_emphasis}"
         f'Return as a JSON array of strings, e.g. ["Line one", "Line two", "Line three"].'
     )
     messages = [
@@ -495,22 +505,54 @@ def _guide_dialogue(guide: dict, hook: str, subject: str, scenario: str, premise
     tone = guide.get("tone") or "neutral, in-scene"
     banned = guide.get("banned_phrases") or []
     scene = premise or hook or subject
-    dynamic = _generate_dynamic_dialogue_sync(scene, tone, banned, num_lines=3)
+    dynamic = _generate_dynamic_dialogue_sync(scene, tone, banned, num_lines=3, force_scene=True)
     if dynamic:
-        lines = [{"time": "0-2s", "character": "NARRATOR (VO)", "line": hook or subject}]
-        for i, line in enumerate(dynamic[:3]):
-            char = "YOU (to camera)" if i == 0 else ("OBSERVER" if i == 1 else "VOICE (room tone)")
-            lines.append({"time": f"{3 + i * 5}-{7 + i * 5}s", "character": char, "line": line})
-        return lines
+        # Post-gen check: if no line references the premise, warn + try once more
+        # with an explicit instruction to reference the scene.
+        if not _premise_referenced(dynamic, premise or hook or subject):
+            print(f"[DIALOGUE] Premise not referenced; regenerating with scene emphasis: {scene[:60]}", flush=True)
+            dynamic2 = _generate_dynamic_dialogue_sync(
+                scene, tone, banned, num_lines=3, force_scene=True, emphasize_scene=True,
+            )
+            if _premise_referenced(dynamic2, premise or hook or subject):
+                dynamic = dynamic2
+        if dynamic:
+            return _lines_from(dynamic, hook or subject)
 
-    # Fallback: guide examples.
+    # Fallback: guide examples, else a premise-referencing in-scene line (so
+    # music/dance/any style with empty examples still gets dialogue).
     examples = [e for e in (guide.get("examples") or []) if str(e).strip()]
-    hooks = [hook or subject] + examples
-    lines = [{"time": "0-2s", "character": "NARRATOR (VO)", "line": hook or (examples[0] if examples else subject)}]
-    for i, ex in enumerate(hooks[:3]):
+    if examples:
+        return _lines_from([hook or subject] + examples[:3], hook or subject)
+    scene_line = (premise or hook or subject).strip() or "the scene happens around us"
+    return _lines_from([scene_line, f"Stay with it — {scene_line[:60]}", "...and it changes everything."], hook or subject)
+
+
+def _lines_from(lines, fallback) -> list[dict]:
+    """Turn dialogue strings into timed {character, line} dicts plus a narrator opener."""
+    if not fallback:
+        fallback = ""
+    out = [{"time": "0-2s", "character": "NARRATOR (VO)", "line": fallback}]
+    for i, line in enumerate(lines[:3]):
         char = "YOU (to camera)" if i == 0 else ("OBSERVER" if i == 1 else "VOICE (room tone)")
-        lines.append({"time": f"{3 + i * 5}-{7 + i * 5}s", "character": char, "line": ex})
-    return lines
+        out.append({"time": f"{3 + i * 5}-{7 + i * 5}s", "character": char, "line": str(line)})
+    return out
+
+
+def _premise_referenced(lines, premise: str) -> bool:
+    """True if any dialogue line contains a content word from the premise (>=3 chars,
+    not a stopword). Speech that ignores the scene triggers a regeneration."""
+    if not premise:
+        return True
+    stop = {"the","a","an","and","or","of","to","in","on","at","for","with","from","that","it","is","are","was","-",","}
+    words = {w.strip(".,!?\"' ").lower() for w in premise.split() if len(w.strip(".,!?\"' ")) >= 3 and w.strip(".,!?\"' ").lower() not in stop}
+    if not words:
+        return True
+    for line in lines:
+        lw = set(re.findall(r"[a-z0-9']{2,}", str(line).lower()))
+        if lw & words:
+            return True
+    return False
 
 
 # Voice texture per character archetype — baked into video prompts in the style of
