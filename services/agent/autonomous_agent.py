@@ -2176,12 +2176,17 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         if not guide:
             guide = {"tone": "neutral in-scene narration", "banned_phrases": [], "examples": []}
     if is_dialogue_content or (guide and _is_helpful_guide(guide)):
+        print(f"[DIALOGUE-GATE] is_dialogue_content={is_dialogue_content} helpful_guide={bool(guide and _is_helpful_guide(guide))} guide_tone={guide.get('tone') if guide else None}", flush=True)
         scenario = _detect_hood_scenario(hook_lower_full)
         if scenario == "general" and hook_lower_full.startswith("pov"):
             scenario = "pov"
         guide_obj = guide if (guide and not (is_dialogue_content and guide and _is_hood_style(guide))) else None
         dialogue = generate_dialogue(scenario, hook, guide_obj, premise=goal)
+        print(f"[DIALOGUE-GATE] scenario={scenario} guide_obj_tone={guide_obj.get('tone') if guide_obj else None} dialogue_lines={len(dialogue) if dialogue else 0}", flush=True)
         dialogue_prompt_clause = build_dialogue_prompt(scenario, hook, character, guide_obj, premise=goal)
+        print(f"[DIALOGUE-GATE] dialogue_prompt_clause={bool(dialogue_prompt_clause)}", flush=True)
+    else:
+        print(f"[DIALOGUE-GATE] SKIP: is_dialogue_content={is_dialogue_content} guide_useful={bool(guide and _is_helpful_guide(guide))}", flush=True)
     
     # Append dialogue clause so video tools get who is talking + how they sound
     if dialogue_prompt_clause:
