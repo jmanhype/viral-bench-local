@@ -12,9 +12,12 @@ Flow:
 
 Output: Ready-to-produce brief. Human handles video creation + posting.
 """
+import asyncio
 import json
 import logging
+import os
 import re
+import threading
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -138,7 +141,7 @@ def _hook_subject(hook: str) -> str:
     return h or hook.strip()
 
 
-def generate_dialogue(scenario: str, hook: str, guide: Optional[dict] = None) -> list[dict]:
+def generate_dialogue(scenario: str, hook: str, guide: Optional[dict] = None, premise: str = "") -> list[dict]:
     """Generate shootable dialogue lines timed to script beats.
 
     Each line: {time, character, line} — character includes delivery hints
@@ -158,7 +161,7 @@ def generate_dialogue(scenario: str, hook: str, guide: Optional[dict] = None) ->
 
     # Style-aware: non-hood styles use their guide's examples/tone, not hood lines.
     if guide and not _is_hood_style(guide):
-        return _guide_dialogue(guide, hook, subject, scenario)
+        return _guide_dialogue(guide, hook, subject, scenario, premise)
 
     DIALOGUES = {
         "block": [
@@ -263,18 +266,135 @@ def _is_helpful_guide(guide: Optional[dict]) -> bool:
     return bool(guide and (guide.get("tone") or (guide.get("examples") or [])))
 
 
-def _guide_dialogue(guide: dict, hook: str, subject: str, scenario: str) -> list[dict]:
-    """Build dialogue lines for a non-hood style from its dialogue_guide.
+def _run_async(coro):
+    """Run an async coroutine from a sync context, tolerating an already-running
+    event loop (fresh thread + own loop) — safe inside generate_brief's loop."""
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(coro)
+    result = {}
+    def _runner():
+        result["value"] = asyncio.run(coro)
+    t = threading.Thread(target=_runner, daemon=True)
+    t.start()
+    t.join()
+    return result.get("value")
 
-    Uses the guide's `examples` (styled to the guide's tone) plus a hook-referencing
-    opener, so the exchange matches the aesthetic instead of hood culture.
+
+def _generate_dynamic_dialogue_sync(
+    premise: str,
+    tone: str,
+    banned_phrases: Optional[list] = None,
+    num_lines: int = 3,
+) -> list[str]:
+    """Dynamic LLM dialogue for a video scene (sync wrapper)."""
+    coro = _generate_dynamic_dialogue(premise, tone, banned_phrases, num_lines)
+    return _run_async(coro) or []
+
+
+async def _generate_dynamic_dialogue(
+    premise: str,
+    tone: str,
+    banned_phrases: Optional[list] = None,
+    num_lines: int = 3,
+) -> list[str]:
+    """Generate dialogue lines with the LLM (the same client used for briefs).
+
+    Prompt asks for `num_lines` short lines (under 15 words) spoken by a
+    character in the scene described by `premise`, in `tone`, never using
+    `banned_phrases`. Returns a JSON array of strings. Falls back to the style's
+    `examples`/guide when the LLM call fails or key is missing.
     """
+    # Lazy import to avoid a circular import: research.app imports this module.
+    try:
+        from services.research.app import call_llm
+    except Exception as exc:  # noqa: BLE001
+        print(f"[DIALOGUE] LLM client unavailable ({exc}); falling back", flush=True)
+        return []
+
+    banned = ", ".join(banned_phrases or []) or "none"
+    user_msg = (
+        f'Generate {num_lines} short dialogue lines (under 15 words each) for this '
+        f'video scene: "{premise}". '
+        f"Tone: {tone}. "
+        f"NEVER use these phrases: {banned}. "
+        f"Each line should be spoken by a character IN the scene. "
+        f'Return as a JSON array of strings, e.g. ["Line one", "Line two", "Line three"].'
+    )
+    messages = [
+        {"role": "system", "content": "You write in-scene dialogue for AI video generation. Reply only with valid JSON."},
+        {"role": "user", "content": user_msg},
+    ]
+    try:
+        raw = await call_llm(messages, max_tokens=512)
+    except Exception as exc:
+        print(f"[DIALOGUE] LLM dialogue call failed: {exc}; using examples", flush=True)
+        return []
+
+    # call_llm returns 'ERROR: ...' strings on config/parse failures — detect and
+    # fall back to guide examples rather than treating the error as dialogue.
+    if not raw or (isinstance(raw, str) and raw.strip().lower().startswith("error")):
+        print("[DIALOGUE] LLM returned an error/non-dialogue; using examples", flush=True)
+        return []
+
+    lines = _parse_dialogue_json(raw)
+    # Enforce banned phrases + length guard.
+    banned_lower = [b.lower() for b in (banned_phrases or [])]
+    clean = []
+    for line in lines:
+        text = str(line).strip()
+        if not text or len(text.split()) > 15:
+            continue
+        if any(b in text.lower() for b in banned_lower if b):
+            continue
+        clean.append(text)
+    print(f"[DIALOGUE] Dynamic lines: {clean}", flush=True)
+    return clean[:num_lines]
+
+
+def _parse_dialogue_json(raw: str) -> list[str]:
+    """Best-effort parse of {json array} from an LLM dialogue response."""
+    if not raw:
+        return []
+    text = raw.strip()
+    # Strip markdown code fences.
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
+    try:
+        data = json.loads(text)
+        if isinstance(data, list):
+            return [str(x) for x in data]
+        if isinstance(data, dict) and ("lines" in data or "dialogue" in data):
+            arr = data.get("lines") or data.get("dialogue") or []
+            return [str(x) for x in arr] if isinstance(arr, list) else []
+        return []
+    except json.JSONDecodeError:
+        # Raw newline-separated lines fallback.
+        return [l.strip() for l in text.splitlines() if l.strip()]
+
+
+def _guide_dialogue(guide: dict, hook: str, subject: str, scenario: str, premise: str = "") -> list[dict]:
+    """Build dialogue lines for a non-hood style, LLM-generated from the premise.
+
+    Uses `_generate_dynamic_dialogue` with the FULL premise/service tone to produce
+    scene-specific lines; falls back to the guide's `examples` if the LLM call
+    fails or returns nothing usable. Banned_phrases are enforced.
+    """
+    tone = guide.get("tone") or "neutral, in-scene"
+    banned = guide.get("banned_phrases") or []
+    scene = premise or hook or subject
+    dynamic = _generate_dynamic_dialogue_sync(scene, tone, banned, num_lines=3)
+    if dynamic:
+        lines = [{"time": "0-2s", "character": "NARRATOR (VO)", "line": hook or subject}]
+        for i, line in enumerate(dynamic[:3]):
+            char = "YOU (to camera)" if i == 0 else ("OBSERVER" if i == 1 else "VOICE (room tone)")
+            lines.append({"time": f"{3 + i * 5}-{7 + i * 5}s", "character": char, "line": line})
+        return lines
+
+    # Fallback: guide examples.
     examples = [e for e in (guide.get("examples") or []) if str(e).strip()]
     hooks = [hook or subject] + examples
-    # Dedup, cap at 3-4 spoken lines + a narrator opener.
-    lines = []
-    narrator = "NARRATOR (VO)"
-    lines.append({"time": "0-2s", "character": narrator, "line": hook or (examples[0] if examples else subject)})
+    lines = [{"time": "0-2s", "character": "NARRATOR (VO)", "line": hook or (examples[0] if examples else subject)}]
     for i, ex in enumerate(hooks[:3]):
         char = "YOU (to camera)" if i == 0 else ("OBSERVER" if i == 1 else "VOICE (room tone)")
         lines.append({"time": f"{3 + i * 5}-{7 + i * 5}s", "character": char, "line": ex})
@@ -300,7 +420,7 @@ VOICE_PROFILES = {
 }
 
 
-def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = None, guide: Optional[dict] = None) -> str:
+def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = None, guide: Optional[dict] = None, premise: str = "") -> str:
     """Render dialogue lines into one dense video-prompt clause.
 
     Style: character dropping "line" + voice texture — so video/lip-sync tools
@@ -311,7 +431,7 @@ def build_dialogue_prompt(scenario: str, hook: str, character: Optional[dict] = 
     overrides the generic archetype voice whenever that archetype speaks —
     same voice texture on every brief of the franchise.
     """
-    lines = generate_dialogue(scenario, hook, guide) if guide is not None else generate_dialogue(scenario, hook)
+    lines = generate_dialogue(scenario, hook, guide, premise) if guide is not None else generate_dialogue(scenario, hook)
     if not lines:
         return ""
     clauses = []
@@ -1760,8 +1880,8 @@ def generate_production_prompts(hook: str, script: str, visual_direction: dict, 
         if scenario == "general" and hook_lower_full.startswith("pov"):
             scenario = "pov"
         guide_obj = guide if (guide and not (is_dialogue_content and guide and _is_hood_style(guide))) else None
-        dialogue = generate_dialogue(scenario, hook, guide_obj)
-        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook, character, guide_obj)
+        dialogue = generate_dialogue(scenario, hook, guide_obj, premise=goal)
+        dialogue_prompt_clause = build_dialogue_prompt(scenario, hook, character, guide_obj, premise=goal)
     
     # Append dialogue clause so video tools get who is talking + how they sound
     if dialogue_prompt_clause:
